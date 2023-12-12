@@ -1,5 +1,11 @@
 import { Providers } from '@/redux/provider'
 import type { Metadata } from 'next'
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({
+  subsets: ['cyrillic', 'latin'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={montserrat.className}>
       <body>
         <Providers>
           {children}

@@ -3,7 +3,6 @@
 export default function Home() {
 
   return (
-    <main>
-    </main>
+    <div>4</div>
   )
 }

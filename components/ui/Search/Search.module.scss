@@ -1,0 +1,27 @@
+.search {
+  position: relative;
+
+  &Input {
+    width: 380px;
+    padding: 8px 45px 8px 15px;
+    border: none;
+    border-bottom: 2px solid var(--black);
+    font-size: 17px;
+  }
+
+  &Input::placeholder {
+    opacity: .7;
+  }
+
+  &Button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
