@@ -65,3 +65,30 @@
     font-weight: 600;
   }
 }
+
+.userNav {
+  display: flex;
+  align-items: center;
+
+  &Link {
+    width: 50px;
+    height: 50px;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &Link + .userNavLink {
+    margin-left: 23px;
+  }
+}
+
+.sign {
+  display: flex;
+  align-items: center;
+
+  &Button + .signButton {
+    margin-left: 26px;
+  }
+}
