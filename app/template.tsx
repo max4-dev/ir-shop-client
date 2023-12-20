@@ -12,7 +12,7 @@ function RootTemplate({
   return (
     <>
       <Header />
-      <main>
+      <main className='main'>
         {children}
       </main>
       <Footer />

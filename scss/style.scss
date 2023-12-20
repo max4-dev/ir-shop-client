@@ -2,6 +2,30 @@
 @import './reset';
 @import './global';
 
+.title-s {
+  font-size: 18px;
+  font-weight: 600;
+}
 
+.title-m {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.title-b {
+  font-size: 36px;
+  font-weight: 600;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 30px;
+    background-color: #000;
+  }
+}
 
 @import 'media';
