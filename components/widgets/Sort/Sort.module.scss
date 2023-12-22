@@ -1,0 +1,88 @@
+.sort {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  margin-bottom: 22px;
+
+  &Text {
+    margin-right: 10px;
+  }
+
+  &Menu {
+    min-width: 190px;
+    height: 34px;
+    padding: 4px 0 4px 11px;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  &Arrow {
+    height: 34px;
+    width: 34px;
+    border-left: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &ArrowIcon {
+    transform: rotate(180deg);
+  }
+
+  &Items {
+    position: absolute;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+    width: 190px;
+    right: 0;
+    top: 45px;
+    z-index: 5;
+    text-align: center;
+  }
+
+  &Option {
+    width: 100%;
+    transition: all .3s;
+    padding: 5px 0;
+  }
+
+  &OptionActive {
+    background-color: var(--black);
+    color: var(--white);
+  }
+}
+
+.enter {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.enterFrom {
+  opacity: 0;
+}
+
+.enterTo {
+  opacity: 1;
+}
+
+.leave {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-duration: 75ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.leaveFrom {
+  opacity: 1;
+}
+
+.leaveTo {
+  opacity: 0;
+}

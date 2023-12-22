@@ -64,10 +64,6 @@
     margin: 0;
   }
   
-  &Input {
-    -moz-appearance: textfield;
-  }
-
   &Line {
     width: 11px;
     height: 1px;
@@ -82,7 +78,7 @@
 }
 
 .select {
-  height: 300px;
+  max-height: 300px;
   overflow-y: scroll;
   scrollbar-width: thin;
 
