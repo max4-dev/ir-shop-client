@@ -33,12 +33,17 @@
     transform: rotate(180deg);
   }
 
+  &ArrowIconActive {
+    transform: rotate(0);
+  }
+
   &Items {
     position: absolute;
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+    background-color: var(--white);
     width: 190px;
     right: 0;
-    top: 45px;
+    top: 35px;
     z-index: 5;
     text-align: center;
   }
