@@ -1,0 +1,115 @@
+.footer {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 50px 0 38px;
+
+  &Top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  &Box {
+    width: 100%;
+    align-self: stretch;
+    padding-bottom: 40px;
+  }
+
+  &Box + &Box {
+    padding-left: 16px;
+    border-left: 1px solid var(--light-black);
+  }
+
+  &Title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  &Info + &Info {
+    margin-top: 18px;
+  }
+
+  &Item + &Item {
+    border-top: 1px solid var(--light-black);
+  }
+
+  &Middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0;
+  }
+
+  &Social {
+    display: flex;
+    align-items: center;
+  }
+
+  &SocialText {
+    font-size: 16px;
+    margin-right: 32px;
+  }
+
+  &SocialImages {
+    display: flex;
+    align-items: center;
+  }
+
+  &SocialImage {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &SocialLink + &SocialLink {
+    margin-left: 16px;
+  }
+
+  &Bottom {
+    padding-top: 25px;
+    font-size: 12px;
+  }
+}
+
+.footerList {
+  &Item {
+    font-size: 16px;
+    color: var(--gray);
+    transition: color .3s;
+  }
+
+  &Item:hover {
+    color: var(--white);
+  }
+
+  &Item + &Item {
+    margin-top: 8px;
+  }
+
+  &Link {
+    display: block;
+  }
+}
+
+.footerInfo {
+  &Title {
+    font-size: 16px;
+    color: var(--gray);
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+
+  &Text {
+    display: flex;
+    align-items: center;
+  }
+
+  &Img {
+    margin-right: 8px;
+  }
+
+  &Link {
+    font-weight: 600;
+  }
+}
