@@ -2,7 +2,20 @@
   max-width: 780px;
   width: 100%;
   margin-left: 52px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 31px 45px;
+
+  &Items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 31px 45px;
+  }
+
+  &ButtonBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 68px;
+  }
+}
+
+.pagination {
+  margin-top: 55px;
 }

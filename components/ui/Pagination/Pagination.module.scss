@@ -1,0 +1,27 @@
+.pagination {
+  background-color: var(--white);
+  box-shadow: -1px 4px 13px 0px rgba(0, 0, 0, 0.25);
+  max-width: 300px;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  gap: 8px;
+
+  &Item {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &ItemActive {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  &Dots {
+    margin-top: -3px;
+  }
+}

@@ -3,7 +3,7 @@ import cn from "classnames";
 import styles from './Product.module.scss';
 import Image from "next/image";
 
-const Product = ({ salePercent = 10, price = 35, badges = [], className, ...props }: ProductProps) => {
+const Product = ({ salePercent = 10, price, badges = [], className, ...props }: ProductProps) => {
 
   return (
     <div className={cn(styles.product, className)} {...props}>
@@ -13,7 +13,7 @@ const Product = ({ salePercent = 10, price = 35, badges = [], className, ...prop
       </button>
       <Image className={styles.productImg} src="/images/products/1.jpg" width={198} height={184} alt="" />
       <h6 className={styles.productName}>Цветы 24\24 см</h6>
-      <div className={styles.productType}>
+      {badges.length > 0 && <div className={styles.productType}>
         <p className={styles.productTypeText}>Тип:</p>
         <div className={styles.productTypeBadges}>
           <span className={styles.productTypeBadge}>
@@ -23,7 +23,7 @@ const Product = ({ salePercent = 10, price = 35, badges = [], className, ...prop
             цветы
           </span>
         </div>
-      </div>
+      </div>}
       <div className={styles.productBottom}>
         <div className={styles.productPrice}>
           {salePercent > 0 ?
