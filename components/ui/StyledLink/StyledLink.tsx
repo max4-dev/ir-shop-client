@@ -1,11 +1,12 @@
-import { ButtonProps } from "./Button.props";
+import { StyledLinkProps } from "./StyledLink.props";
 import cn from "classnames";
 import Image from "next/image";
 import styles from "@/scss/Button/Button.module.scss";
+import Link from "next/link";
 
-const Button = ({ size="medium", appearance="primary", icon="none", children, className, ...props }: ButtonProps) => {
+const StyledLink = ({ size="medium", appearance="primary", icon="none", children, className, ...props }: StyledLinkProps) => {
   return (
-    <button className={cn(
+    <Link className={cn(
         styles.button,
         styles.size,
         styles.appearance,
@@ -19,8 +20,8 @@ const Button = ({ size="medium", appearance="primary", icon="none", children, cl
       {...props}
       >
       {children}
-    </button>
+    </Link>
   );
 }
  
-export default Button;
+export default StyledLink;

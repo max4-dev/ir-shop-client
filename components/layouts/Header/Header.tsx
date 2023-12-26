@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Search from "@/components/ui/Search/Search";
 import Button from "@/components/ui/Button/Button";
+import StyledLink from "@/components/ui/StyledLink/StyledLink";
 
 const Header = ({ className, ...props }: HeaderProps) => {
   return (
@@ -52,12 +53,12 @@ const Header = ({ className, ...props }: HeaderProps) => {
               </Link>
             </div>
             <div className={styles.sign}>
-              <Button className={styles.signButton} size="small" appearance="ghost">
+              <StyledLink className={styles.signButton} size="small" appearance="ghost" href="/login">
                 Войти
-              </Button>
-              <Button className={styles.signButton} size="small">
+              </StyledLink>
+              <StyledLink className={styles.signButton} size="small"href="/signup">
                 Регистрация
-              </Button>
+              </StyledLink>
             </div>
           </div>
         </div>

@@ -1,0 +1,22 @@
+.inputBox {
+  position: relative;
+}
+
+.input {
+  max-width: 530px;
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid var(--black);
+
+  &::placeholder {
+    opacity: 0;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  background-color: var(--white);
+  padding: 0 5px;
+  top: -11px;
+  left: 30px;
+}

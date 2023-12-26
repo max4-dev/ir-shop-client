@@ -104,43 +104,6 @@
   &Item + .selectItem {
     margin-top: 8px;
   }
-
-  &Label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  &Input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-
-  &Input:checked + .selectCheckbox {
-    background-color: var(--black);
-    border-color: var(--black);
-    background-image: url('/images/icons/check.svg');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-  }
-
-  &Input:checked + .selectCheckbox + .selectText {
-    color: var(--black);
-  }
-
-  &Checkbox {
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--dark-gray);
-  }
-
-  &Text {
-    color: var(--dark-gray);
-    font-size: 16px;
-    margin-left: 10px;
-  }
 }
 
 .range {

@@ -52,7 +52,7 @@ const Pagination = ({ pagesCount, currentPage, className, ...props }: Pagination
   return (
     <div className={cn(styles.pagination, className)} {...props}>
       {paginationList.map((page, i) => (
-        page !== -1 ? <Link className={cn(styles.paginationItem, {[styles.paginationItemActive]: currentPage === page})} href={`/catalog/${page}`} key={i}>{page}</Link>
+        page !== -1 ? <Link className={cn(styles.paginationItem, styles.paginationItemLink, {[styles.paginationItemActive]: currentPage === page})} href={`/catalog/${page}`} key={i}>{page}</Link>
         : <span className={cn(styles.paginationItem, styles.paginationDots)} key={i}>...</span>
       ))}
     </div>

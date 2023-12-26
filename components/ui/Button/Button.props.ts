@@ -4,5 +4,5 @@ export interface ButtonProps extends Omit<DetailedHTMLProps<ButtonHTMLAttributes
   children: ReactNode;
   size?: 'fullWidth' | 'small' | 'medium' | 'big';
   appearance?: 'primary' | 'ghost';
-  icon?: any | 'none'
+  icon?: any | 'none';
 }

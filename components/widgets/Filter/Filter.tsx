@@ -1,3 +1,5 @@
+"use client"
+
 import { FilterProps } from "./Filter.props";
 import cn from "classnames";
 import styles from './Filter.module.scss';
@@ -5,6 +7,7 @@ import ArrowIcon from '@/public/images/icons/arrow.svg'
 import Button from "@/components/ui/Button/Button";
 import ReactSlider from "react-slider";
 import { useState } from "react";
+import Checkbox from "@/components/ui/Checkbox/Checkbox";
 
 const price = {
   min: 0,
@@ -31,104 +34,24 @@ const Filter = ({ className, ...props }: FilterProps) => {
           <div className={styles.filterBlockContent}>
             <button className={styles.selectButton}>Выбрать все</button>
             <ul className={styles.select}>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
-              <li className={styles.selectItem}>
-                <label className={styles.selectLabel}>
-                  <input className={styles.selectInput} type="checkbox" />
-                  <span className={styles.selectCheckbox}></span>
-                  <p className={styles.selectText}>Тип 1</p>
-                </label>
-              </li>
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem} text="Тип 1" />
             </ul>
           </div>
         </div>
