@@ -1,0 +1,48 @@
+.info {
+  background-color: var(--white);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+  padding: 24px 24px 80px 24px;
+
+  &Group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &List {
+    max-width: 245px;
+    width: 100%;
+    border-right: 1px solid var(--gray);
+    padding-right: 24px;
+  }
+
+  &Tab {
+    display: block;
+    color: var(--black);
+    background-color: var(--white);
+    padding: 12px 16px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  &TabActive {
+    color: var(--white);
+      background-color: var(--black);
+  }
+
+  &Tab + &Tab {
+    margin-top: 12px;
+  }
+
+  &Panels {
+    padding-left: 24px;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.infoPanel {
+  p + p {
+    margin-top: 20px;
+  }
+}

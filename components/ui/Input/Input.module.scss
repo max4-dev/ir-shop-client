@@ -5,11 +5,23 @@
 .input {
   max-width: 530px;
   width: 100%;
-  padding: 12px 18px;
+  padding: 12px 50px 12px 18px;
   border: 1px solid var(--black);
 
   &::placeholder {
     opacity: 0;
+  }
+
+  &Button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

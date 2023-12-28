@@ -13,7 +13,7 @@ const Login = () => {
         </h2>
         <div className={styles.loginForm}>
           <Input className={styles.input} placeholder="Имя" />
-          <Input className={styles.input} type="password" placeholder="Пароль" />
+          <Input className={styles.input} type="password" placeholder="Пароль" isPassword />
           <Checkbox className={styles.checkbox} text="Я согласен с условиями пользовательского соглашения" />
           <Button className={styles.button} size="big">
             Вход
