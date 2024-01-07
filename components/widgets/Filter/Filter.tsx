@@ -34,24 +34,36 @@ const Filter = ({ className, ...props }: FilterProps) => {
           <div className={styles.filterBlockContent}>
             <button className={styles.selectButton}>Выбрать все</button>
             <ul className={styles.select}>
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
-              <Checkbox className={styles.selectItem} text="Тип 1" />
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
             </ul>
           </div>
         </div>

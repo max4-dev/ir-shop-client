@@ -1,0 +1,118 @@
+.cart {
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+
+  &Title {
+    margin-bottom: 48px;
+  }
+
+  &Top {
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  &TopTitle {
+    margin-left: 23px;
+  }
+
+  &Content {
+    padding: 24px;
+  }
+
+  &ContentCount {
+    color: var(--dark-gray);
+    span {
+      color: var(--black);
+    }
+  }
+
+  &Items {
+    margin-top: 24px;
+    max-height: 425px;
+    overflow-y: scroll;
+    padding-right: 15px;
+  }
+
+  &Items::-webkit-scrollbar {
+    background-color: var(--gray);
+    width: 8px;
+    border-radius: 5px;
+  }
+
+  &Items::-webkit-scrollbar-thumb {
+    background-color: var(--dark-gray);
+    border-radius: 5px;
+  }
+
+  &Items::-webkit-scrollbar-thumb:hover {
+    background-color: #6d6a6a;
+  }
+
+  &Item + &Item {
+    margin-top: 24px;
+  }
+
+  &Bottom {
+    padding-top: 25px;
+  }
+
+  &Price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &PriceText {
+    color: var(--dark-gray);
+  }
+
+  &PriceCount {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &Button {
+    margin: 40px 0 0 auto;
+  }
+}
+
+.popup {
+
+  &Title {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  &List {
+    margin-top: 24px;
+  }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &Item + &Item {
+    margin-top: 24px;
+  }
+
+  &Name, &Value {
+    color: var(--disabled);
+  }
+
+  &Button {
+    margin-top: 36px;
+  }
+
+  &Checkbox {
+    margin-top: 36px;
+  }
+
+  &Checkbox p {
+    font-size: 14px;
+    display: block;
+    max-width: 354px;
+  }
+}

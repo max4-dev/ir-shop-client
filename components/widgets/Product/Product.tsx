@@ -3,7 +3,7 @@ import cn from "classnames";
 import styles from './Product.module.scss';
 import Image from "next/image";
 
-const Product = ({ salePercent = 10, price, badges = [], className, ...props }: ProductProps) => {
+const Product = ({ salePercent = 0, price, badges = [], className, ...props }: ProductProps) => {
 
   return (
     <div className={cn(styles.product, className)} {...props}>

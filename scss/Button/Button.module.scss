@@ -17,6 +17,12 @@
   background-color: var(--white);
 }
 
+.disabled {
+  color: var(--disabled);
+  background-color: var(--light-gray);
+  border-color: var(--light-gray);
+}
+
 .fullWidth {
   width: 100%;
 }

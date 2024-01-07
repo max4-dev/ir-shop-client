@@ -1,0 +1,75 @@
+.product {
+  width: 100%;
+  background-color: var(--white);
+  padding-bottom: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray);
+
+  &Sale {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 400;
+    padding: 3px 4px;
+  }
+
+  &Content {
+    display: flex;
+    align-items: center;
+  }
+
+  &Img {
+    border-radius: 4px;
+  }
+
+  &Name {
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 24px;
+  }
+  
+  &Counters {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.newPrice {
+  width: auto;
+  text-wrap: nowrap;
+}
+
+.oldPrice {
+  color: var(--dark-gray);
+  font-weight: 400;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 1px;
+    background-color: var(--dark-gray);
+    left: -6px;
+    top: 10px;
+    transform: rotate(40deg);
+  }
+}
+
+.deleteButton {
+  color: #9E9E9E;
+  border-bottom: 1.5px dashed #9E9E9E;
+  margin-left: 27px;
+  font-size: 12px;
+}

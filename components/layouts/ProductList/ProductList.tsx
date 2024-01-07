@@ -11,7 +11,7 @@ const ProductList = ({ className, ...props }: ProductListProps) => {
     <div className={cn(styles.productList, className)} {...props}>
       <div className={styles.productListItems}>
         {[...Array(9)].map((item, i) => (
-          <Product key={i} salePercent={10} price={35} badges={['4']} />
+          <Product key={i} salePercent={0} price={35} badges={['4']} />
         ))}
       </div>
       <div className={styles.productListButtonBox}>

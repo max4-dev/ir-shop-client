@@ -1,0 +1,61 @@
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &Dialog {
+    position: relative;
+    z-index: 10;
+  }
+
+  &Background {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(#000000, .25);
+  }
+
+  &Box {
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  &Panel {
+    background-color: var(--white);
+    transition: all .3s;
+    max-width: 440px;
+    width: 100%;
+    padding: 24px;
+    overflow: hidden;
+    margin-top: 80px;
+  }
+}
+
+.enter {
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.enterFrom {
+  opacity: 0;
+}
+
+.enterTo {
+  opacity: 1;
+}
+
+.leave {
+  transition-duration: 200ms;
+}
+
+.leaveFrom {
+  opacity: 1;
+}
+
+.leaveTo {
+  opacity: 0;
+}
