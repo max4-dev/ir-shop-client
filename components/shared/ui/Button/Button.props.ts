@@ -5,4 +5,6 @@ export interface ButtonProps extends Omit<DetailedHTMLProps<ButtonHTMLAttributes
   size?: 'fullWidth' | 'small' | 'medium' | 'big';
   appearance?: 'primary' | 'ghost' | 'disabled';
   icon?: any | 'none';
+  typeOf?: 'link' | 'button';
+  href?: string;
 }

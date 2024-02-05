@@ -1,20 +1,21 @@
 "use client"
 
-import { FilterProps } from "./Filter.props";
 import cn from "classnames";
-import styles from './Filter.module.scss';
-import ArrowIcon from '@/public/images/icons/arrow.svg'
-import Button from "@/components/ui/Button/Button";
 import ReactSlider from "react-slider";
 import { useState } from "react";
-import Checkbox from "@/components/ui/Checkbox/Checkbox";
+
+import ArrowIcon from '@/public/images/icons/arrow.svg'
+import { Checkbox, Button } from "@/components/shared/ui";
+
+import { FilterProps } from "./Filter.props";
+import styles from './Filter.module.scss';
 
 const price = {
   min: 0,
   max: 500
 }
 
-const Filter = ({ className, ...props }: FilterProps) => {
+export const Filter = ({ className, ...props }: FilterProps) => {
   const [thumbValue, setThumbValue] = useState([price.min, price.max]);
   
 
@@ -114,5 +115,3 @@ const Filter = ({ className, ...props }: FilterProps) => {
     </aside>
   );
 }
- 
-export default Filter;

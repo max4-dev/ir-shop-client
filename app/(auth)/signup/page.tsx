@@ -1,8 +1,7 @@
-import Input from "@/components/ui/Input/Input";
-import Checkbox from "@/components/ui/Checkbox/Checkbox";
-import Button from "@/components/ui/Button/Button";
 import cn from "classnames";
+
 import styles from "@/scss/Login/Login.module.scss";
+import { Button, Checkbox, Input } from "@/components/shared/ui";
 
 const Signup = () => {
   return ( 

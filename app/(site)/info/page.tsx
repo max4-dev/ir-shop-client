@@ -2,6 +2,7 @@
 
 import { Tab } from "@headlessui/react";
 import cn from "classnames";
+
 import styles from "./Info.module.scss";
 
 const Info = () => {

@@ -1,13 +1,13 @@
-import { HeaderProps } from "./Header.props";
 import cn from "classnames";
-import styles from './Header.module.scss';
 import Link from "next/link";
 import Image from "next/image";
-import Search from "@/components/ui/Search/Search";
-import Button from "@/components/ui/Button/Button";
-import StyledLink from "@/components/ui/StyledLink/StyledLink";
 
-const Header = ({ className, ...props }: HeaderProps) => {
+import { Button, Search } from "@/components/shared/ui";
+
+import { HeaderProps } from "./Header.props";
+import styles from './Header.module.scss';
+
+export const Header = ({ className, ...props }: HeaderProps) => {
   return (
     <header className={cn(styles.header, className)} {...props}>
       <div className={styles.headerTop}>
@@ -53,12 +53,12 @@ const Header = ({ className, ...props }: HeaderProps) => {
               </Link>
             </div>
             <div className={styles.sign}>
-              <StyledLink className={styles.signButton} size="small" appearance="ghost" href="/login">
+              <Button className={styles.signButton} typeOf="link" size="small" appearance="ghost" href="/login">
                 Войти
-              </StyledLink>
-              <StyledLink className={styles.signButton} size="small"href="/signup">
+              </Button>
+              <Button className={styles.signButton} typeOf="link" size="small" href="/signup">
                 Регистрация
-              </StyledLink>
+              </Button>
             </div>
           </div>
         </div>
@@ -66,5 +66,3 @@ const Header = ({ className, ...props }: HeaderProps) => {
     </header>
   );
 }
- 
-export default Header;

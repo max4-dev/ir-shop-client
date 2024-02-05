@@ -1,0 +1,94 @@
+.productPage {
+  padding: 24px 24px 54px 24px;
+  background-color: var(--white);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+
+  &Title {
+    font-weight: 600;
+    font-size: 26px;
+  }
+
+  &Box {
+    margin-top: 26px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &Slider {
+    margin-right: 48px;
+    width: 100%;
+  }
+
+  &Content {
+    max-width: 436px;
+    width: 100%;
+  }
+
+  &Price {
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  &Status {
+    margin-top: 9px;
+    font-size: 14px;
+  }
+
+  &Vendor {
+    margin-top: 5px;
+  }
+  &TypeBadges {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 20px;
+  }
+
+  &TypeBadge {
+    padding: 2px 5px;
+    border: 1px solid var(--black);
+    font-size: 14px;
+  }
+
+  &Buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  &Favorite {
+    background-color: var(--black);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .3s;
+  }
+
+  &Description {
+    margin-top: 48px;
+
+    h5 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p + h5 {
+      margin-top: 24px;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  }
+}
+
+.statusStock {
+  color: #04B19E;
+}
+
+.statusOutStock {
+  color: var(--red);
+}

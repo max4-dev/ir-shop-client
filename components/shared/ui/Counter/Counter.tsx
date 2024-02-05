@@ -1,17 +1,21 @@
 "use client"
 
-import { CounterProps } from "./Counter.props";
+/* eslint-disable no-plusplus */
+
 import cn from "classnames";
-import styles from "./Counter.module.scss";
 import Image from "next/image";
+
 import { checkRange } from "@/helpers/checkRange";
+
+import { CounterProps } from "./Counter.props";
+import styles from "./Counter.module.scss";
 
 const counterSize = {
   min: 1,
   max: 1000,
 }
 
-const Counter = ({ value, setValue, className, ...props }: CounterProps) => {
+export const Counter = ({ value, setValue, className, ...props }: CounterProps) => {
   const onChangeCount = (value: number) => {
     setValue(String(value))
     checkRange({ value, setValue, counterSize, replace: "0"})
@@ -39,5 +43,3 @@ const Counter = ({ value, setValue, className, ...props }: CounterProps) => {
     </div>
   );
 }
- 
-export default Counter;

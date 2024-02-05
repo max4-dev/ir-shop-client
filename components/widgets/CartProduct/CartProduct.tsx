@@ -1,14 +1,16 @@
 "use client"
 
-import { CartProductProps } from "./CartProduct.props";
 import cn from "classnames";
-import styles from './CartProduct.module.scss';
 import Image from "next/image";
 import Link from "next/link";
-import Counter from "@/components/ui/Counter/Counter";
 import { useState } from "react";
 
-const CartProduct = ({ productId, salePercent = 0, price, className, ...props }: CartProductProps) => {
+import { Counter } from "@/components/shared/ui";
+
+import { CartProductProps } from "./CartProduct.props";
+import styles from './CartProduct.module.scss';
+
+export const CartProduct = ({ productId, salePercent = 0, price, className, ...props }: CartProductProps) => {
   const [counterValue, setCounterValue] = useState("1");
 
   return (
@@ -17,7 +19,7 @@ const CartProduct = ({ productId, salePercent = 0, price, className, ...props }:
         {salePercent > 0 && <div className={styles.productSale}>-{salePercent}%</div>}
         <Image className={styles.productImg} src="/images/products/1.jpg" width={79} height={79} alt="" />
         <h6 className={styles.productName}>
-          <Link href={`products/${productId}`}>Цветы 24\24 см</Link>
+          <Link href={`product/${productId}`}>Цветы 24\24 см</Link>
         </h6>
       </div>
       <div className={styles.productCounters}>
@@ -35,5 +37,3 @@ const CartProduct = ({ productId, salePercent = 0, price, className, ...props }:
     </div>
   )
 }
- 
-export default CartProduct;
