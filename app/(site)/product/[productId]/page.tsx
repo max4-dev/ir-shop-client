@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Image from 'next/image';
 
 import { Button } from '@/components/shared/ui';
+import { ProductSlider } from '@/components/widgets';
 
 import styles from './ProductPage.module.scss';
 
@@ -20,6 +21,7 @@ const ProductPage = ({ params }: ProductPageProps ) => {
         </h3>
         <div className={styles.productPageBox}>
           <div className={styles.productPageSlider}>
+            <ProductSlider />
           </div>
           <div className={styles.productPageContent}>
             <p className={styles.productPagePrice}>

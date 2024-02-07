@@ -65,6 +65,21 @@ export const Filter = ({ className, ...props }: FilterProps) => {
               <Checkbox className={styles.selectItem}>
                 Тип 1
               </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
+              <Checkbox className={styles.selectItem}>
+                Тип 1
+              </Checkbox>
             </ul>
           </div>
         </div>

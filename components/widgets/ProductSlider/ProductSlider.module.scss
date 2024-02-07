@@ -1,0 +1,22 @@
+.slider {
+  max-width: 648px;
+  width: 100%;
+
+  &Big {
+    transform: translate3d(0px, 0, 0) !important;
+  }
+
+  &Img img {
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &Thumbs {
+    margin-top: 16px;
+  }
+
+  &Thumb img {
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}

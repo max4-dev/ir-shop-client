@@ -83,7 +83,7 @@
 
 .select {
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {

@@ -53,14 +53,14 @@
 
   &Buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 22px;
     margin-top: 24px;
   }
 
   &Favorite {
     background-color: var(--black);
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
