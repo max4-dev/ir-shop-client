@@ -1,0 +1,15 @@
+.swiper-scrollbar {
+  margin-top: 16px;
+  border-radius: 20px;
+}
+
+.swiper-scrollbar-horizontal {
+  height: 8px;
+  background-color: var(--gray);
+}
+
+.swiper-scrollbar-drag {
+  height: 8px;
+  background-color: var(--disabled);
+  border-radius: 20px;
+}

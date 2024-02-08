@@ -3,16 +3,16 @@
 import cn from 'classnames';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useState } from 'react';
+import { FreeMode, Navigation, Thumbs, Scrollbar } from 'swiper/modules';
 
 import { ProductSliderProps } from "./ProductSlider.props";
 import styles from './ProductSlider.module.scss';
 
 import 'swiper/css';
+import '@/scss/slider/slider.scss';
 
-export const ProductSlider = ({ className, ...props }: ProductSliderProps) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...props }: ProductSliderProps) => {
+  
 
   return ( 
     <div className={cn(styles.slider, className)} {...props}>
@@ -48,8 +48,11 @@ export const ProductSlider = ({ className, ...props }: ProductSliderProps) => {
         spaceBetween={16}
         slidesPerView={3.5}
         freeMode={true}
+        scrollbar={{
+          hide: false,
+        }}
         watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, Scrollbar]}
         className={styles.sliderThumbs}
       >
         <SwiperSlide className={styles.sliderThumb}>

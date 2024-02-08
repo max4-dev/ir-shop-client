@@ -2,6 +2,7 @@
 
 import cn from 'classnames';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { Button } from '@/components/shared/ui';
 import { ProductSlider } from '@/components/widgets';
@@ -13,6 +14,8 @@ interface ProductPageProps {
 }
 
 const ProductPage = ({ params }: ProductPageProps ) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  
   return ( 
     <div className="container">
       <div className={styles.productPage}>
@@ -21,7 +24,7 @@ const ProductPage = ({ params }: ProductPageProps ) => {
         </h3>
         <div className={styles.productPageBox}>
           <div className={styles.productPageSlider}>
-            <ProductSlider />
+            <ProductSlider thumbsSwiper={thumbsSwiper} setThumbsSwiper={setThumbsSwiper} />
           </div>
           <div className={styles.productPageContent}>
             <p className={styles.productPagePrice}>
