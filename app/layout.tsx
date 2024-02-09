@@ -1,6 +1,8 @@
-import { Providers } from '@/redux/provider'
-import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google';
+
+import { Providers } from '@/redux/provider'
+
+import type { Metadata } from 'next'
 
 const montserrat = Montserrat({
   subsets: ['cyrillic', 'latin'],

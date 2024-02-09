@@ -1,9 +1,10 @@
-import { SearchProps } from "./Search.props";
 import cn from "classnames";
 import Image from "next/image";
+
+import { SearchProps } from "./Search.props";
 import styles from './Search.module.scss';
 
-const Search = ({ className, ...props }: SearchProps) => {
+export const Search = ({ className, ...props }: SearchProps) => {
   return (
     <div className={cn(styles.search, className)} {...props}>
       <input className={styles.searchInput} type="text" placeholder="Я ищу..." />
@@ -13,5 +14,3 @@ const Search = ({ className, ...props }: SearchProps) => {
     </div>
   );
 }
- 
-export default Search;

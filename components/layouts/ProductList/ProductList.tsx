@@ -1,11 +1,12 @@
-import { ProductListProps } from "./ProductList.props";
 import cn from "classnames";
-import styles from './ProductList.module.scss';
-import Product from "@/components/widgets/Product/Product";
-import Button from "@/components/ui/Button/Button";
-import Pagination from "@/components/ui/Pagination/Pagination";
 
-const ProductList = ({ className, ...props }: ProductListProps) => {
+import { Product } from "@/components/widgets";
+import { Button, Pagination } from "@/components/shared/ui";
+
+import { ProductListProps } from "./ProductList.props";
+import styles from './ProductList.module.scss';
+
+export const ProductList = ({ className, ...props }: ProductListProps) => {
   
   return (
     <div className={cn(styles.productList, className)} {...props}>
@@ -23,5 +24,3 @@ const ProductList = ({ className, ...props }: ProductListProps) => {
     </div>
   );
 }
- 
-export default ProductList;

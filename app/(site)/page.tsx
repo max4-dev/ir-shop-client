@@ -1,9 +1,9 @@
 'use client'
 
-import Filter from '@/components/widgets/Filter/Filter';
+import { Filter, Sort } from '@/components/widgets';
+import { ProductList } from '@/components/layouts';
+
 import styles from './Home.module.scss';
-import Sort from '@/components/widgets/Sort/Sort';
-import ProductList from '@/components/layouts/ProductList/ProductList';
 
 export default function Home() {
 

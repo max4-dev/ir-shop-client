@@ -1,8 +1,9 @@
-import Input from "@/components/ui/Input/Input";
 import cn from "classnames";
-import Checkbox from "@/components/ui/Checkbox/Checkbox";
-import Button from "@/components/ui/Button/Button";
+import Link from "next/link";
+
 import styles from "@/scss/Login/Login.module.scss";
+import { Button, Checkbox, Input } from "@/components/shared/ui";
+
 
 const Login = () => {
   return ( 
@@ -14,7 +15,7 @@ const Login = () => {
         <div className={styles.loginForm}>
           <Input className={styles.input} placeholder="Имя" />
           <Input className={styles.input} type="password" placeholder="Пароль" isPassword />
-          <Checkbox className={styles.checkbox}>Я согласен с условиями пользовательского соглашения</Checkbox>
+          <Checkbox className={styles.checkbox}>Я согласен с <Link href="#">условиями пользовательского соглашения</Link></Checkbox>
           <Button className={styles.button} size="big">
             Вход
           </Button>

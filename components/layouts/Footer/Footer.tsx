@@ -1,10 +1,11 @@
-import { FooterProps } from "./Footer.props";
 import cn from "classnames";
-import styles from './Footer.module.scss';
 import Image from "next/image";
 import Link from "next/link";
 
-const Footer = ({ className, ...props }: FooterProps) => {
+import { FooterProps } from "./Footer.props";
+import styles from './Footer.module.scss';
+
+export const Footer = ({ className, ...props }: FooterProps) => {
   return (
     <footer className={cn(styles.footer, className)} {...props}>
       <div className="container">
@@ -12,7 +13,7 @@ const Footer = ({ className, ...props }: FooterProps) => {
           <div className={cn(styles.footerItem, styles.footerTop)}>
             <div className={styles.footerBox}>
               <Link href="/">
-                <Image src="images/white-logo.svg" width={153} height={37} alt="Логотип" />
+                <Image src="/images/white-logo.svg" width={153} height={37} alt="Логотип" />
               </Link>
             </div>
             <div className={styles.footerBox}>
@@ -68,7 +69,7 @@ const Footer = ({ className, ...props }: FooterProps) => {
                   Наш адрес:
                 </h6>
                 <div className={styles.footerInfoText}>
-                  <Image className={styles.footerInfoImg} src={"images/icons/marker.svg"} width={16} height={16} alt="Маркер" />
+                  <Image className={styles.footerInfoImg} src={"/images/icons/marker.svg"} width={16} height={16} alt="Маркер" />
                   <a className={styles.footerInfoLink} href="#">
                     г. Москва, ул. ... д.... 
                   </a>
@@ -79,7 +80,7 @@ const Footer = ({ className, ...props }: FooterProps) => {
                   Наш адрес:
                 </h6>
                 <div className={styles.footerInfoText}>
-                  <Image className={styles.footerInfoImg} src={"images/icons/phone.svg"} width={16} height={16} alt="Маркер" />
+                  <Image className={styles.footerInfoImg} src={"/images/icons/phone.svg"} width={16} height={16} alt="Маркер" />
                   <a className={styles.footerInfoLink} href="#">
                     +7(8095) 555-55-55
                   </a>
@@ -90,7 +91,7 @@ const Footer = ({ className, ...props }: FooterProps) => {
                   Наш адрес:
                 </h6>
                 <div className={styles.footerInfoText}>
-                  <Image className={styles.footerInfoImg} src={"images/icons/mail.svg"} width={16} height={16} alt="Маркер" />
+                  <Image className={styles.footerInfoImg} src={"/images/icons/mail.svg"} width={16} height={16} alt="Маркер" />
                   <a className={styles.footerInfoLink} href="#">
                     info@zapchasti.com.ru
                   </a>
@@ -126,5 +127,3 @@ const Footer = ({ className, ...props }: FooterProps) => {
     </footer>
   );
 }
- 
-export default Footer;

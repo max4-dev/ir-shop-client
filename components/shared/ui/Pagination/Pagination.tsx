@@ -1,18 +1,20 @@
 "use client"
 
-import { PaginationProps } from "./Pagination.props";
+/* eslint-disable no-plusplus */
+
 import cn from "classnames";
-import Image from "next/image";
-import styles from "./Pagination.module.scss";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const Pagination = ({ pagesCount, currentPage, className, ...props }: PaginationProps) => {
+import { PaginationProps } from "./Pagination.props";
+import styles from "./Pagination.module.scss";
+
+export const Pagination = ({ pagesCount, currentPage, className, ...props }: PaginationProps) => {
   const [paginationList, setPaginationList] = useState<number[]>([]);
 
   useEffect(() => {
     const generatePaginationList = () => {
-      let newList = [];
+      const newList = [];
 
       const maxPagesToShow = 3;
 
@@ -58,5 +60,3 @@ const Pagination = ({ pagesCount, currentPage, className, ...props }: Pagination
     </div>
   );
 }
- 
-export default Pagination;

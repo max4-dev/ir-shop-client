@@ -1,7 +1,6 @@
 'use client';
 
-import Footer from '@/components/layouts/Footer/Footer';
-import Header from '@/components/layouts/Header/Header';
+import { Footer, Header } from '@/components/layouts';
 import '@/scss/style.scss';
 
 function RootTemplate({

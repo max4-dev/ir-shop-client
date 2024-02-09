@@ -1,25 +1,17 @@
 "use client";
 
-import { PopupProps } from "./Popup.props";
 import cn from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
+
+import { PopupProps } from "./Popup.props";
 import styles from "./Popup.module.scss"
 
-const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
-
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
+export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
   return (
     <div className={cn(styles.popup, className)} {...props}>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className={styles.popupDialog} onClose={closeModal}>
+        <Dialog as="div" className={styles.popupDialog} onClose={() => setIsOpen(false)}>
           <Transition.Child
             as={Fragment}
             enter={styles.enter}
@@ -52,5 +44,3 @@ const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps)
     </div>
   );
 }
- 
-export default Popup;

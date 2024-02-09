@@ -1,9 +1,11 @@
-import { ProductProps } from "./Product.props";
 import cn from "classnames";
-import styles from './Product.module.scss';
 import Image from "next/image";
+import Link from "next/link";
 
-const Product = ({ salePercent = 0, price, badges = [], className, ...props }: ProductProps) => {
+import { ProductProps } from "./Product.props";
+import styles from './Product.module.scss';
+
+export const Product = ({ salePercent = 0, price, badges = [], className, ...props }: ProductProps) => {
 
   return (
     <div className={cn(styles.product, className)} {...props}>
@@ -12,7 +14,7 @@ const Product = ({ salePercent = 0, price, badges = [], className, ...props }: P
         <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
       </button>
       <Image className={styles.productImg} src="/images/products/1.jpg" width={198} height={184} alt="" />
-      <h6 className={styles.productName}>Цветы 24\24 см</h6>
+      <Link className={styles.productName} href={`product/${4}`}>Цветы 24\24 см</Link>
       {badges.length > 0 && <div className={styles.productType}>
         <p className={styles.productTypeText}>Тип:</p>
         <div className={styles.productTypeBadges}>
@@ -41,5 +43,3 @@ const Product = ({ salePercent = 0, price, badges = [], className, ...props }: P
     </div>
   )
 }
- 
-export default Product;

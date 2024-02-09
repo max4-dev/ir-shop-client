@@ -1,11 +1,13 @@
-import { SortProps } from "./Sort.props";
 import cn from "classnames";
-import styles from './Sort.module.scss';
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+
 import ArrowIcon from '@/public/images/icons/arrow.svg';
 
-const Sort = ({ className, ...props }: SortProps) => {
+import { SortProps } from "./Sort.props";
+import styles from './Sort.module.scss';
+
+export const Sort = ({ className, ...props }: SortProps) => {
 
   return (
     <div className={cn(styles.sort, className)} {...props}>
@@ -72,5 +74,3 @@ const Sort = ({ className, ...props }: SortProps) => {
     </div>
   )
 }
- 
-export default Sort;

@@ -1,13 +1,15 @@
 "use client"
 
-import { InputProps } from "./Input.props";
+import { MouseEvent, useState } from "react";
 import cn from "classnames";
+
 import EyeIcon from "@/public/images/icons/eye.svg"
 import EyeISlashcon from "@/public/images/icons/eye-slash.svg"
-import styles from "./Input.module.scss";
-import { MouseEvent, useState } from "react";
 
-const Input = ({ placeholder, type, isPassword = false, className, ...props }: InputProps) => {
+import { InputProps } from "./Input.props";
+import styles from "./Input.module.scss";
+
+export const Input = ({ placeholder, type, isPassword = false, className, ...props }: InputProps) => {
   const [inputType, setInputType] = useState(type);
 
   const toggleVisible = (e:  MouseEvent<HTMLElement>) => {
@@ -32,5 +34,3 @@ const Input = ({ placeholder, type, isPassword = false, className, ...props }: I
     </div>
   );
 }
- 
-export default Input;

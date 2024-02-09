@@ -1,4 +1,4 @@
-import { counterSizeI } from "@/components/ui/Counter/Counter.props";
+import { counterSizeI } from "@/components/shared/ui/Counter/Counter.props";
 
 interface checkRangeParams {
   value: number;
@@ -10,7 +10,8 @@ interface checkRangeParams {
 export const checkRange = ({value, setValue, counterSize, replace}: checkRangeParams) => {
   if (value < counterSize.min) {
     return setValue(String(replace))
-  } else if(value > counterSize.max) {
+  } if(value > counterSize.max) {
     return setValue(String(counterSize.max))
   }
+  return null;
 }

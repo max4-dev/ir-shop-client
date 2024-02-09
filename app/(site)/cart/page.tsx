@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import cn from "classnames";
-import styles from "./Cart.module.scss";
-import CartProduct from "@/components/widgets/CartProduct/CartProduct";
-import Button from "@/components/ui/Button/Button";
-import Popup from "@/components/ui/Popup/Popup";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import Checkbox from "@/components/ui/Checkbox/Checkbox";
+
+import { CartProduct } from "@/components/widgets";
+import { Button, Checkbox, Popup } from "@/components/shared/ui";
+
+import styles from "./Cart.module.scss";
 
 const Cart = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
