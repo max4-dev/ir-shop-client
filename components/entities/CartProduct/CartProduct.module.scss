@@ -45,28 +45,6 @@
   font-weight: 400;
 }
 
-.newPrice {
-  width: auto;
-  text-wrap: nowrap;
-}
-
-.oldPrice {
-  color: var(--dark-gray);
-  font-weight: 400;
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 32px;
-    height: 1px;
-    background-color: var(--dark-gray);
-    left: -6px;
-    top: 10px;
-    transform: rotate(40deg);
-  }
-}
-
 .deleteButton {
   color: #9E9E9E;
   border-bottom: 1.5px dashed #9E9E9E;

@@ -1,0 +1,32 @@
+.order {
+  &Name {
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  &Status {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 23px;
+  }
+
+  &Title {
+    margin-bottom: 10px;
+  }
+
+  &Items {
+    margin-bottom: 36px;
+  }
+
+  &Item + &Item {
+    margin-top: 24px;
+  }
+
+  &Buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

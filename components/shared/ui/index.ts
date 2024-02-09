@@ -5,3 +5,4 @@ export * from './Input/Input';
 export * from './Counter/Counter';
 export * from './Checkbox/Checkbox';
 export * from './Button/Button';
+export * from './Status/Status';

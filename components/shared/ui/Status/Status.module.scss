@@ -1,0 +1,20 @@
+.status {
+  display: inline-block;
+  font-size: 16px;
+  padding: 5px 20px;
+}
+
+.pending {
+  color: var(--disabled);
+  background-color: var(--light-gray);
+}
+
+.complete {
+  color: var(--dark-green);
+  background-color: var(--green);
+}
+
+.cancel {
+  color: var(--white);
+  background-color: var(--red);
+}
