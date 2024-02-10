@@ -6,3 +6,6 @@ export * from './Counter/Counter';
 export * from './Checkbox/Checkbox';
 export * from './Button/Button';
 export * from './Status/Status';
+export * from './ProfileButton/ProfileButton';
+export * from './ProfileMenu/ProfileMenu';
+export * from './Dropdown/Dropdown';

@@ -1,13 +1,37 @@
+"use client";
+
 import cn from "classnames";
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 
-import { Button, Search } from "@/components/shared/ui";
+import { Button, Search, Dropdown, ProfileButton, ProfileMenu } from "@/components/shared/ui";
+import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 
 import { HeaderProps } from "./Header.props";
 import styles from './Header.module.scss';
 
 export const Header = ({ className, ...props }: HeaderProps) => {
+  const [isAuth, setIsAuth] = useState(true);
+
+  const menuItems = useMemo((): ProfileMenuItem[] => {
+    return [
+      {
+        title: "Профиль",
+        href: `profile`,
+      },
+      {
+        title: "Мои заказы",
+        href: `orders`,
+      },
+      {
+        title: "Выйти",
+        href: "/",
+        // onClick: clearTokens,
+      },
+    ]
+  }, []);
+
   return (
     <header className={cn(styles.header, className)} {...props}>
       <div className={styles.headerTop}>
@@ -45,6 +69,13 @@ export const Header = ({ className, ...props }: HeaderProps) => {
             </Link>
             <Search />
             <div className={styles.userNav}>
+              {isAuth &&
+                <div className={cn(styles.userNavLink, styles.profile)}>
+                  <Dropdown buttonChildren={(open) => <ProfileButton />} panelClassName={styles.panel}>
+                    <ProfileMenu items={menuItems} />
+                  </Dropdown>
+                </div>
+              }
               <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={'/favorites'}>
                 <Image src={'/images/icons/favorite.svg'} alt="Избранное" width={26} height={23} />
               </Link>
@@ -52,14 +83,16 @@ export const Header = ({ className, ...props }: HeaderProps) => {
                 <Image src={'/images/icons/cart.svg'} alt="Корзина" width={28} height={28} />
               </Link>
             </div>
-            <div className={styles.sign}>
-              <Button className={styles.signButton} typeOf="link" size="small" appearance="ghost" href="/login">
-                Войти
-              </Button>
-              <Button className={styles.signButton} typeOf="link" size="small" href="/signup">
-                Регистрация
-              </Button>
-            </div>
+            {!isAuth && 
+              <div className={styles.sign}>
+                <Button className={styles.signButton} typeOf="link" size="small" appearance="ghost" href="/login">
+                  Войти
+                </Button>
+                <Button className={styles.signButton} typeOf="link" size="small" href="/signup">
+                  Регистрация
+                </Button>
+              </div>
+            }
           </div>
         </div>
       </div>

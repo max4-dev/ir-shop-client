@@ -1,0 +1,29 @@
+.dropdown {
+  position: relative;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--content-light);
+  background: var(--dominant-main);
+  overflow: hidden;
+  padding: 12px;
+}
+
+.float {
+  position: absolute;
+  z-index: 6;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+}
