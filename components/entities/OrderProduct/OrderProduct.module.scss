@@ -1,0 +1,39 @@
+.product {
+  width: 100%;
+  background-color: var(--white);
+  padding-bottom: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray);
+
+  &Content {
+    display: flex;
+    align-items: center;
+  }
+
+  &Img {
+    border-radius: 4px;
+  }
+
+  &Name {
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 24px;
+  }
+
+  &Counters {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.count {
+  margin-right: 40px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 400;
+}
