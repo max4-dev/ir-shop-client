@@ -96,3 +96,90 @@
 .panel {
   right: -76px;
 }
+
+.burger {
+  width: 50px;
+  height: 50px;
+  background-color: var(--black);
+  gap: 8px;
+  padding: 10px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  display: none;
+
+  span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--white);
+  }
+}
+
+@media screen and (max-width: 961px) {
+  .userNav {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .list {
+    display: block;
+    text-align: center;
+    color: var(--black);
+    max-width: 480px;
+    width: 100%;
+  }
+
+  .listItem {
+    font-size: 19px;
+    padding: 5px 0;
+  }
+
+  .listItem:hover {
+    border-bottom-color: var(--black);
+  }
+
+  .listItem + .listItem {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .headerBottomInner {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .header .search {
+    display: block;
+    max-width: 100%;
+    width: 100%;  
+    order: 1;
+  }
+
+  .logo {
+    max-width: 135px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .headerTopInner {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .phone {
+    a {
+      font-size: 16px;
+    }
+  }
+}

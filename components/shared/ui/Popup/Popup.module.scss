@@ -25,6 +25,7 @@
   }
 
   &Panel {
+    position: relative;
     background-color: var(--white);
     transition: all .3s;
     max-width: 440px;
@@ -33,6 +34,12 @@
     overflow: hidden;
     margin-top: 80px;
   }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .enter {
