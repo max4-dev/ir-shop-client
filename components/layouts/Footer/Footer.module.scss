@@ -113,3 +113,47 @@
     font-weight: 600;
   }
 }
+
+@media screen and (max-width: 961px) {
+  .footer {
+    &Top {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &Box {
+      padding-left: 16px;
+      border-left: 1px solid var(--light-black);
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .footer {
+    &Top {
+      display: block;
+    }
+
+    &Box {
+      padding-left: 0;
+      border-left: none;
+    }
+
+    &Box + &Box {
+      padding-left: 0;
+      border-left: none;
+    }
+
+    &Social {
+      display: block;
+    }
+
+    &SocialText {
+      margin: 0 0 10px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+}
