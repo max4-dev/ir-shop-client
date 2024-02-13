@@ -19,3 +19,54 @@
 .pagination {
   margin-top: 55px;
 }
+
+@media screen and (max-width: 1280px) {
+  .productList {
+    max-width: 100%;
+    margin: 0;
+
+    &Items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pagination {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .productList {
+    &Items {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 26px 15px;
+    }
+
+    &Item {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .productList {
+    &Items {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .productList {
+    &ButtonBox {
+      margin-top: 40px;
+    }
+  }
+
+  .pagination {
+    max-width: 100%;
+    margin-top: 35px;
+  }
+}

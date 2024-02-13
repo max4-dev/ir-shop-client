@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  margin-bottom: 22px;
 
   &Text {
     margin-right: 10px;
@@ -90,4 +89,22 @@
 
 .leaveTo {
   opacity: 0;
+}
+
+@media screen and (max-width: 400px) {
+  .sort {
+    display: block;
+    width: 100%;
+
+    &Text {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+
+    &Items {
+      right: auto;
+      left: 0;
+      top: 64px;
+    }
+  }
 }
