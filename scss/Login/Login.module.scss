@@ -24,3 +24,38 @@
   margin-top: 60px;
   margin-left: auto;
 }
+
+@media screen and (max-width: 768px) {
+  .login {
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .input input {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login {
+    &Form {
+      padding-left: 0;
+    }
+  }
+
+  .input input {
+    font-size: 16px;
+  }
+  
+  .checkbox {
+    display: block;
+  }
+
+  .checkbox span {
+    display: block;
+  }
+
+  .checkbox p {
+    margin: 10px 0 0 0;
+  }
+}
