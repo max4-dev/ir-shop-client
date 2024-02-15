@@ -20,7 +20,7 @@ export default function Home() {
       <div className="container">
         <div className={styles.top}>
           {isMobile && <button className={styles.filterButton} onClick={() => setFilterOpen(prevState => !prevState)}>
-            <Image src="images/icons/filter.svg" width={30} height={30} alt="Иконка фильтрации" />
+            <Image src="/images/icons/filter.svg" width={30} height={30} alt="Иконка фильтрации" />
           </button>}
           <Sort className={styles.sort} />
         </div>

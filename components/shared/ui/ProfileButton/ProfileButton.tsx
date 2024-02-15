@@ -12,7 +12,7 @@ export function ProfileButton({
 }: ProfileButtonProps) {
   return (
     <div className={cn(className, styles.profile)} {...props}>
-      <Image src="images/icons/user.svg" width={23} height={29} alt="Изображение пользователя" />
+      <Image src="/images/icons/user.svg" width={23} height={29} alt="Изображение пользователя" />
     </div>
   );
 }

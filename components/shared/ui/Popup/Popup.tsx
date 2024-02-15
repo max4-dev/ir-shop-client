@@ -37,7 +37,7 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
             >
               <Dialog.Panel className={styles.popupPanel}>
                 <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
-                  <Image src="images/icons/close.svg" width={20} height={20} alt="Картинка закрыть" />
+                  <Image src="/images/icons/close.svg" width={20} height={20} alt="Картинка закрыть" />
                 </button>
                 {children}
               </Dialog.Panel>

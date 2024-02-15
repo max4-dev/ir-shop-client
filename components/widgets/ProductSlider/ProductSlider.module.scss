@@ -2,10 +2,6 @@
   max-width: 648px;
   width: 100%;
 
-  &Big {
-    transform: translate3d(0px, 0, 0) !important;
-  }
-
   &Img img {
     object-fit: cover;
     border-radius: 4px;
@@ -18,5 +14,26 @@
   &Thumb img {
     object-fit: cover;
     border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slider {
+    &Big {
+      height: 398px;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .slider {
+    &Big {
+      height: 250px;
+    }
+
+    &Img img {
+      object-fit: cover;
+      height: 250px;
+    }
   }
 }

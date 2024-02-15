@@ -12,17 +12,19 @@
     min-width: 190px;
     height: 34px;
     padding: 4px 0 4px 11px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--white);
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    background-color: var(--black);
+    color: var(--white);
   }
 
   &Arrow {
     height: 34px;
     width: 34px;
-    border-left: 1px solid var(--black);
+    border-left: 1px solid var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,6 +32,7 @@
 
   &ArrowIcon {
     transform: rotate(180deg);
+    color: var(--white);
   }
 
   &ArrowIconActive {
