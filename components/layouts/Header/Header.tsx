@@ -13,7 +13,7 @@ import { HeaderProps } from "./Header.props";
 import styles from './Header.module.scss';
 
 export const Header = ({ className, ...props }: HeaderProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(true);
   const { width } = useWindowSize();
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const isMobile = Boolean(width && width < 961);

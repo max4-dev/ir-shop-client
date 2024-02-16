@@ -46,3 +46,30 @@
     margin-top: 20px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .info {
+    padding: 0;
+    box-shadow: none;
+
+    &Group {
+      display: block;
+    }
+
+    &List {
+      border-right: none;
+      border-bottom: 1px solid var(--gray);
+      max-width: 100%;
+      padding-right: 0;
+      margin-bottom: 15px;
+    }
+
+    &Tab + &Tab {
+      margin-top: 0;
+    }
+
+    &Panels {
+      padding: 0;
+    }
+  }
+}
