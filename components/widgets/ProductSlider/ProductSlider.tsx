@@ -22,6 +22,7 @@ export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...pro
         allowTouchMove={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
+
         className={styles.sliderBig}
       >
         <SwiperSlide className={styles.sliderImg}>
@@ -53,6 +54,21 @@ export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...pro
         }}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs, Scrollbar]}
+        breakpoints={{
+          0: {
+            slidesPerView: 1.5,
+          },
+          320: {
+            slidesPerView: 2,
+          },
+          400: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+        }}
+
         className={styles.sliderThumbs}
       >
         <SwiperSlide className={styles.sliderThumb}>

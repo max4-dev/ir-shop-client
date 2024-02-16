@@ -37,3 +37,11 @@
   font-size: 20px;
   min-width: 280px;
 }
+
+@media screen and (max-width: 400px) {
+  .big {
+    min-width: 100%;
+    font-size: 19px;
+    padding: 12px 28px;
+  }
+}

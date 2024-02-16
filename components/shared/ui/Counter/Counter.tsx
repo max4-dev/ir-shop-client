@@ -34,11 +34,11 @@ export const Counter = ({ value, setValue, className, ...props }: CounterProps) 
   return (
     <div className={cn(styles.counter, className)} {...props}>
       <button className={cn(styles.counterButton, styles.counterMinus)} onClick={() => decrement(Number(value))}>
-        <Image src="images/icons/minus.svg" width={20} height={20} alt="Минус" />
+        <Image src="/images/icons/minus.svg" width={20} height={20} alt="Минус" />
       </button>
       <input className={styles.counterInput} onChange={({target}) => onChangeCount(Number(target.value))} value={value} type="number" min={counterSize.min} max={counterSize.max} />
       <button className={cn(styles.counterButton, styles.counterPlus)} onClick={() => increment(Number(value))}>
-        <Image src="images/icons/plus.svg" width={20} height={20} alt="Плюс" />
+        <Image src="/images/icons/plus.svg" width={20} height={20} alt="Плюс" />
       </button>
     </div>
   );

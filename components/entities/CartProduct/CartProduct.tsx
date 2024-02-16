@@ -23,7 +23,7 @@ export const CartProduct = ({ productId, salePercent = 0, price, className, ...p
         </h6>
       </div>
       <div className={styles.productCounters}>
-        <Counter value={String(counterValue)} setValue={setCounterValue} />
+        <Counter className={styles.productCounter} value={String(counterValue)} setValue={setCounterValue} />
         <div className={styles.productPrice}>
           {salePercent > 0 ?
             <span className={cn(styles.price)}>{price - Math.round(price * (salePercent / 100))} ₽</span>

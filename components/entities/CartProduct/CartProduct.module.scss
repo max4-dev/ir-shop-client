@@ -8,6 +8,10 @@
   justify-content: space-between;
   border-bottom: 1px solid var(--gray);
 
+  &Counter {
+    margin-right: 95px;
+  }
+
   &Sale {
     position: absolute;
     left: 0;
@@ -26,6 +30,7 @@
 
   &Img {
     border-radius: 4px;
+    object-fit: cover;
   }
 
   &Name {
@@ -43,6 +48,7 @@
 .price {
   font-size: 24px;
   font-weight: 400;
+  text-wrap: nowrap;
 }
 
 .deleteButton {
@@ -50,4 +56,42 @@
   border-bottom: 1.5px dashed #9E9E9E;
   margin-left: 27px;
   font-size: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .product {
+    display: block;
+
+    &Counters {
+      margin-top: 15px;
+      width: 100%;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    &Counter {
+      margin-right: 0;
+    }
+
+    &Price {
+      margin-right: auto;
+    }
+  }
+
+  .deleteButton {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .product {
+    &Content {
+      display: block;
+    }
+
+    &Name {
+      margin: 15px 0 0 0;
+    }
+  }
 }

@@ -6,6 +6,7 @@ import React, { Fragment } from "react";
 
 import { PopupProps } from "./Popup.props";
 import styles from "./Popup.module.scss"
+import Image from "next/image";
 
 export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
   return (
@@ -35,6 +36,9 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
               leaveTo={styles.leaveTo}
             >
               <Dialog.Panel className={styles.popupPanel}>
+                <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
+                  <Image src="/images/icons/close.svg" width={20} height={20} alt="Картинка закрыть" />
+                </button>
                 {children}
               </Dialog.Panel>
             </Transition.Child>

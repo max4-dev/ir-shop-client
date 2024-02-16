@@ -116,3 +116,30 @@
     max-width: 354px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .cart {
+    box-shadow: none;
+
+    &Title {
+      margin-bottom: 28px;
+    }
+
+    &Top {
+      box-shadow: none;
+      padding: 0;
+    }
+
+    &Content {
+      padding: 20px 0 0 0;
+    }
+
+    &Price {
+      display: block;
+    }
+
+    &PriceCount {
+      margin-top: 10px;
+    }
+  }
+}

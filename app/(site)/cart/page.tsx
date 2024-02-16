@@ -20,7 +20,7 @@ const Cart = () => {
       </h2>
       <div className={styles.cart}>
         <div className={styles.cartTop}>
-          <Image src="images/icons/cart-white.svg" width={48} height={48} alt="Корзина" />
+          <Image src="/images/icons/cart-white.svg" width={48} height={48} alt="Корзина" />
           <h5 className={cn(styles.cartTopTitle, "title-m")}>Корзина</h5>
         </div>
         <div className={styles.cartContent}>

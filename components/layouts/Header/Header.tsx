@@ -5,32 +5,63 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { Button, Search, Dropdown, ProfileButton, ProfileMenu } from "@/components/shared/ui";
+import { Search, Dropdown, ProfileButton, ProfileMenu, Popup } from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 import { HeaderProps } from "./Header.props";
 import styles from './Header.module.scss';
 
 export const Header = ({ className, ...props }: HeaderProps) => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState<boolean>(true);
+  const { width } = useWindowSize();
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
+  const isMobile = Boolean(width && width < 961);
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
       {
+        title: "Каталог",
+        href: `/catalog`,
+      },
+      {
+        title: "Оплата и доставка",
+        href: `/pay`,
+      },
+      {
+        title: "Контакты",
+        href: "/contacts",
+      },
+    ]
+  }, []);
+
+  const profileItems = useMemo((): ProfileMenuItem[] => {
+    return isAuth ? [
+      {
         title: "Профиль",
-        href: `profile`,
+        href: `/profile`,
       },
       {
         title: "Мои заказы",
-        href: `orders`,
+        href: `/orders`,
       },
       {
         title: "Выйти",
         href: "/",
         // onClick: clearTokens,
       },
+    ] : [
+      {
+        title: "Войти",
+        href: `/login`,
+      },
+      {
+        title: "Регистрация",
+        href: `/signup`,
+      },
     ]
   }, []);
+  
 
   return (
     <header className={cn(styles.header, className)} {...props}>
@@ -38,21 +69,26 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         <div className="container">
           <div className={styles.headerTopInner}>
             <div className={styles.city}>
-              <Image src="/images/icons/location.svg" alt="" width={12} height={12} />
+              <Image src="/images/icons/location.svg"  width={12} height={12} alt="Иконка маркерам" />
               <button>Москва</button>
             </div>
             <nav>
-              <ul className={styles.list}>
-                <li className={styles.listItem}>
-                  <Link href={'/catalog'}>Каталог</Link>
-                </li>
-                <li className={styles.listItem}>
-                  <Link href={'/pay'}>Оплата и доставка</Link>
-                </li>
-                <li className={styles.listItem}>
-                  <Link href={'/contacts'}>Контакты</Link>
-                </li>
-              </ul>
+              {!isMobile && <ul className={styles.list}>
+                {menuItems.map(menuItem => (
+                  <li className={styles.listItem} key={menuItem.title}>
+                    {
+                    menuItem.href ? 
+                    <Link href={menuItem.href}>
+                      {menuItem.title}
+                    </Link>
+                    :
+                    <button onClick={menuItem.onClick}>
+                      {menuItem.title}
+                    </button>
+                    }
+                  </li>
+                ))}
+              </ul>}
             </nav>
             <div className={styles.phone}>
               <Image src="/images/icons/phone.svg" alt="" width={16} height={16} />
@@ -65,37 +101,55 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         <div className="container">
           <div className={styles.headerBottomInner}>
             <Link href="/">
-              <Image src="/images/logo.svg" alt="Логотип" width={181} height={48} />
+              <Image className={styles.logo} src="/images/logo.svg" width={181} height={48} alt="Логотип" />
             </Link>
-            <Search />
-            <div className={styles.userNav}>
-              {isAuth &&
-                <div className={cn(styles.userNavLink, styles.profile)}>
-                  <Dropdown buttonChildren={(open) => <ProfileButton />} panelClassName={styles.panel}>
-                    <ProfileMenu items={menuItems} />
-                  </Dropdown>
-                </div>
-              }
+            <Search className={styles.search} />
+            {!isMobile && <div className={styles.userNav}>
+              <div className={cn(styles.userNavLink, styles.profile)}>
+                <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
+                  <ProfileMenu items={profileItems} />
+                </Dropdown>
+              </div>
               <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={'/favorites'}>
                 <Image src={'/images/icons/favorite.svg'} alt="Избранное" width={26} height={23} />
               </Link>
               <Link className={cn(styles.userNavLink, styles.userNavCart)} href={'/cart'}>
                 <Image src={'/images/icons/cart.svg'} alt="Корзина" width={28} height={28} />
               </Link>
-            </div>
-            {!isAuth && 
-              <div className={styles.sign}>
-                <Button className={styles.signButton} typeOf="link" size="small" appearance="ghost" href="/login">
-                  Войти
-                </Button>
-                <Button className={styles.signButton} typeOf="link" size="small" href="/signup">
-                  Регистрация
-                </Button>
-              </div>
-            }
+            </div>}
+            {isMobile && <button className={styles.burger} onClick={() => setMenuOpen(prevState => !prevState)}>
+              <span />
+              <span />
+              <span />
+            </button>}
           </div>
         </div>
       </div>
+
+      {isMobile && <Popup isOpen={isMenuOpen} setIsOpen={setMenuOpen}>
+        <div className={styles.userNav}>
+          <div className={cn(styles.userNavLink, styles.profile)}>
+            <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
+              <ProfileMenu items={profileItems} />
+            </Dropdown>
+          </div>
+          <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={'/favorites'}>
+            <Image src={'/images/icons/favorite.svg'} alt="Избранное" width={26} height={23} />
+          </Link>
+          <Link className={cn(styles.userNavLink, styles.userNavCart)} href={'/cart'}>
+            <Image src={'/images/icons/cart.svg'} alt="Корзина" width={28} height={28} />
+          </Link>
+        </div>
+        <ul className={styles.list}>
+          {menuItems.map(menuItem => (
+            <li className={styles.listItem} key={menuItem.href}>
+              <Link href={`/${menuItem.href}`}>
+                {menuItem.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Popup>}
     </header>
   );
 }
