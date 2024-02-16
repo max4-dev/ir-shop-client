@@ -15,6 +15,7 @@
 
   &Img {
     border-radius: 4px;
+    object-fit: cover;
   }
 
   &Name {
@@ -36,4 +37,11 @@
 .price {
   font-size: 24px;
   font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+  .product {
+    flex-wrap: wrap;
+    gap: 25px;
+  }
 }

@@ -45,3 +45,36 @@
 .order + .order {
   margin-top: 72px;
 }
+
+@media screen and (max-width: 1100px) {
+  .orders {
+    &Inner {
+      padding: 0;
+      box-shadow: none;
+      display: block;
+    }
+
+    &Items {
+      margin-left: 0;
+    }
+  }
+
+  .ordersAside {
+    max-width: 100%;
+    margin-bottom: 45px;
+    border-right: none;
+    padding: 0;
+    display: flex;
+    gap: 45px;
+    flex-wrap: wrap;
+
+    &Item + &Item {
+      margin-top: 0;
+    }
+
+    &Statistic {
+      justify-content: start;
+      gap: 15px;
+    }
+  }
+}
