@@ -12,7 +12,7 @@ import styles from "./Cart.module.scss";
 
 const Cart = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  
   return ( 
     <div className="container">
       <h2 className={cn(styles.cartTitle, "title-b")}>

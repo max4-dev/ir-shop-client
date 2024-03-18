@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  // withCredentials: true,
-  baseURL: process.env.NEXT_SERVER_DOMAIN,
+import { axiosInterceptor } from '@/components/shared/api';
+import { API_URL } from '@/components/shared/api/const/ApiUrl';
+import { getAccessToken, getIsRefreshSent, getRefreshToken, removeTokenStorage, saveTokenStorage } from '@/components/shared/api/lib/interceptor/AuthHelper';
+
+const axiosInstance = axios.create({
+  baseURL: API_URL,
 });
 
-export default instance;
+axiosInterceptor({axiosInstance, getAccessToken, getRefreshToken, saveTokenStorage, removeTokenStorage, getIsRefreshSent});
+
+
+export default axiosInstance;
