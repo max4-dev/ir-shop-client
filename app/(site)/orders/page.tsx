@@ -7,7 +7,6 @@ import { Order } from '@/components/widgets';
 import styles from './Orders.module.scss';
 
 const Orders = () => {
-  
   return ( 
     <div className={styles.orders}>
       <div className="container">
@@ -49,5 +48,7 @@ const Orders = () => {
     </div>
    );
 }
+
+Orders.isOnlyUser = true;
  
 export default Orders;

@@ -1,6 +1,6 @@
 "use client"
 
-import { MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, forwardRef, useEffect, useState } from "react";
 import cn from "classnames";
 
 import EyeIcon from "@/public/images/icons/eye.svg"
@@ -9,8 +9,20 @@ import EyeISlashcon from "@/public/images/icons/eye-slash.svg"
 import { InputProps } from "./Input.props";
 import styles from "./Input.module.scss";
 
-export const Input = ({ placeholder, type, isPassword = false, className, ...props }: InputProps) => {
+export const Input =  forwardRef<HTMLInputElement, InputProps>(({ value, placeholder, type, onChange, isPassword = false, className, ...props }: InputProps, ref) => {
   const [inputType, setInputType] = useState(type);
+  const [customValue, setValue] = useState<string | number | readonly string[] | undefined>();
+
+  useEffect(() => {
+    setValue(value);
+  }, [value]);
+
+  const change = (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+      if (onChange) {
+        onChange(e);
+      }
+    };
 
   const toggleVisible = (e:  MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -25,7 +37,15 @@ export const Input = ({ placeholder, type, isPassword = false, className, ...pro
   return (
     <div className={cn(styles.inputBox, className)}>
       {placeholder && <span className={styles.placeholder}>{placeholder}</span>}
-      <input className={styles.input} placeholder={placeholder} type={inputType} {...props} />
+      <input 
+        className={styles.input}
+        value={customValue ?? ""}
+        ref={ref}
+        placeholder={placeholder}
+        type={inputType}
+        onChange={(e) => change(e)}
+        {...props}
+      />
       {isPassword && 
        <button onClick={toggleVisible} className={styles.inputButton}>
         {inputType === 'password' ? <EyeIcon /> : <EyeISlashcon />}
@@ -33,4 +53,6 @@ export const Input = ({ placeholder, type, isPassword = false, className, ...pro
       }
     </div>
   );
-}
+})
+
+Input.displayName = "Input";
