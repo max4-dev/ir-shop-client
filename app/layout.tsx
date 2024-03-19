@@ -21,7 +21,7 @@ export default function RootLayout({ children }: {
     <html lang="ru" className={montserrat.className}>
       <body>
         <Providers>
-            {children}
+          {children}
         </Providers>
       </body>
     </html>

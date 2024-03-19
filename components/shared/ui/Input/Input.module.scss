@@ -23,6 +23,10 @@
     align-items: center;
     justify-content: center;
   }
+
+  &Error {
+    border-color: var(--red);
+  }
 }
 
 .placeholder {
@@ -31,4 +35,12 @@
   padding: 0 5px;
   top: -11px;
   left: 30px;
+}
+
+.errorMessage {
+  position: absolute;
+  right: 0;
+  top: -22px;
+  font-size: 16px;
+  color: var(--red);
 }
