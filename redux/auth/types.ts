@@ -23,3 +23,8 @@ export interface IInitialState {
   user: IUser,
   isLoading: boolean,
 }
+
+export enum AuthType {
+  LOGIN = 'login',
+  REGISTER = 'register',
+}

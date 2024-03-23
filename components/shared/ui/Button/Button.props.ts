@@ -7,4 +7,5 @@ export interface ButtonProps extends Omit<DetailedHTMLProps<ButtonHTMLAttributes
   icon?: any | 'none';
   typeOf?: 'link' | 'button';
   href?: string;
+  disabled?: boolean;
 }

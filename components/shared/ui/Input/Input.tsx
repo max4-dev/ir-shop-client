@@ -9,7 +9,16 @@ import EyeISlashcon from "@/public/images/icons/eye-slash.svg"
 import { InputProps } from "./Input.props";
 import styles from "./Input.module.scss";
 
-export const Input =  forwardRef<HTMLInputElement, InputProps>(({ value, placeholder, type, onChange, isPassword = false, className, ...props }: InputProps, ref) => {
+export const Input =  forwardRef<HTMLInputElement, InputProps>(({ 
+  errorMessage, 
+  value, 
+  placeholder, 
+  type, 
+  onChange, 
+  isPassword = false,
+  className, 
+  ...props 
+}: InputProps, ref) => {
   const [inputType, setInputType] = useState(type);
   const [customValue, setValue] = useState<string | number | readonly string[] | undefined>();
 
@@ -36,9 +45,18 @@ export const Input =  forwardRef<HTMLInputElement, InputProps>(({ value, placeho
 
   return (
     <div className={cn(styles.inputBox, className)}>
-      {placeholder && <span className={styles.placeholder}>{placeholder}</span>}
+      {placeholder && 
+        <span className={styles.placeholder}>
+          {placeholder}
+        </span>
+      }
+      {errorMessage && 
+        <span className={styles.errorMessage}>
+          {errorMessage}
+        </span>
+      }
       <input 
-        className={styles.input}
+        className={cn(styles.input, {[styles.inputError]: errorMessage})}
         value={customValue ?? ""}
         ref={ref}
         placeholder={placeholder}

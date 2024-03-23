@@ -1,3 +1,4 @@
 export const enum HttpCodes {
-  Unauthorized = 401
+  BadRequest = 400,
+  Unauthorized = 401,
 }
