@@ -3,10 +3,10 @@
 import cn from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
+import Image from "next/image";
 
 import { PopupProps } from "./Popup.props";
 import styles from "./Popup.module.scss"
-import Image from "next/image";
 
 export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
   return (

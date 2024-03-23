@@ -28,6 +28,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
     "react-slider": "^2.0.6",
+    "react-toastify": "^10.0.5",
     "redux-persist": "^6.0.0",
     "sass": "^1.69.5",
     "swiper": "^11.0.6",

@@ -5,13 +5,13 @@ import { removeTokenStorage } from "@/components/shared/api/lib/interceptor/Auth
 import { ILogin } from "@/app/(auth)/login/Login.interface";
 import { ISignup } from "@/app/(auth)/signup/Signup.interface";
 
-import { IAuthResponse } from "./types";
+import { AuthType, IAuthResponse } from "./types";
 
 export const signup = createAsyncThunk<IAuthResponse, ISignup>(
   'auth/register',
   async (data, thunkApi) => {
     try {
-      const response = await sign('register', data);
+      const response = await sign(AuthType.REGISTER, data);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -23,7 +23,8 @@ export const login = createAsyncThunk<IAuthResponse, ILogin>(
   'auth/login',
   async (data, thunkApi) => {
     try {
-      const response = await sign('login', data);
+      const response = await sign(AuthType.LOGIN, data);
+
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);

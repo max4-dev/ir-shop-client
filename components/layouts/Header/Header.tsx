@@ -8,12 +8,15 @@ import { useMemo, useState } from "react";
 import { Search, Dropdown, ProfileButton, ProfileMenu, Popup } from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { useAuth } from "@/hooks/useAuth";
+import { useActions } from "@/hooks/useActions";
 
 import { HeaderProps } from "./Header.props";
 import styles from './Header.module.scss';
 
 export const Header = ({ className, ...props }: HeaderProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>(true);
+  const { user } = useAuth();
+  const { logout } = useActions();
   const { width } = useWindowSize();
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const isMobile = Boolean(width && width < 961);
@@ -36,7 +39,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   }, []);
 
   const profileItems = useMemo((): ProfileMenuItem[] => {
-    return isAuth ? [
+    return user ? [
       {
         title: "Профиль",
         href: `/profile`,
@@ -47,8 +50,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
       },
       {
         title: "Выйти",
-        href: "/",
-        // onClick: clearTokens,
+        onClick: logout,
       },
     ] : [
       {
@@ -60,7 +62,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         href: `/signup`,
       },
     ]
-  }, []);
+  }, [user]);
   
 
   return (

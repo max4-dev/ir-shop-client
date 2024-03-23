@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-import { IAuthResponse, Tokens } from "@/redux/auth/types";
+import { AuthType, IAuthResponse, Tokens } from "@/redux/auth/types";
 import { ILogin } from "@/app/(auth)/login/Login.interface";
 import axios from "@/core/axios";
 
@@ -21,12 +21,10 @@ export const getNewTokens = async () => {
   return response;
 }
 
-export const sign = async (type: 'login' | 'register', data: ILogin) => {
-  const response = await axios<IAuthResponse>({
-      url: `/auth/${type}`,
-      method: 'POST',
-      data
-    }
+export const sign = async (type: AuthType.LOGIN | AuthType.REGISTER, data: ILogin) => {
+  const response = await axios.post<IAuthResponse>(
+    `/auth/${type}`,
+    data
   )
 
   if (response.data.accessToken) {

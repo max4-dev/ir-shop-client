@@ -1,8 +1,11 @@
 import { Montserrat } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
 
 import { Providers } from '@/redux/provider';
 
 import type { Metadata } from 'next';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const montserrat = Montserrat({
   subsets: ['cyrillic', 'latin'],
@@ -23,6 +26,18 @@ export default function RootLayout({ children }: {
         <Providers>
           {children}
         </Providers>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
       </body>
     </html>
   )

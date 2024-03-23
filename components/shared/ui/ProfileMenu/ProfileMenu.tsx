@@ -19,9 +19,9 @@ export function ProfileMenu({
           {menuItem.title}
         </Link> 
         : 
-        <div className={styles.menuItem} key={menuItem.title}>
+        <button className={styles.menuItem} key={menuItem.title} onClick={menuItem.onClick}>
           {menuItem.title}
-        </div>
+        </button>
       ))}
     </div>
   );

@@ -11,6 +11,7 @@ import parsePhoneNumberFromString from "libphonenumber-js";
 import { Button, Checkbox, Input } from "@/components/shared/ui";
 import { useActions } from "@/hooks/useActions";
 import { phoneRegExp } from "@/helpers/const/phoneRegExp";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 
 import { PhoneStart } from "../login/Login.interface";
 
@@ -19,7 +20,7 @@ import { ISignup } from "./Signup.interface";
 
 const formSchema = yup.object({
   phone: yup.string().matches(phoneRegExp, "Некорректный телефон").required("Телефон - обязательное поле"),
-  password: yup.string().required("Пароль - обязательное поле"),
+  password: yup.string().min(6, "Минимум 6 символа").required("Пароль - обязательное поле"),
   name: yup.string().min(3, "Минимум 3 символа").required("Имя - обязательное поле"),
 });
 
@@ -30,6 +31,7 @@ const defaultValues = {
 };
 
 const Signup = () => {
+  useAuthRedirect('isOnlyGuest');
   const { signup } = useActions();
   const [phone, setPhone] = useState<string>(PhoneStart.RU)
   const [isChecked, setChecked] = useState(true);

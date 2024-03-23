@@ -13,9 +13,21 @@ export const Product = ({ salePercent = 0, price, badges = [], className, ...pro
       <button className={styles.productFavorite}>
         <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
       </button>
-      <Image className={styles.productImg} src="/images/products/1.jpg" width={198} height={184} alt="" />
-      <Link className={styles.productName} href={`product/${4}`}>Цветы 24\24 см</Link>
-      {badges.length > 0 && <div className={styles.productType}>
+      <Image
+        className={styles.productImg}
+        src="/images/products/1.jpg"
+        width={198}
+        height={184}
+        alt="" 
+      />
+      <Link
+        className={styles.productName}
+        href={`product/${4}`}
+      >
+        Цветы 24\24 см
+      </Link>
+      {badges.length > 0 && 
+      <div className={styles.productType}>
         <p className={styles.productTypeText}>Тип:</p>
         <div className={styles.productTypeBadges}>
           <span className={styles.productTypeBadge}>

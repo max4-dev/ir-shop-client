@@ -11,13 +11,14 @@ import { useState } from "react";
 import { Button, Input } from "@/components/shared/ui";
 import { useActions } from "@/hooks/useActions";
 import { phoneRegExp } from "@/helpers/const/phoneRegExp";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 
 import styles from "./Login.module.scss";
 import { ILogin, PhoneStart } from "./Login.interface";
 
 const formSchema = yup.object({
   phone: yup.string().matches(phoneRegExp, "Некорректный телефон").required("Телефон - обязательное поле"),
-  password: yup.string().required("Пароль - обязательное поле"),
+  password: yup.string().min(6, "Минимум 6 символа").required("Пароль - обязательное поле"),
 });
 
 const defaultValues = {
@@ -26,6 +27,7 @@ const defaultValues = {
 };
 
 const Login = () => {
+  useAuthRedirect('isOnlyGuest');
   const { login } = useActions();
   const [phone, setPhone] = useState<string>(PhoneStart.RU)
   const { register, handleSubmit, formState: { errors } } = useForm<ILogin>({

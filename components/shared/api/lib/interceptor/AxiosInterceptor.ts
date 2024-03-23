@@ -1,5 +1,7 @@
 import { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
 
+import { notify } from "@/helpers/toastMessage";
+
 import { HttpCodes } from "../../const/ErrorsHttp";
 
 import { handleRefreshToken } from "./HandleRefreshToken";
@@ -22,7 +24,6 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
   axiosInstance.interceptors.request.use(
     async (config: InternalAxiosRequestConfig) => {
       const accessToken = getAccessToken();
-      console.log(accessToken);
 
       if (config.headers && accessToken) {
         config.headers.authorization = `Bearer ${accessToken}`;
@@ -38,14 +39,19 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-      if (error.response.status === HttpCodes.Unauthorized) {
+
+      if (error.response.status === HttpCodes.BadRequest) {
+        notify(error.response.data.message, 'error')
+      } 
+      else if (error.response.status === HttpCodes.Unauthorized) {
         const config: AxiosRequestConfig = error?.config;
         const oldRefreshToken = getRefreshToken();
-        const isSentToRefresh = await getIsRefreshSent();
 
         if (!oldRefreshToken) {
           return removeTokenStorage();
         }
+
+        const isSentToRefresh = await getIsRefreshSent();
 
         if (isSentToRefresh) {
           return debounceRequests<AxiosRequestConfig>(

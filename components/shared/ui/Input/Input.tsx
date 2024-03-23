@@ -15,7 +15,7 @@ export const Input =  forwardRef<HTMLInputElement, InputProps>(({
   placeholder, 
   type, 
   onChange, 
-  isPassword = false, 
+  isPassword = false,
   className, 
   ...props 
 }: InputProps, ref) => {
