@@ -6,8 +6,20 @@ type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] exte
 
 type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
 
-export interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface IProduct {
+  id: string;
+  title: string;
+  salePercent: Range<0, 101>;
+  slug: string;
+  description?: string;
+  images: string[];
+  categories: string[];
+  price: number;
+  inStock: boolean;
+}
+
+export type ProductProps = {
   salePercent?:  Range<0, 101>;
   price: number;
   badges?: string[];
-}
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & IProduct

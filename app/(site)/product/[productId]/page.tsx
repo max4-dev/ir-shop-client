@@ -3,9 +3,13 @@
 import cn from 'classnames';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
+import { Swiper } from 'swiper/types';
 
 import { Button } from '@/components/shared/ui';
 import { ProductSlider } from '@/components/widgets';
+import { getProducts } from '@/components/entities/Product/handler';
 
 import styles from './ProductPage.module.scss';
 
@@ -13,61 +17,75 @@ interface ProductPageProps {
   params: { productId: string }
 }
 
+enum StockStatus {
+  IN_STOCK = 'В наличии',
+  OUT_STOCK = 'Нет в наличии',
+}
+
 const ProductPage = ({ params }: ProductPageProps ) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<Swiper | null>(null);
+  const { productId } = params;
+
+  if (!productId) {
+    notFound()
+  }
+
+  const { data } = useQuery({queryKey: [`product-${productId}`], queryFn: () => getProducts.getById(productId)});
   
-  return ( 
-    <div className="container">
-      <div className={styles.productPage}>
-        <h3 className={cn(styles.productPageTitle, "title-m")}>
-          Цветы 24\24 см
-        </h3>
-        <div className={styles.productPageBox}>
-          <div className={styles.productPageSlider}>
-            <ProductSlider thumbsSwiper={thumbsSwiper} setThumbsSwiper={setThumbsSwiper} />
-          </div>
-          <div className={styles.productPageContent}>
-            <p className={styles.productPagePrice}>
-              300 ₽
-            </p>
-            <p className={cn(styles.productPageStatus, styles.statusStock, styles.statusOutStock)}>
-              В наличии
-            </p>
-            <p className={styles.productPageVendor}>
-              Артикул: 61010212
-            </p>
-            <div className={styles.productPageTypeBadges}>
-              <span className={styles.productPageTypeBadge}>
-                цветы
-              </span>
-              <span className={styles.productPageTypeBadge}>
-                цветы
-              </span>
+  return (
+    <>
+      {data && <div className="container">
+        <div className={styles.productPage}>
+          <h3 className={cn(styles.productPageTitle, "title-m")}>
+            {data.title}
+          </h3>
+          <div className={styles.productPageBox}>
+            <div className={styles.productPageSlider}>
+              <ProductSlider images={data.images} thumbsSwiper={thumbsSwiper} setThumbsSwiper={setThumbsSwiper} />
             </div>
-            <div className={styles.productPageButtons}>
-              <Button size='big'>
-                Положить в корзину
-              </Button>
-              <button className={styles.productPageFavorite}>
-                <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
-              </button>
-            </div>
-            <div className={styles.productPageDescription}>
-              <h5>Описание</h5>
-              <p>
-                Одной из главных составляющих котла является циркуляционный насос. Он  перекачивает теплоноситель по замкнутому контуру.
+            <div className={styles.productPageContent}>
+              <p className={styles.productPagePrice}>
+                {data.price} ₽
               </p>
-              <p>
-                В газовых котлах используются центробежные циркуляционные насосы с «мокрым ротором». Основные его части : корпус, статор, ротор, вал, крыльчатка (технополимер), стальная гильза, задняя часть (улитка), клеммная  коробка.
+              {data.inStock ? 
+              <p className={cn(styles.productPageStatus, styles.statusStock)}>
+                 {StockStatus.IN_STOCK}
+              </p> : 
+              <p className={cn(styles.productPageStatus, styles.statusOutStock)}>
+                 {StockStatus.OUT_STOCK}
+              </p>}
+              <p className={styles.productPageVendor}>
+                Артикул: {data.id}
               </p>
-              <p>
-                Голова и задняя часть (улитка)- это основные узлы  насоса. Внутри улитки циркуляционного насоса происходит контакт лопастей колеса с теплоносителем, статор насоса отделен стальной гильзой. Сам ротор крепится на торцевых подшипниках, которые выполнены из графита или керамики. Охлаждение и смазка подшипников происходит при помощи воды.
-              </p>
+              {data.categories && data.categories.map(category => (
+                <div className={styles.productPageTypeBadges} key={category}>
+                  <div className={styles.productTypeBadges}>
+                    <span className={styles.productPageTypeBadge}>
+                      {category}
+                    </span>
+                  </div>
+                </div>
+              ))
+              }
+              <div className={styles.productPageButtons}>
+                <Button size='big'>
+                  Положить в корзину
+                </Button>
+                <button className={styles.productPageFavorite}>
+                  <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
+                </button>
+              </div>
+              <div className={styles.productPageDescription}>
+                <h5>Описание</h5>
+                <p>
+                  {data.description}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div>}
+    </>
    );
 }
  

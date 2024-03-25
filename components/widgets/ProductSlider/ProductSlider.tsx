@@ -11,7 +11,7 @@ import styles from './ProductSlider.module.scss';
 import 'swiper/css';
 import '@/scss/slider/slider.scss';
 
-export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...props }: ProductSliderProps) => {
+export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className, ...props }: ProductSliderProps) => {
   
 
   return ( 
@@ -25,24 +25,11 @@ export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...pro
 
         className={styles.sliderBig}
       >
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderImg}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={648} height={455} alt="" />
-        </SwiperSlide>
+        {images.map(image => (
+          <SwiperSlide className={styles.sliderImg} key={image}>
+            <Image className={styles.productImg} src={image} width={648} height={455} alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -71,24 +58,11 @@ export const ProductSlider = ({ thumbsSwiper, setThumbsSwiper, className, ...pro
 
         className={styles.sliderThumbs}
       >
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/1.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.sliderThumb}>
-          <Image className={styles.productImg} src="/images/products/2.jpg" width={166} height={149} alt="" />
-        </SwiperSlide>
+        {images.map(image => (
+          <SwiperSlide className={styles.sliderThumb} key={image}>
+            <Image className={styles.productImg} src={image} width={166} height={149} alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
    );
