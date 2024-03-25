@@ -41,7 +41,7 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
     async (error) => {
 
       if (error.response.status === HttpCodes.BadRequest) {
-        notify(error.response.data.message, 'error')
+        notify({message: error.response.data.message, type: 'error'})
       } 
       else if (error.response.status === HttpCodes.Unauthorized) {
         const config: AxiosRequestConfig = error?.config;

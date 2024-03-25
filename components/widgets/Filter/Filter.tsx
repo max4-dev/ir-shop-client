@@ -3,11 +3,14 @@
 import cn from "classnames";
 import ReactSlider from "react-slider";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { motion, useReducedMotion } from "framer-motion";
 
 import ArrowIcon from '@/public/images/icons/arrow.svg'
 import { Checkbox, Button } from "@/components/shared/ui";
+import { getCategories } from "@/components/entities/Category/handler";
 
-import { FilterProps } from "./Filter.props";
+import { FilterProps, IIsOpened } from "./Filter.props";
 import styles from './Filter.module.scss';
 
 const price = {
@@ -17,6 +20,38 @@ const price = {
 
 export const Filter = ({ className, ...props }: FilterProps) => {
   const [thumbValue, setThumbValue] = useState([price.min, price.max]);
+  const [isOpened, setOpened] =  useState<IIsOpened>({ type: true, price: true })
+  const categories = useQuery({queryKey: ['categories'], queryFn: getCategories.getAll});
+
+  const shouldReduceMotion = useReducedMotion();
+
+  const variants = {
+    visible: {
+      transition: shouldReduceMotion ? {} : {
+        when: 'beforeChildren',
+        staggerChildren: 0.1
+      }
+    },
+    hidden: {}
+  }
+
+  const variantsChildren = {
+    visible: {
+      display: 'block',
+      opacity: 1,
+    },
+    hidden: {
+      display: 'none',
+      opacity: shouldReduceMotion ? 1 : 0,
+    }
+  }
+
+  const handleChangeOpen = (item: keyof IIsOpened) => {
+    setOpened((prevState) => ({
+      ...isOpened,
+      [item]: !prevState[item]
+    }))
+  }
   
 
   return (
@@ -25,72 +60,44 @@ export const Filter = ({ className, ...props }: FilterProps) => {
         Фильтры
       </h4>
       <div className={styles.filterBloks}>
-        <div className={styles.filterBlock}>
-          <div className={styles.filterBlockTop}>
+        <motion.div
+          className={styles.filterBlock}
+          layout
+          variants={variants}
+          initial={isOpened.type ? 'visible' : 'hidden'}
+          animate={isOpened.type ? 'visible' : 'hidden'}
+        >
+          <div className={styles.filterBlockTop} onClick={() => handleChangeOpen('type')}>
             <h5 className={cn(styles.filterBlockTitle, "title-s")}>
               Тип
             </h5>
-            <ArrowIcon />
+            <ArrowIcon className={cn(styles.arrow, {[styles.reverced]: isOpened.type})} />
           </div>
-          <div className={styles.filterBlockContent}>
+          {categories.data && <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
             <button className={styles.selectButton}>Выбрать все</button>
             <ul className={styles.select}>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
-              <Checkbox className={styles.selectItem}>
-                Тип 1
-              </Checkbox>
+              {categories.data.map((category) => (
+                <Checkbox key={category.id} className={styles.selectItem}>
+                  {category.name}
+                </Checkbox>
+              ))}
             </ul>
-          </div>
-        </div>
-        <div className={styles.filterBlock}>
-          <div className={styles.filterBlockTop}>
+          </motion.div>}
+        </motion.div>
+        <motion.div
+          className={styles.filterBlock}
+          layout
+          variants={variants}
+          initial={isOpened.price ? 'visible' : 'hidden'}
+          animate={isOpened.price ? 'visible' : 'hidden'}
+        >
+          <div className={styles.filterBlockTop} onClick={() => handleChangeOpen('price')}>
             <h5 className={cn(styles.filterBlockTitle, "title-s")}>
               Цена
             </h5>
-            <ArrowIcon />
+            <ArrowIcon className={cn(styles.arrow, {[styles.reverced]: isOpened.price})} />
           </div>
-          <div className={styles.filterBlockContent}>
+          <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
             <div className={styles.filterBlockInputs}>
               <div className={styles.filterBlockInput}>
                 {thumbValue[0]} ₽
@@ -116,8 +123,8 @@ export const Filter = ({ className, ...props }: FilterProps) => {
                 setThumbValue(value)
               }}
           />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       <div className={styles.filterButtons}>
         <Button className={styles.filterButton} size="fullWidth">

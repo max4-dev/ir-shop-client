@@ -1,6 +1,6 @@
 import { TypeOptions, toast } from "react-toastify";
 
-export const notify = (message: string, type: TypeOptions  | undefined) => toast(message, {
+export const notify = ({ message, type }: { message: string, type: TypeOptions  | undefined }) => toast(message, {
   type,
   position: "top-right",
   autoClose: 5000,
