@@ -10,7 +10,7 @@ import { Counter } from "@/components/shared/ui";
 import { CartProductProps } from "./CartProduct.props";
 import styles from './CartProduct.module.scss';
 
-export const CartProduct = ({ productId, salePercent = 0, price, className, ...props }: CartProductProps) => {
+export const CartProduct = ({ productId, salePercent = 0, price, priceWithSale, className, ...props }: CartProductProps) => {
   const [counterValue, setCounterValue] = useState("1");
 
   return (
@@ -26,7 +26,7 @@ export const CartProduct = ({ productId, salePercent = 0, price, className, ...p
         <Counter className={styles.productCounter} value={String(counterValue)} setValue={setCounterValue} />
         <div className={styles.productPrice}>
           {salePercent > 0 ?
-            <span className={cn(styles.price)}>{price - Math.round(price * (salePercent / 100))} ₽</span>
+            <span className={cn(styles.price)}>{priceWithSale} ₽</span>
           : 
           <span className={styles.price}>{price} ₽</span>}
         </div>

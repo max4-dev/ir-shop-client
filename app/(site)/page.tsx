@@ -27,7 +27,7 @@ export default function Home() {
         <div className={styles.content}>
           {isMobile ? 
             <Popup isOpen={isFilterOpen} setIsOpen={setFilterOpen}>
-              <Filter className={styles.filter} />
+              <Filter className={styles.filter} setFilterOpen={setFilterOpen} />
             </Popup>
           : <Filter />}
           <ProductList />

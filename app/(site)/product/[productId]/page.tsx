@@ -45,7 +45,7 @@ const ProductPage = ({ params }: ProductPageProps ) => {
             </div>
             <div className={styles.productPageContent}>
               <p className={styles.productPagePrice}>
-                {data.price} ₽
+                {data.priceWithSale} ₽
               </p>
               {data.inStock ? 
               <p className={cn(styles.productPageStatus, styles.statusStock)}>
@@ -68,9 +68,9 @@ const ProductPage = ({ params }: ProductPageProps ) => {
               ))
               }
               <div className={styles.productPageButtons}>
-                <Button size='big'>
+                {data.inStock && <Button size='big'>
                   Положить в корзину
-                </Button>
+                </Button>}
                 <button className={styles.productPageFavorite}>
                   <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
                 </button>

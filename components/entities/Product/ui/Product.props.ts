@@ -13,13 +13,11 @@ export interface IProduct {
   slug: string;
   description?: string;
   images: string[];
-  categories: string[];
+  categories?: string[];
   price: number;
   inStock: boolean;
+  rating: number;
+  priceWithSale: number;
 }
 
-export type ProductProps = {
-  salePercent?:  Range<0, 101>;
-  price: number;
-  badges?: string[];
-} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & IProduct
+export type ProductProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & IProduct
