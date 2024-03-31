@@ -1,6 +1,5 @@
-import { DetailedHTMLProps, Dispatch, LabelHTMLAttributes, ReactNode, SetStateAction } from "react";
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
 
-export interface CheckboxProps extends DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
-  setChecked?: Dispatch<SetStateAction<boolean>>;
+export interface CheckboxProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   children: ReactNode;
 }

@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { getStoreLocal } from "@/helpers/getStoreLocal";
 
-import { IInitialState } from "./types";
+import { IAuthInitialState } from "./types";
 import { checkAuth, login, logout, signup } from "./asyncActions";
 
-const initialState: IInitialState = {
+const initialState: IAuthInitialState = {
   user: getStoreLocal('user'),
   isLoading: false,
 }

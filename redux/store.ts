@@ -4,6 +4,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, pers
 import storage from 'redux-persist/lib/storage';
 
 import auth from './auth/slice';
+import filter from './filter/slice';
 
 import type { TypedUseSelectorHook } from 'react-redux'
 
@@ -15,6 +16,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: auth,
+  filter,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
