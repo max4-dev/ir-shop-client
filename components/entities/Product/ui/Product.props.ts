@@ -20,4 +20,10 @@ export interface IProduct {
   priceWithSale: number;
 }
 
+export interface ILimitProductsResponse {
+  products: IProduct[],
+  page: number,
+  pages: number,
+}
+
 export type ProductProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & IProduct

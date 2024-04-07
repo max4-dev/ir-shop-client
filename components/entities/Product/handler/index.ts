@@ -3,11 +3,20 @@ import { cache } from "react";
 import axios from "@/core/axios";
 
 import { productsApi } from "../api";
-import { IProduct } from "../ui/Product.props";
+import { ILimitProductsResponse, IProduct } from "../ui/Product.props";
+import { ILimitQuery } from "../types";
 
 const getAll = cache(async () => {
   const res = await axios.get<IProduct[]>(
     productsApi.getAll
+  );
+  
+  return res.data;
+});
+
+const getByLimited = cache(async (query: ILimitQuery) => {
+  const res = await axios.get<ILimitProductsResponse>(
+    productsApi.byLimited(query)
   );
   
   return res.data;
@@ -32,6 +41,7 @@ const getById = cache(async (id: string) => {
 
 export const getProducts = {
   getAll,
+  getByLimited,
   getBySlug,
   getById
 };
