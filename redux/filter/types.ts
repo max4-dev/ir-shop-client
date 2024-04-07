@@ -17,5 +17,7 @@ export type SortType = {
 export interface IFilterInitialState {
   sort: SortType,
   filter: IFilter,
+  activePage: number,
+  catalogCountPages: number,
   isLoading: boolean,
 }

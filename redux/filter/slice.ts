@@ -13,6 +13,8 @@ const initialState: IFilterInitialState = {
     categories: [],
     price: defaultPrice,
   },
+  activePage: 1,
+  catalogCountPages: 0,
   isLoading: false,
 }
 
@@ -26,8 +28,14 @@ export const filterSlice = createSlice({
     setFilter(state, action: PayloadAction<IFilter>) {
       state.filter = { ...state.filter, ...action.payload };
     },
+    setActivePage(state, action: PayloadAction<number>) {
+      state.activePage = action.payload;
+    },
+    setCatalogCountPages(state, action: PayloadAction<number>) {
+      state.catalogCountPages = action.payload;
+    },
   },
 })
 
-export const { setSort, setFilter } = filterSlice.actions;
+export const { setSort, setFilter, setActivePage, setCatalogCountPages } = filterSlice.actions;
 export default filterSlice.reducer;
