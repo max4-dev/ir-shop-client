@@ -4,13 +4,20 @@
 
 import cn from "classnames";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+
+import { setActivePage } from "@/redux/filter/slice";
+import { useAppDispatch } from "@/redux/store";
 
 import { PaginationProps } from "./Pagination.props";
 import styles from "./Pagination.module.scss";
 
 export const Pagination = ({ pagesCount, currentPage, className, ...props }: PaginationProps) => {
   const [paginationList, setPaginationList] = useState<number[]>([]);
+  const dispatch = useAppDispatch();
+
+  const handleChangePage = (page: number) => {
+    dispatch(setActivePage(page));
+  };
 
   useEffect(() => {
     const generatePaginationList = () => {
@@ -54,8 +61,22 @@ export const Pagination = ({ pagesCount, currentPage, className, ...props }: Pag
   return (
     <div className={cn(styles.pagination, className)} {...props}>
       {paginationList.map((page, i) => (
-        page !== -1 ? <Link className={cn(styles.paginationItem, styles.paginationItemLink, {[styles.paginationItemActive]: currentPage === page})} href={`/catalog/${page}`} key={i}>{page}</Link>
-        : <span className={cn(styles.paginationItem, styles.paginationDots)} key={i}>...</span>
+        page !== -1 ? 
+        <button
+          onClick={() => handleChangePage(page)}
+          className={cn(styles.paginationItem, 
+            styles.paginationItemLink, 
+            {[styles.paginationItemActive]: currentPage === page})}
+          key={i}
+        >
+          {page}
+        </button>
+        : <span
+          className={cn(styles.paginationItem, styles.paginationDots)}
+          key={i}
+        >
+          ...
+        </span>
       ))}
     </div>
   );

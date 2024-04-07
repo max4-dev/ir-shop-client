@@ -67,14 +67,14 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
   }
 
   const applyFilters = () => {
-    if (setFilterOpen) {
-      setFilterOpen(false);
-    }
-
     dispatch(setFilter({
       categories: activeCategories,
       price: thumbValue,
     }));
+
+    if (setFilterOpen) {
+      setFilterOpen(false);
+    }
   }
 
   const resetFilters = () => {
@@ -88,6 +88,10 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
       categories: [],
       price: defaultPrice,
     }));
+
+    if (setFilterOpen) {
+      setFilterOpen(false);
+    }
   }
 
   const checkAllCategories = () => {
@@ -178,7 +182,6 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
               ariaLabel={['Lower thumb', 'Upper thumb']}
               ariaValuetext={state => `Thumb value ${state.valueNow}`}
               renderThumb={(props, state) => {
-                // state.value = thumbValue;
                 return <div {...props} key={state.index}></div>
               }}
               pearling
