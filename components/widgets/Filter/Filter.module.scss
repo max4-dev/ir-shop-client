@@ -1,8 +1,7 @@
 .filter {
   padding: 24px 16px;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
-  max-width: 371px;
-  width: 100%;
+  width: 347px;
   align-self: flex-start;
   // position: sticky;
   // top: 45px;
@@ -140,7 +139,7 @@
 @media screen and (max-width: 1280px) {
   .filter {
     max-width: 100%;
-    margin-bottom: 35px;
+    margin: 0 auto;
     box-shadow: none;
   }
 }

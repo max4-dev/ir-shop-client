@@ -29,7 +29,7 @@ export const sortReducer = (state: SortReducerState, action: SortActions) => {
     case SortEnum.Default:
       return {
         sort: SortEnum.Default,
-        products: action.products
+        products: action.products && action.products.toReversed()
       }
 
     case 'reset':

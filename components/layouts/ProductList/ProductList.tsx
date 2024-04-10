@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { useEffect, useReducer, useState } from "react";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 import { Product } from "@/components/widgets";
 import { Button, Pagination } from "@/components/shared/ui";
@@ -18,17 +19,31 @@ const defaultLimit = 9;
 
 export const ProductList = ({ className, ...props }: ProductListProps) => {
   const dispatch = useAppDispatch();
-  const { sort, filter, activePage, catalogCountPages } = useAppSelector(state => state.filter);
+  const { sort, filter, search, activePage, catalogCountPages } = useAppSelector(state => state.filter);
 
   const [isLoading, setLoading] = useState(true);
   const [limit, setLimit] = useState(defaultLimit);
   const [isMoreProducts, setMoreProducts] = useState(false);
   const [products, setProducts] = useState<IProduct[] | undefined>([]);
+  const [searchedProducts, setSearchedProducts] = useState<IProduct[] | undefined>([]);
   const [paginateProducts, setPaginateProducts] = useState<IProduct[] | undefined>([]);
+  const [parent] = useAutoAnimate()
 
   const { data } = useProducts();
 
   const [{ products: sortedProducts }, dispatchSort] = useReducer(sortReducer, { sort: sort.type, products });
+
+  const searchProducts = () => {
+    if (search.length === 0) {
+      return products;
+    }
+    
+    return (
+      products && products.filter((product) => {
+        return product.title.toLowerCase().includes(search.toLowerCase()) || (product.categories && product.categories.includes(search))
+      })
+    )
+  }
 
   const filterProducts = ({ products, filter }: FilterType) => {
     return {
@@ -47,23 +62,15 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
   }
 
   const loadMoreProducts = () => {
-    if (sortedProducts && (limit + 12) > sortedProducts.length) {
+    if (sortedProducts && (limit + defaultLimit) > sortedProducts.length) {
       return setLimit(sortedProducts.length)
     }
     return setLimit(prevState => prevState + defaultLimit)
   }
 
   useEffect(() => {
-    if (data) {
-      dispatchSort({ type: 'reset', initialState: data })
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (products) {
-      dispatchSort({ type: sort.type, products });
-    }
-  }, [sort, products]);
+    dispatchSort({ type: sort.type, products: searchedProducts });
+  }, [sort, searchedProducts]);
 
   useEffect(() => {
     const { filteredProducts } = filterProducts({ products: data, filter })
@@ -74,6 +81,14 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
   useEffect(() => {
     dispatch(setActivePage(1));
   }, [sort, filter, dispatch]);
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      const searchedProducts = searchProducts();
+  
+      setSearchedProducts(searchedProducts);
+    }
+  }, [search, products]);
 
   useEffect(() => {
     if (sortedProducts) {
@@ -110,7 +125,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
 
   return (
     <div className={cn(styles.productList, className)} {...props}>
-      <div className={styles.productListItems}>
+      <div ref={parent} className={styles.productListItems}>
         {paginateProducts && paginateProducts.map((product: IProduct) => (
           <Product
             className={styles.productListItem}

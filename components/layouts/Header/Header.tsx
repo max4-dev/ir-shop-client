@@ -71,7 +71,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         <div className="container">
           <div className={styles.headerTopInner}>
             <div className={styles.city}>
-              <Image src="/images/icons/location.svg"  width={12} height={12} alt="Иконка маркерам" />
+              <Image src="/images/icons/location.svg"  width={12} height={12} alt="Иконка маркера" />
               <button>Москва</button>
             </div>
             <nav>
@@ -103,7 +103,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         <div className="container">
           <div className={styles.headerBottomInner}>
             <Link href="/">
-              <Image className={styles.logo} src="/images/logo.svg" width={181} height={48} alt="Логотип" />
+              <Image className={styles.logo} priority={true} src="/images/logo.svg" width={181} height={48} alt="Логотип" />
             </Link>
             <Search className={styles.search} />
             {!isMobile && <div className={styles.userNav}>
