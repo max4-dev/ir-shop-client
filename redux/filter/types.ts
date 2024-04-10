@@ -19,5 +19,6 @@ export interface IFilterInitialState {
   filter: IFilter,
   activePage: number,
   catalogCountPages: number,
+  search: string,
   isLoading: boolean,
 }

@@ -14,8 +14,9 @@ export const Product = ({ salePercent = 0, price, categories = [], title, id, im
       </button>
       <Image
         className={styles.productImg}
+        priority={true}
         src={images[0]}
-        width={198}
+        width={182}
         height={184}
         alt="" 
       />

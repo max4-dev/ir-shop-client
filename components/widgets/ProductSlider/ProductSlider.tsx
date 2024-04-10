@@ -25,8 +25,8 @@ export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className
 
         className={styles.sliderBig}
       >
-        {images.map(image => (
-          <SwiperSlide className={styles.sliderImg} key={image}>
+        {images.map((image, index) => (
+          <SwiperSlide className={styles.sliderImg} key={index}>
             <Image className={styles.productImg} src={image} width={648} height={455} alt="" />
           </SwiperSlide>
         ))}
@@ -58,8 +58,8 @@ export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className
 
         className={styles.sliderThumbs}
       >
-        {images.map(image => (
-          <SwiperSlide className={styles.sliderThumb} key={image}>
+        {images.map((image, index) => (
+          <SwiperSlide className={styles.sliderThumb} key={index}>
             <Image className={styles.productImg} src={image} width={166} height={149} alt="" />
           </SwiperSlide>
         ))}
