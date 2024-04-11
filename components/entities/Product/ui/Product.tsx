@@ -1,16 +1,53 @@
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
+
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { addProduct, removeProduct } from "@/redux/favorites/slice";
+import FavoriteIcon from  "@/assets/icons/favorite.svg";
 
 import { ProductProps } from "./Product.props";
-import styles from './Product.module.scss';
+import styles from "./Product.module.scss";
 
-export const Product = ({ salePercent = 0, price, categories = [], title, id, images, inStock, priceWithSale, className, ...props }: ProductProps) => {
+export const Product = ({ salePercent = 0, price, categories = [], title, id, images, inStock, priceWithSale, slug, rating, className, ...props }: ProductProps) => {
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.favorites);
+
+  const isFavorit = useMemo(() => {
+    return Boolean(products.find(product => product.id === id));
+  }, [products, id]);
+
+  const toggleFavorite = () => {
+    if (!isFavorit) {
+      return dispatch(addProduct({
+        salePercent,
+        price,
+        categories,
+        title,
+        id,
+        images,
+        inStock,
+        priceWithSale,
+        slug,
+        rating,
+      }))
+    }
+
+    return dispatch(removeProduct({ id }))
+  }
+
+  
+
+  // useEffect(() => {
+  //   setFavorite(Boolean(products.find(product => product.id === id)));
+  // }, [products]);
+
   return (
     <div className={cn(styles.product, className)} {...props}>
       {salePercent > 0 && <div className={styles.productSale}>-{salePercent}%</div>}
-      <button className={styles.productFavorite}>
-        <Image src='/images/icons/favorite.svg' alt="Корзина" width={26} height={23} />
+      <button onClick={toggleFavorite} className={styles.productFavorite}>
+        <FavoriteIcon className={cn(styles.productFavoriteIcon, {[styles.productFavoriteIconActive]: isFavorit})} />
       </button>
       <Image
         className={styles.productImg}

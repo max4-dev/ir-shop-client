@@ -1,0 +1,48 @@
+.favorites {
+  &List {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 31px 45px;
+  }
+
+  &NotFoundTitle {
+    display: flex;
+    justify-content: center;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.productList {
+  max-width: 780px;
+  width: 100%;
+  margin-left: 52px;
+
+  &ButtonBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 68px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .favorites {
+    &List {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 26px 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .favorites {
+    &List {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 26px 30px;
+    }
+  }
+}

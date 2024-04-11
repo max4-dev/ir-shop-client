@@ -10,6 +10,7 @@ import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
+import FavoriteIcon from  '@/assets/icons/favorite.svg';
 
 import { HeaderProps } from "./Header.props";
 import styles from './Header.module.scss';
@@ -113,7 +114,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
                 </Dropdown>
               </div>
               <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={'/favorites'}>
-                <Image src={'/images/icons/favorite.svg'} alt="Избранное" width={26} height={23} />
+                <FavoriteIcon className={styles.favoriteIcon} />
               </Link>
               <Link className={cn(styles.userNavLink, styles.userNavCart)} href={'/cart'}>
                 <Image src={'/images/icons/cart.svg'} alt="Корзина" width={28} height={28} />

@@ -6,7 +6,6 @@ import { IFavoritesInitialState } from "./types";
 
 const initialState: IFavoritesInitialState = {
   products: [],
-  isLoading: false,
 }
 
 export const favoritesSlice = createSlice({
@@ -16,8 +15,11 @@ export const favoritesSlice = createSlice({
     addProduct(state, action: PayloadAction<IProduct>) {
       state.products = [...state.products, action.payload];
     },
+    removeProduct(state, action: PayloadAction<{ id: string }>) {
+      state.products = state.products.filter(product => product.id !== action.payload.id)
+    },
   },
 })
 
-export const { addProduct } = favoritesSlice.actions;
+export const { addProduct, removeProduct } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

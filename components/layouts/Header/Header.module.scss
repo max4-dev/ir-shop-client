@@ -115,6 +115,10 @@
   }
 }
 
+.favoriteIcon {
+  color: var(--white);
+}
+
 @media screen and (max-width: 961px) {
   .userNav {
     justify-content: center;

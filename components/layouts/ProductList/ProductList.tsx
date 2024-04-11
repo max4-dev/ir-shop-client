@@ -80,7 +80,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
 
   useEffect(() => {
     dispatch(setActivePage(1));
-  }, [sort, filter, dispatch]);
+  }, [sort, filter.categories.length, filter.price, dispatch]);
 
   useEffect(() => {
     if (products && products.length > 0) {
