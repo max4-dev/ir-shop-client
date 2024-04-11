@@ -37,6 +37,14 @@
     transition: transform .3s;
   }
 
+  &FavoriteIcon {
+    color: var(--white);
+  }
+
+  &FavoriteIconActive {
+    color: var(--red);
+  }
+
   &:hover &Favorite {
     transform: translateY(0);
   }
