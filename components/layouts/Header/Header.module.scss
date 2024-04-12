@@ -13,7 +13,7 @@
 
   &Bottom {
     color: var(--black);
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     padding: 12px 0;
   }
 
@@ -42,7 +42,7 @@
 
   &Item {
     font-size: 16px;
-    transition: all .5s;
+    transition: all 0.5s;
     border-bottom: 1px solid transparent;
   }
 
@@ -81,6 +81,27 @@
 
   &Link + .userNavLink {
     margin-left: 23px;
+  }
+
+  &Cart {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &CartCount {
+    position: absolute;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: 14px;
+    width: 23px;
+    height: 23px;
+    right: 0;
+    top: 0;
   }
 }
 
@@ -161,7 +182,7 @@
   .header .search {
     display: block;
     max-width: 100%;
-    width: 100%;  
+    width: 100%;
     order: 1;
   }
 

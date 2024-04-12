@@ -1,12 +1,12 @@
 .cart {
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 
   &Title {
     margin-bottom: 48px;
   }
 
   &Top {
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
     padding: 24px;
     display: flex;
     align-items: center;
@@ -57,6 +57,15 @@
     padding-top: 25px;
   }
 
+  &BottomButtons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
   &Price {
     display: flex;
     align-items: center;
@@ -71,14 +80,16 @@
     font-size: 24px;
     font-weight: 500;
   }
+  &NotFoundTitle {
+    text-align: center;
 
-  &Button {
-    margin: 40px 0 0 auto;
+    &::after {
+      display: none;
+    }
   }
 }
 
 .popup {
-
   &Title {
     padding-bottom: 24px;
     border-bottom: 1px solid var(--gray);
@@ -98,7 +109,8 @@
     margin-top: 24px;
   }
 
-  &Name, &Value {
+  &Name,
+  &Value {
     color: var(--disabled);
   }
 
@@ -140,6 +152,12 @@
 
     &PriceCount {
       margin-top: 10px;
+    }
+
+    &Button {
+      width: 100%;
+      font-size: 19px;
+      padding: 12px 32px;
     }
   }
 }

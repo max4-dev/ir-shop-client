@@ -5,7 +5,10 @@ export interface counterSizeI {
   max: number;
 }
 
-export interface CounterProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  value: string;
-  setValue: (value: string) => void;
+export interface CounterProps
+  extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  value: number;
+  setValue: (value: number) => void;
+  addToCart: () => void;
+  removeFromCart: () => void;
 }

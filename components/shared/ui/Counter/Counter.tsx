@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /* eslint-disable no-plusplus */
 
@@ -13,33 +13,49 @@ import styles from "./Counter.module.scss";
 const counterSize = {
   min: 1,
   max: 1000,
-}
+};
 
-export const Counter = ({ value, setValue, className, ...props }: CounterProps) => {
-  const onChangeCount = (value: number) => {
-    setValue(String(value))
-    checkRange({ value, setValue, counterSize, replace: "0"})
-  }
-
+export const Counter = ({
+  addToCart,
+  removeFromCart,
+  value,
+  setValue,
+  className,
+  ...props
+}: CounterProps) => {
   const decrement = (value: number) => {
-    setValue(String(--value))
-    checkRange({ value, setValue, counterSize, replace: counterSize.min})
-  }
+    if (value === counterSize.min) {
+      return;
+    }
+    setValue(--value);
+    removeFromCart();
+    checkRange({ value, setValue, counterSize, replace: counterSize.min });
+  };
 
   const increment = (value: number) => {
-    setValue(String(++value))
-    checkRange({ value, setValue, counterSize, replace: counterSize.max })
-  }
+    if (value === counterSize.max) {
+      return;
+    }
+    setValue(++value);
+    addToCart();
+    checkRange({ value, setValue, counterSize, replace: counterSize.max });
+  };
 
   return (
     <div className={cn(styles.counter, className)} {...props}>
-      <button className={cn(styles.counterButton, styles.counterMinus)} onClick={() => decrement(Number(value))}>
+      <button
+        className={cn(styles.counterButton, styles.counterMinus)}
+        onClick={() => decrement(value)}
+      >
         <Image src="/images/icons/minus.svg" width={20} height={20} alt="Минус" />
       </button>
-      <input className={styles.counterInput} onChange={({target}) => onChangeCount(Number(target.value))} value={value} type="number" min={counterSize.min} max={counterSize.max} />
-      <button className={cn(styles.counterButton, styles.counterPlus)} onClick={() => increment(Number(value))}>
+      <span className={styles.counterItem}>{value}</span>
+      <button
+        className={cn(styles.counterButton, styles.counterPlus)}
+        onClick={() => increment(value)}
+      >
         <Image src="/images/icons/plus.svg" width={20} height={20} alt="Плюс" />
       </button>
     </div>
   );
-}
+};
