@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { useEffect, useReducer, useState } from "react";
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { Product } from "@/components/widgets";
 import { Button, Pagination } from "@/components/shared/ui";
@@ -13,13 +13,15 @@ import { paginate } from "@/helpers/paginate";
 import { Loader } from "@/components/shared/ui/Loader/Loader";
 
 import { FilterType, ProductListProps } from "./ProductList.props";
-import styles from './ProductList.module.scss';
+import styles from "./ProductList.module.scss";
 
 const defaultLimit = 9;
 
 export const ProductList = ({ className, ...props }: ProductListProps) => {
   const dispatch = useAppDispatch();
-  const { sort, filter, search, activePage, catalogCountPages } = useAppSelector(state => state.filter);
+  const { sort, filter, search, activePage, catalogCountPages } = useAppSelector(
+    (state) => state.filter
+  );
 
   const [isLoading, setLoading] = useState(true);
   const [limit, setLimit] = useState(defaultLimit);
@@ -27,55 +29,67 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
   const [products, setProducts] = useState<IProduct[] | undefined>([]);
   const [searchedProducts, setSearchedProducts] = useState<IProduct[] | undefined>([]);
   const [paginateProducts, setPaginateProducts] = useState<IProduct[] | undefined>([]);
-  const [parent] = useAutoAnimate()
+  const [parent] = useAutoAnimate();
 
   const { data } = useProducts();
 
-  const [{ products: sortedProducts }, dispatchSort] = useReducer(sortReducer, { sort: sort.type, products });
+  const [{ products: sortedProducts }, dispatchSort] = useReducer(sortReducer, {
+    sort: sort.type,
+    products,
+  });
 
   const searchProducts = () => {
     if (search.length === 0) {
       return products;
     }
-    
+
     return (
-      products && products.filter((product) => {
-        return product.title.toLowerCase().includes(search.toLowerCase()) || (product.categories && product.categories.includes(search))
+      products &&
+      products.filter((product) => {
+        return (
+          product.title.toLowerCase().includes(search.toLowerCase()) ||
+          (product.categories && product.categories.includes(search))
+        );
       })
-    )
-  }
+    );
+  };
 
   const filterProducts = ({ products, filter }: FilterType) => {
     return {
-      filteredProducts: products && products.filter((product: IProduct) => {
-        if (filter.categories.length !== 0) {
-          return filter.categories.some((category: string) => {
-            return product.categories && product.categories.includes(category)
+      filteredProducts:
+        products &&
+        products
+          .filter((product: IProduct) => {
+            if (filter.categories.length !== 0) {
+              return filter.categories.some((category: string) => {
+                return product.categories && product.categories.includes(category);
+              });
+            }
+
+            return products;
           })
-        }
-        
-        return products;
-      }).filter((product: IProduct) => (
-        product.priceWithSale >= filter.price[0] && product.priceWithSale <= filter.price[1]
-      ))
-    }
-  }
+          .filter(
+            (product: IProduct) =>
+              product.priceWithSale >= filter.price[0] && product.priceWithSale <= filter.price[1]
+          ),
+    };
+  };
 
   const loadMoreProducts = () => {
-    if (sortedProducts && (limit + defaultLimit) > sortedProducts.length) {
-      return setLimit(sortedProducts.length)
+    if (sortedProducts && limit + defaultLimit > sortedProducts.length) {
+      return setLimit(sortedProducts.length);
     }
-    return setLimit(prevState => prevState + defaultLimit)
-  }
+    return setLimit((prevState) => prevState + defaultLimit);
+  };
 
   useEffect(() => {
     dispatchSort({ type: sort.type, products: searchedProducts });
   }, [sort, searchedProducts]);
 
   useEffect(() => {
-    const { filteredProducts } = filterProducts({ products: data, filter })
+    const { filteredProducts } = filterProducts({ products: data, filter });
 
-    setProducts(filteredProducts)
+    setProducts(filteredProducts);
   }, [data, filter]);
 
   useEffect(() => {
@@ -85,17 +99,22 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
   useEffect(() => {
     if (products && products.length > 0) {
       const searchedProducts = searchProducts();
-  
+
       setSearchedProducts(searchedProducts);
     }
   }, [search, products]);
 
   useEffect(() => {
     if (sortedProducts) {
-      const { sliceItems, pageCount } = paginate({ activePage, limit, products: sortedProducts, defaultLimit })
+      const { sliceItems, pageCount } = paginate({
+        activePage,
+        limit,
+        products: sortedProducts,
+        defaultLimit,
+      });
       dispatch(setCatalogCountPages(pageCount));
-      
-      setMoreProducts(sortedProducts.length > limit * activePage && activePage === 1)
+
+      setMoreProducts(sortedProducts.length > limit * activePage && activePage === 1);
       setPaginateProducts(sliceItems);
     }
   }, [sortedProducts, activePage, limit, dispatch]);
@@ -111,35 +130,36 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
     }
   }, [paginateProducts]);
 
-
   if (isLoading) {
-    return <Loader className={styles.loader} />
+    return <Loader className={styles.loader} />;
   }
 
   if (!isLoading && (!paginateProducts || paginateProducts.length === 0)) {
-    
-    return (
-      <h3 className={cn("title-b", styles.productListNotFoundTitle)}>Товары не найдены</h3>
-    )
+    return <h3 className={cn("title-b", styles.productListNotFoundTitle)}>Товары не найдены</h3>;
   }
 
   return (
     <div className={cn(styles.productList, className)} {...props}>
       <div ref={parent} className={styles.productListItems}>
-        {paginateProducts && paginateProducts.map((product: IProduct) => (
-          <Product
-            className={styles.productListItem}
-            key={product.id}
-            {...product}
-          />
-        ))}
+        {paginateProducts &&
+          paginateProducts.map((product: IProduct) => (
+            <Product className={styles.productListItem} key={product.id} {...product} />
+          ))}
       </div>
       <div className={styles.productListButtonBox}>
-        {isMoreProducts && <Button onClick={loadMoreProducts} size="big">
-          Загрузить еще
-        </Button>}
+        {isMoreProducts && (
+          <Button onClick={loadMoreProducts} size="big">
+            Загрузить еще
+          </Button>
+        )}
       </div>
-      {catalogCountPages > 1 && <Pagination className={styles.pagination} pagesCount={catalogCountPages} currentPage={activePage} />}
+      {catalogCountPages > 1 && (
+        <Pagination
+          className={styles.pagination}
+          pagesCount={catalogCountPages}
+          currentPage={activePage}
+        />
+      )}
     </div>
   );
-}
+};

@@ -6,19 +6,21 @@ import storage from 'redux-persist/lib/storage';
 import auth from './auth/slice';
 import filter from './filter/slice';
 import favorites from './favorites/slice';
+import cart from './cart/slice';
 
 import type { TypedUseSelectorHook } from 'react-redux'
 
 const persistConfig = {
   key: 'ir-shop',
   storage,
-  whitelist: ['favorites'],
+  whitelist: ['favorites', 'cart'],
 }
 
 const rootReducer = combineReducers({
   user: auth,
   filter,
   favorites,
+  cart,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
