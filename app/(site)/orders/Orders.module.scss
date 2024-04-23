@@ -1,7 +1,7 @@
 .orders {
   &Inner {
     padding: 47px 67px 77px 54px;
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
   }
@@ -12,38 +12,12 @@
   }
 }
 
-.ordersAside {
-  max-width: 267px;
-  width: 100%;
-  border-right: 1px solid var(--gray);
-  padding: 17px 20px 17px 0;
-
-  &Item + &Item {
-    margin-top: 31px;
-  }
-
-  &Title {
-    margin-bottom: 18px;
-  }
-
-  &Text {
-    font-size: 19px;
-    font-weight: 500;
-  }
-
-  &Text + &Text {
-    margin-top: 7px;
-  }
-
-  &Statistic {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
 .order + .order {
   margin-top: 72px;
+}
+
+.loader {
+  text-align: center;
 }
 
 @media screen and (max-width: 1100px) {
@@ -56,25 +30,6 @@
 
     &Items {
       margin-left: 0;
-    }
-  }
-
-  .ordersAside {
-    max-width: 100%;
-    margin-bottom: 45px;
-    border-right: none;
-    padding: 0;
-    display: flex;
-    gap: 45px;
-    flex-wrap: wrap;
-
-    &Item + &Item {
-      margin-top: 0;
-    }
-
-    &Statistic {
-      justify-content: start;
-      gap: 15px;
     }
   }
 }

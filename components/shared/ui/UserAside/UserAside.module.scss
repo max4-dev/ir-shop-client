@@ -1,0 +1,50 @@
+.ordersAside {
+  max-width: 280px;
+  width: 100%;
+  border-right: 1px solid var(--gray);
+  padding: 17px 35px 17px 0;
+
+  &Item + &Item {
+    margin-top: 31px;
+  }
+
+  &Title {
+    margin-bottom: 18px;
+  }
+
+  &Text {
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  &Text + &Text {
+    margin-top: 7px;
+  }
+
+  &Statistic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .ordersAside {
+    max-width: 100%;
+    margin-bottom: 45px;
+    border-right: none;
+    padding: 0;
+    display: flex;
+    gap: 45px;
+    flex-wrap: wrap;
+
+    &Item + &Item {
+      margin-top: 0;
+    }
+
+    &Statistic {
+      justify-content: start;
+      gap: 15px;
+    }
+  }
+}

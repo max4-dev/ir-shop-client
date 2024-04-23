@@ -2,8 +2,6 @@ import axios from "axios";
 
 import { ITokens } from "@/redux/auth/types";
 
-import { REFRESH_URL } from "../../const/RefreshUrl";
-
 export const handleRefreshToken = async (
   oldRefreshToken: string | null
 ): Promise<[string, string]> => {
@@ -14,12 +12,14 @@ export const handleRefreshToken = async (
   try {
     const {
       data: { accessToken, refreshToken },
-    }: { data: ITokens } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login/access-token`, {
-      refreshToken: oldRefreshToken,
-    });
+    }: { data: ITokens } = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login/access-token`,
+      {
+        refreshToken: oldRefreshToken,
+      }
+    );
 
     console.log("[accessToken, refreshToken]", [accessToken, refreshToken]);
-    
 
     return [accessToken, refreshToken];
   } catch (error) {

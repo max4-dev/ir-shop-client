@@ -1,5 +1,7 @@
-import * as userActions from './auth/asyncActions'
+import * as userActions from "./auth/asyncActions";
+import * as profileActions from "./profile/asyncActions";
 
 export const rootActions = {
-  ...userActions
-}
+  ...profileActions,
+  ...userActions,
+};

@@ -5,9 +5,7 @@ import { notify } from "@/helpers/toastMessage";
 import { HttpCodes } from "../../const/ErrorsHttp";
 
 import { handleRefreshToken } from "./HandleRefreshToken";
-import { debounceRequests } from "./DebounceRequests";
 import { AxiosInterceptorProps } from "./AxiosInterceptor.props";
-
 
 export const axiosInterceptor = (props: AxiosInterceptorProps) => {
   const {
@@ -17,7 +15,6 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
     saveTokenStorage,
     removeTokenStorage,
     getIsRefreshSent,
-    // setIsRefreshSent,
   } = props;
   axiosInstance.defaults.headers["Content-Type"] = "application/json";
 
@@ -39,11 +36,9 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-
       if (error.response.status === HttpCodes.BadRequest) {
-        notify({message: error.response.data.message, type: 'error'})
-      } 
-      else if (error.response.status === HttpCodes.Unauthorized) {
+        notify({ message: error.response.data.message, type: "error" });
+      } else if (error.response.status === HttpCodes.Unauthorized) {
         const config: AxiosRequestConfig = error?.config;
         const oldRefreshToken = getRefreshToken();
 
@@ -54,19 +49,12 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
         const isSentToRefresh = await getIsRefreshSent();
 
         if (isSentToRefresh) {
-          return debounceRequests<AxiosRequestConfig>(
-            config,
-            getIsRefreshSent,
-            getAccessToken,
-            200,
-            5000
-          );
+          return removeTokenStorage();
         }
-        // setIsRefreshSent(true);
 
         try {
           const [accessToken, refreshToken] = await handleRefreshToken(oldRefreshToken);
-          saveTokenStorage({accessToken, refreshToken})
+          saveTokenStorage({ accessToken, refreshToken });
           if (config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;
           }
@@ -74,10 +62,7 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
         } catch (error) {
           console.log(error);
           removeTokenStorage();
-        } 
-        // finally {
-        //   setIsRefreshSent(false);
-        // }
+        }
       }
       throw new Error(error);
     }

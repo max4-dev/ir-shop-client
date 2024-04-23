@@ -46,10 +46,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
     return (
       products &&
       products.filter((product) => {
-        return (
-          product.title.toLowerCase().includes(search.toLowerCase()) ||
-          (product.categories && product.categories.includes(search))
-        );
+        return product.title.toLowerCase().includes(search.toLowerCase());
       })
     );
   };
@@ -68,10 +65,11 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
 
             return products;
           })
-          .filter(
-            (product: IProduct) =>
+          .filter((product: IProduct) => {
+            return (
               product.priceWithSale >= filter.price[0] && product.priceWithSale <= filter.price[1]
-          ),
+            );
+          }),
     };
   };
 
@@ -97,11 +95,9 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
   }, [sort, filter.categories.length, filter.price, dispatch]);
 
   useEffect(() => {
-    if (products && products.length > 0) {
-      const searchedProducts = searchProducts();
+    const searchedProducts = searchProducts();
 
-      setSearchedProducts(searchedProducts);
-    }
+    setSearchedProducts(searchedProducts);
   }, [search, products]);
 
   useEffect(() => {
@@ -117,7 +113,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
       setMoreProducts(sortedProducts.length > limit * activePage && activePage === 1);
       setPaginateProducts(sliceItems);
     }
-  }, [sortedProducts, activePage, limit, dispatch]);
+  }, [sortedProducts, products, activePage, limit, dispatch]);
 
   useEffect(() => {
     setLimit(defaultLimit);

@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 
-import { Order } from "@/components/widgets";
 import { UserTypes, useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
@@ -10,9 +9,9 @@ import { useAppSelector } from "@/redux/store";
 import { Loader } from "@/components/shared/ui/Loader/Loader";
 import { UserAside } from "@/components/shared/ui/UserAside/UserAside";
 
-import styles from "./Orders.module.scss";
+import styles from "./Profile.module.scss";
 
-const Orders = () => {
+const Profile = () => {
   useAuthRedirect(UserTypes.IsOnlyUser);
 
   const { user } = useAuth();
@@ -39,16 +38,10 @@ const Orders = () => {
   return (
     <>
       {profile && (
-        <div className={styles.orders}>
+        <div className={styles.profile}>
           <div className="container">
-            <div className={styles.ordersInner}>
+            <div className={styles.profileInner}>
               <UserAside profile={profile} />
-              <div className={styles.ordersItems}>
-                <div className={styles.ordersItem}>
-                  <Order className={styles.order} />
-                  <Order className={styles.order} />
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -57,4 +50,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Profile;
