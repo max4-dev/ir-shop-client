@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
 import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { useAppSelector } from "@/redux/store";
+import { CityMenu } from "@/components/shared/ui/CityMenu/CityMenu";
 
 import { HeaderProps } from "./Header.props";
 import styles from "./Header.module.scss";
@@ -23,6 +24,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const isMobile = Boolean(width && width < 961);
   const { totalCount } = useAppSelector((state) => state.cart);
+  const { address } = useAppSelector((state) => state.address);
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
@@ -74,10 +76,22 @@ export const Header = ({ className, ...props }: HeaderProps) => {
       <div className={styles.headerTop}>
         <div className="container">
           <div className={styles.headerTopInner}>
-            <div className={styles.city}>
-              <Image src="/images/icons/location.svg" width={12} height={12} alt="Иконка маркера" />
-              <button>Москва</button>
-            </div>
+            <Dropdown
+              panelClassName={styles.cityMenu}
+              buttonChildren={
+                <div className={styles.city}>
+                  <Image
+                    src="/images/icons/location.svg"
+                    width={12}
+                    height={12}
+                    alt="Иконка маркера"
+                  />
+                  <span>{address}</span>
+                </div>
+              }
+            >
+              <CityMenu />
+            </Dropdown>
             <nav>
               {!isMobile && (
                 <ul className={styles.list}>
@@ -156,7 +170,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               </Dropdown>
             </div>
             <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={"/favorites"}>
-              <Image src={"/images/icons/favorite.svg"} alt="Избранное" width={26} height={23} />
+              <FavoriteIcon className={styles.favoriteIcon} />
             </Link>
             <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
               {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}

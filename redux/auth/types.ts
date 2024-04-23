@@ -1,6 +1,6 @@
 export enum Tokens {
-  ACCESS = 'accessToken',
-  REFRESH = 'refreshToken',
+  ACCESS = "accessToken",
+  REFRESH = "refreshToken",
 }
 
 export interface ITokens {
@@ -13,18 +13,22 @@ export type IUser = {
   name: string;
   phone: string;
   password: string;
-} | null
+} | null;
 
 export interface IAuthResponse extends ITokens {
-  user: IUser
+  user: IUser;
+}
+
+export interface WithPayload<T> {
+  payload: T;
 }
 
 export interface IAuthInitialState {
-  user: IUser,
-  isLoading: boolean,
+  user: IUser;
+  isLoading: boolean;
 }
 
 export enum AuthType {
-  LOGIN = 'login',
-  REGISTER = 'register',
+  LOGIN = "login",
+  REGISTER = "register",
 }

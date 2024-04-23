@@ -32,7 +32,7 @@ export default function Home() {
               />
             </button>
           )}
-          <Sort className={styles.sort} />
+          <Sort />
         </div>
         <div className={styles.content}>
           {isMobile ? (

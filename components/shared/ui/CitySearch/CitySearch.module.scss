@@ -1,0 +1,22 @@
+.search {
+  position: relative;
+  margin-bottom: 15px;
+
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--black);
+    padding: 5px 25px 5px 10px;
+  }
+
+  &Icon {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+  }
+
+  &Button {
+    margin-left: auto;
+    margin-top: 10px;
+  }
+}

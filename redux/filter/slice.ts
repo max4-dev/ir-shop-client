@@ -15,8 +15,7 @@ const initialState: IFilterInitialState = {
   },
   activePage: 1,
   catalogCountPages: 0,
-  search: '',
-  isLoading: false,
+  search: ''
 }
 
 export const filterSlice = createSlice({
