@@ -2,7 +2,9 @@
 
 import cn from "classnames";
 import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from "react-dadata";
-import { useState } from "react";
+
+import { useAppDispatch } from "@/redux/store";
+import { setAddress } from "@/redux/address/slice";
 
 import { CitySearch } from "../CitySearch/CitySearch";
 
@@ -10,7 +12,13 @@ import { CityMenuProps } from "./CityMenu.props";
 import styles from "./CityMenu.module.scss";
 
 export function CityMenu({ className, ...props }: CityMenuProps) {
-  const [value, setValue] = useState<DaDataSuggestion<DaDataAddress>>();
+  const dispatch = useAppDispatch();
+
+  const saveAddress = (city: DaDataSuggestion<DaDataAddress> | undefined) => {
+    if (city?.value) {
+      dispatch(setAddress(city.value));
+    }
+  };
 
   return (
     <div className={cn(className, styles.menu)} {...props}>
@@ -24,8 +32,7 @@ export function CityMenu({ className, ...props }: CityMenuProps) {
           containerClassName={styles.menuItems}
           suggestionClassName={styles.menuItem}
           token={process.env.NEXT_PUBLIC_DADATA_KEY || ""}
-          value={value}
-          onChange={setValue}
+          onChange={saveAddress}
         />
       </div>
     </div>
