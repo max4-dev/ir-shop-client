@@ -2,15 +2,14 @@ import cn from "classnames";
 import { useEffect, useReducer, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-import { Product } from "@/components/widgets";
-import { Button, Pagination } from "@/components/shared/ui";
+import { Product } from "@/components/entities/product/ui";
+import { Button, Loader, Pagination } from "@/components/shared/ui";
 import { sortReducer } from "@/components/widgets/Sort/sortReducer";
 import { useProducts } from "@/hooks/useProducts";
-import { IProduct } from "@/components/entities/Product/ui/Product.props";
+import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setActivePage, setCatalogCountPages } from "@/redux/filter/slice";
 import { paginate } from "@/helpers/paginate";
-import { Loader } from "@/components/shared/ui/Loader/Loader";
 
 import { FilterType, ProductListProps } from "./ProductList.props";
 import styles from "./ProductList.module.scss";
@@ -92,7 +91,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
 
   useEffect(() => {
     dispatch(setActivePage(1));
-  }, [sort, filter.categories.length, filter.price, dispatch]);
+  }, [sort, search, filter.categories.length, filter.price, dispatch]);
 
   useEffect(() => {
     const searchedProducts = searchProducts();

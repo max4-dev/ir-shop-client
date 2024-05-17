@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
-export interface counterSizeI {
+export interface ICounterSize {
   min: number;
   max: number;
 }

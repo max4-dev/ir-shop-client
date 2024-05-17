@@ -10,7 +10,7 @@ import { Swiper } from "swiper/types";
 
 import { Button } from "@/components/shared/ui";
 import { ProductSlider } from "@/components/widgets";
-import { getProducts } from "@/components/entities/Product/handler";
+import { getProducts } from "@/components/entities/product/handler";
 import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { addProduct, removeProduct } from "@/redux/favorites/slice";

@@ -1,5 +1,5 @@
-import { IProduct } from "@/components/entities/Product/ui/Product.props";
+import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
 
 export interface IFavoritesInitialState {
-  products: IProduct[],
+  products: IProduct[];
 }

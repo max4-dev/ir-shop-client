@@ -5,7 +5,7 @@ import cn from "classnames";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-import { CartProduct } from "@/components/widgets";
+import { CartProduct } from "@/components/entities/product/ui";
 import { Button, Checkbox, Popup } from "@/components/shared/ui";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { clearProducts } from "@/redux/cart/slice";

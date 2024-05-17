@@ -9,7 +9,7 @@ import { Counter } from "@/components/shared/ui";
 import { useAppDispatch } from "@/redux/store";
 import { addCartProduct, minusProduct, removeProduct } from "@/redux/cart/slice";
 
-import { IProduct } from "../Product/ui/Product.props";
+import { IProduct } from "../Product/Product.props";
 
 import { CartProductProps } from "./CartProduct.props";
 import styles from "./CartProduct.module.scss";

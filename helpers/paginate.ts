@@ -1,10 +1,10 @@
-import { IProduct } from "@/components/entities/Product/ui/Product.props";
+import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
 
 interface IPaginate {
-  activePage: number,
-  limit: number,
-  products: IProduct[],
-  defaultLimit: number,
+  activePage: number;
+  limit: number;
+  products: IProduct[];
+  defaultLimit: number;
 }
 
 export const paginate = ({ activePage, limit, products, defaultLimit }: IPaginate) => {
@@ -12,5 +12,5 @@ export const paginate = ({ activePage, limit, products, defaultLimit }: IPaginat
   const pageCount = Math.ceil(products.length / defaultLimit);
   const sliceItems = products.slice(startIndex, limit * activePage);
 
-  return { sliceItems, pageCount }
-}
+  return { sliceItems, pageCount };
+};

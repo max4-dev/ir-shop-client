@@ -5,14 +5,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { Search, Dropdown, ProfileButton, ProfileMenu, Popup } from "@/components/shared/ui";
+import {
+  Search,
+  Dropdown,
+  ProfileButton,
+  ProfileMenu,
+  Popup,
+  CityMenu,
+} from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
 import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { useAppSelector } from "@/redux/store";
-import { CityMenu } from "@/components/shared/ui/CityMenu/CityMenu";
 
 import { HeaderProps } from "./Header.props";
 import styles from "./Header.module.scss";
@@ -71,6 +77,41 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         ];
   }, [user]);
 
+  const renderUserNav = () => {
+    return (
+      <div className={styles.userNav}>
+        <div className={cn(styles.userNavLink, styles.profile)}>
+          <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
+            <ProfileMenu items={profileItems} />
+          </Dropdown>
+        </div>
+        <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={"/favorites"}>
+          <FavoriteIcon className={styles.favoriteIcon} />
+        </Link>
+        <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
+          {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}
+          <Image src={"/images/icons/cart.svg"} alt="Корзина" width={28} height={28} />
+        </Link>
+      </div>
+    );
+  };
+
+  const renderMenuItems = () => {
+    return (
+      <ul className={styles.list}>
+        {menuItems.map((menuItem) => (
+          <li className={styles.listItem} key={menuItem.title}>
+            {menuItem.href ? (
+              <Link href={menuItem.href}>{menuItem.title}</Link>
+            ) : (
+              <button onClick={menuItem.onClick}>{menuItem.title}</button>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <header className={cn(styles.header, className)} {...props}>
       <div className={styles.headerTop}>
@@ -92,21 +133,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
             >
               <CityMenu />
             </Dropdown>
-            <nav>
-              {!isMobile && (
-                <ul className={styles.list}>
-                  {menuItems.map((menuItem) => (
-                    <li className={styles.listItem} key={menuItem.title}>
-                      {menuItem.href ? (
-                        <Link href={menuItem.href}>{menuItem.title}</Link>
-                      ) : (
-                        <button onClick={menuItem.onClick}>{menuItem.title}</button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </nav>
+            <nav>{!isMobile && renderMenuItems()}</nav>
             <div className={styles.phone}>
               <Image src="/images/icons/phone.svg" alt="" width={16} height={16} />
               <a href="tel:+79998549080">+7 (999) 854-90-80</a>
@@ -128,25 +155,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               />
             </Link>
             <Search className={styles.search} />
-            {!isMobile && (
-              <div className={styles.userNav}>
-                <div className={cn(styles.userNavLink, styles.profile)}>
-                  <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
-                    <ProfileMenu items={profileItems} />
-                  </Dropdown>
-                </div>
-                <Link
-                  className={cn(styles.userNavLink, styles.userNavFavorite)}
-                  href={"/favorites"}
-                >
-                  <FavoriteIcon className={styles.favoriteIcon} />
-                </Link>
-                <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
-                  {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}
-                  <Image src={"/images/icons/cart.svg"} alt="Корзина" width={28} height={28} />
-                </Link>
-              </div>
-            )}
+            {!isMobile && renderUserNav()}
             {isMobile && (
               <button
                 className={styles.burger}
@@ -163,27 +172,8 @@ export const Header = ({ className, ...props }: HeaderProps) => {
 
       {isMobile && (
         <Popup isOpen={isMenuOpen} setIsOpen={setMenuOpen}>
-          <div className={styles.userNav}>
-            <div className={cn(styles.userNavLink, styles.profile)}>
-              <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
-                <ProfileMenu items={profileItems} />
-              </Dropdown>
-            </div>
-            <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={"/favorites"}>
-              <FavoriteIcon className={styles.favoriteIcon} />
-            </Link>
-            <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
-              {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}
-              <Image src={"/images/icons/cart.svg"} alt="Корзина" width={28} height={28} />
-            </Link>
-          </div>
-          <ul className={styles.list}>
-            {menuItems.map((menuItem) => (
-              <li className={styles.listItem} key={menuItem.href}>
-                <Link href={`/${menuItem.href}`}>{menuItem.title}</Link>
-              </li>
-            ))}
-          </ul>
+          {renderUserNav()}
+          {renderMenuItems()}
         </Popup>
       )}
     </header>
