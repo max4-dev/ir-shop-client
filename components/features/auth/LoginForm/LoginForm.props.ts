@@ -4,5 +4,5 @@ export interface ILogin {
 }
 
 export enum PhoneStart {
-  RU = '+7'
+  RU = "+7",
 }

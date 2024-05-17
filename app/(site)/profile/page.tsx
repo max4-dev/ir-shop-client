@@ -6,8 +6,7 @@ import { UserTypes, useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
 import { useAppSelector } from "@/redux/store";
-import { Loader } from "@/components/shared/ui/Loader/Loader";
-import { UserAside } from "@/components/shared/ui/UserAside/UserAside";
+import { Loader, UserAside } from "@/components/shared/ui";
 
 import styles from "./Profile.module.scss";
 

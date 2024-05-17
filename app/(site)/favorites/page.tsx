@@ -1,22 +1,19 @@
 "use client";
 
-import cn from 'classnames';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import cn from "classnames";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-import { useAppSelector } from '@/redux/store';
-import { Product } from '@/components/entities';
+import { useAppSelector } from "@/redux/store";
+import { Product } from "@/components/entities/product/ui";
 
-
-import styles from './FavoritesPage.module.scss';
+import styles from "./FavoritesPage.module.scss";
 
 const FavoritesPage = () => {
   const { products } = useAppSelector((state) => state.favorites);
-  const [parent] = useAutoAnimate()
+  const [parent] = useAutoAnimate();
 
   if (!products || products.length === 0) {
-    return (
-      <h3 className={cn("title-b", styles.favoritesNotFoundTitle)}>Товары не найдены</h3>
-    )
+    return <h3 className={cn("title-b", styles.favoritesNotFoundTitle)}>Товары не найдены</h3>;
   }
 
   return (
@@ -30,6 +27,6 @@ const FavoritesPage = () => {
       </div>
     </div>
   );
-}
- 
+};
+
 export default FavoritesPage;

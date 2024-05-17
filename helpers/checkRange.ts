@@ -1,9 +1,9 @@
-import { counterSizeI } from "@/components/shared/ui/Counter/Counter.props";
+import { ICounterSize } from "@/components/shared/ui/Counter/Counter.props";
 
 interface checkRangeParams {
   value: number;
   setValue: (value: number) => void;
-  counterSize: counterSizeI;
+  counterSize: ICounterSize;
   replace: number;
 }
 

@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
 
 import { AuthType, IAuthResponse, IUser, Tokens } from "@/redux/auth/types";
-import { ILogin } from "@/app/(auth)/login/Login.interface";
 import axios from "@/core/axios";
+import { ILogin } from "@/components/features/auth/LoginForm/LoginForm.props";
 
 import { saveToStorage } from "../api/lib/interceptor/AuthHelper";
 

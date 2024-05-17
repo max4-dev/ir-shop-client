@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { IProduct } from "@/components/entities/Product/ui/Product.props";
+import { IProduct } from "@/components/entities/Product/ui/Product/Product.props";
 
 import { ICartInitialState } from "./types";
 
