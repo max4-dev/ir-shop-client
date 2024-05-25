@@ -13,6 +13,7 @@ import { getCategories } from "@/components/entities/category/handler";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setFilter } from "@/redux/filter/slice";
 import { defaultPrice, price } from "@/helpers/const/defaultPrice";
+import { ICategory } from "@/components/entities/category/types";
 
 import { FilterProps, IIsOpened, SliderStateWithValue } from "./Filter.props";
 import styles from "./Filter.module.scss";
@@ -20,8 +21,10 @@ import styles from "./Filter.module.scss";
 export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
   const dispatch = useAppDispatch();
   const [thumbValue, setThumbValue] = useState<number[]>(defaultPrice);
-  const [isOpened, setOpened] = useState<IIsOpened>({ type: true, price: true });
+  const [isOpened, setOpened] = useState<IIsOpened>({ price: true });
+  const [openedCategories, setOpenedCategories] = useState<Record<string, boolean>>({});
   const categories = useQuery({ queryKey: ["categories"], queryFn: getCategories.getAll });
+
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const { filter } = useAppSelector((state) => state.filter);
   const pathname = usePathname();
@@ -31,6 +34,7 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
 
   const variants = {
     visible: {
+      display: "block",
       transition: shouldReduceMotion
         ? {}
         : {
@@ -38,7 +42,9 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
             staggerChildren: 0.1,
           },
     },
-    hidden: {},
+    hidden: {
+      display: "block",
+    },
   };
 
   const variantsChildren = {
@@ -51,6 +57,14 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
       opacity: shouldReduceMotion ? 1 : 0,
     },
   };
+
+  useEffect(() => {
+    setActiveCategories(filter.categories);
+    if (rangeSliderRef.current) {
+      rangeSliderRef.current.state.value = filter.price;
+    }
+    setThumbValue(filter.price);
+  }, [filter.categories, filter.price, pathname]);
 
   const handleChangeOpen = (item: keyof IIsOpened) => {
     setOpened((prevState) => ({
@@ -100,61 +114,91 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
     }
   };
 
-  const checkAllCategories = () => {
+  const checkAllCategories = (categoryParent: string) => {
     const allCategoryNames: string[] = [];
-    categories.data?.map((category) => allCategoryNames.push(category.name));
+    categories.data?.forEach((category) => {
+      if (categoryParent === category.parent) {
+        allCategoryNames.push(category.name);
+      }
+    });
 
-    setActiveCategories(allCategoryNames);
+    setActiveCategories((prevState) => [...prevState, ...allCategoryNames]);
   };
 
-  useEffect(() => {
-    setActiveCategories(filter.categories);
-    if (rangeSliderRef.current) {
-      rangeSliderRef.current.state.value = filter.price;
-    }
-    setThumbValue(filter.price);
-  }, [pathname]);
+  const openSecondLevel = (categoryId: string) => {
+    setOpenedCategories((prevState) => ({
+      ...prevState,
+      [categoryId]: !prevState[categoryId],
+    }));
+  };
+
+  const buildSecondLevel = (category: ICategory) => {
+    return (
+      <li className={styles.selectItem} key={category.id}>
+        <Checkbox
+          checked={Boolean(
+            activeCategories.find((activeCategory) => category.name === activeCategory)
+          )}
+          onChange={() => handleCategoryToggle(category.name)}
+        >
+          {category.name}
+        </Checkbox>
+      </li>
+    );
+  };
+
+  const buildFirstLevel = () => {
+    return (
+      categories.data &&
+      categories.data.map(
+        (parentCategory: ICategory) =>
+          !parentCategory.parent && (
+            <motion.div
+              className={styles.filterBlock}
+              layout
+              variants={variants}
+              initial={openedCategories[parentCategory.name] ? "visible" : "hidden"}
+              animate={openedCategories[parentCategory.name] ? "visible" : "hidden"}
+              key={parentCategory.id}
+            >
+              <div
+                className={styles.filterBlockTop}
+                onClick={() => openSecondLevel(parentCategory.name)}
+              >
+                <h5 className={cn(styles.filterBlockTitle, "title-s")}>{parentCategory.name}</h5>
+                <ArrowIcon
+                  className={cn(styles.arrow, {
+                    [styles.reverced]: parentCategory.isOpened,
+                  })}
+                />
+              </div>
+              <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
+                <button
+                  onClick={() => checkAllCategories(parentCategory.slug)}
+                  className={styles.selectButton}
+                >
+                  Выбрать все
+                </button>
+                <ul className={styles.select}>
+                  {categories.data.map(
+                    (category) =>
+                      category.parent === parentCategory.slug && buildSecondLevel(category)
+                  )}
+                </ul>
+              </motion.div>
+            </motion.div>
+          )
+      )
+    );
+  };
 
   return (
     <aside className={cn(styles.filter, className)} {...props}>
       <h4 className={cn(styles.title, "title-m")}>Фильтры</h4>
       <div className={styles.filterBloks}>
+        {buildFirstLevel()}
         <motion.div
           className={styles.filterBlock}
-          layout
-          variants={variants}
-          initial={isOpened.type ? "visible" : "hidden"}
-          animate={isOpened.type ? "visible" : "hidden"}
-        >
-          <div className={styles.filterBlockTop} onClick={() => handleChangeOpen("type")}>
-            <h5 className={cn(styles.filterBlockTitle, "title-s")}>Тип</h5>
-            <ArrowIcon className={cn(styles.arrow, { [styles.reverced]: isOpened.type })} />
-          </div>
-          {categories.data && (
-            <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
-              <button onClick={checkAllCategories} className={styles.selectButton}>
-                Выбрать все
-              </button>
-              <ul className={styles.select}>
-                {categories.data.map((category) => (
-                  <li className={styles.selectItem} key={category.id}>
-                    <Checkbox
-                      checked={Boolean(
-                        activeCategories.find((activeCategory) => category.name === activeCategory)
-                      )}
-                      onChange={() => handleCategoryToggle(category.name)}
-                    >
-                      {category.name}
-                    </Checkbox>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </motion.div>
-        <motion.div
-          className={styles.filterBlock}
-          layout
           variants={variants}
           initial={isOpened.price ? "visible" : "hidden"}
           animate={isOpened.price ? "visible" : "hidden"}
