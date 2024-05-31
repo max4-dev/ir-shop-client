@@ -19,8 +19,6 @@ export const handleRefreshToken = async (
       }
     );
 
-    console.log("[accessToken, refreshToken]", [accessToken, refreshToken]);
-
     return [accessToken, refreshToken];
   } catch (error) {
     throw new Error(

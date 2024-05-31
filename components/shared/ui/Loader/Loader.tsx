@@ -1,12 +1,14 @@
 "use client";
 
-import styles from "./Loader.module.scss";
-import { LoaderProps } from "./Loader.props";
+import cn from "classnames";
 
-export const Loader = ({ className, ...props }: LoaderProps) => {
+import { LoaderProps } from "./Loader.props";
+import styles from "./Loader.module.scss";
+
+export const Loader = ({ loaderClassName, className, ...props }: LoaderProps) => {
   return (
     <div className={className}>
-      <span className={styles.loader} {...props}></span>
+      <span className={cn(loaderClassName, styles.loader)} {...props}></span>
     </div>
   );
-}
+};

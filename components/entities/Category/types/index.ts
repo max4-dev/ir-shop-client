@@ -3,5 +3,4 @@ export interface ICategory {
   name: string;
   slug: string;
   parent: string;
-  isOpened?: boolean;
 }

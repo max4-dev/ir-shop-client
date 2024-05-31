@@ -11,17 +11,19 @@ import { useState } from "react";
 import { Button, Checkbox, Input } from "@/components/shared/ui";
 import { useActions } from "@/hooks/useActions";
 import { phoneRegExp } from "@/helpers/const/phoneRegExp";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+
+import { PhoneStart } from "../LoginForm/LoginForm.props";
 
 import { ISignup } from "./SignupForm.props";
 import styles from "./SignupForm.module.scss";
-import { PhoneStart } from "../LoginForm/LoginForm.props";
 
 const formSchema = yup.object({
   phone: yup
     .string()
     .matches(phoneRegExp, "Некорректный телефон")
     .required("Телефон - обязательное поле"),
-  password: yup.string().min(6, "Минимум 6 символа").required("Пароль - обязательное поле"),
+  password: yup.string().min(6, "Минимум 6 символов").required("Пароль - обязательное поле"),
   name: yup.string().min(3, "Минимум 3 символа").required("Имя - обязательное поле"),
 });
 
@@ -34,6 +36,7 @@ const defaultValues = {
 export const SignupForm = () => {
   const { signup } = useActions();
   const [phone, setPhone] = useState<string>(PhoneStart.RU);
+  const { isLoading } = useTypedSelector((state) => state.user);
   const [isChecked, setChecked] = useState(false);
   const {
     register,
@@ -94,7 +97,13 @@ export const SignupForm = () => {
         >
           Я согласен с <Link href="#">условиями пользовательского соглашения</Link>
         </Checkbox>
-        <Button className={styles.button} size="big" type="submit" disabled={!isChecked}>
+        <Button
+          className={styles.button}
+          size="big"
+          type="submit"
+          disabled={!isChecked}
+          isLoading={isLoading}
+        >
           Регистрация
         </Button>
       </form>
