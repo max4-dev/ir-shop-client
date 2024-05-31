@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import { InternalAxiosRequestConfig } from "axios";
 
 import { notify } from "@/helpers/toastMessage";
 
@@ -36,35 +36,36 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
-      if (error.response.status === HttpCodes.BadRequest) {
-        notify({ message: error.response.data.message, type: "error" });
-      } else if (error.response.status === HttpCodes.Unauthorized) {
-        const config: AxiosRequestConfig = error?.config;
+      if (error.response && error.response.status === HttpCodes.Unauthorized) {
+        const { config } = error;
         const oldRefreshToken = getRefreshToken();
 
         if (!oldRefreshToken) {
-          return removeTokenStorage();
+          removeTokenStorage();
+          return Promise.reject(error);
         }
 
         const isSentToRefresh = await getIsRefreshSent();
 
         if (isSentToRefresh) {
-          return removeTokenStorage();
+          removeTokenStorage();
+          return Promise.reject(error);
         }
 
         try {
           const [accessToken, refreshToken] = await handleRefreshToken(oldRefreshToken);
           saveTokenStorage({ accessToken, refreshToken });
-          if (config.headers) {
-            config.headers.Authorization = `Bearer ${accessToken}`;
-          }
-          return config;
+
+          config.headers.Authorization = `Bearer ${accessToken}`;
+          return axiosInstance(config);
         } catch (error) {
-          console.log(error);
           removeTokenStorage();
+          return Promise.reject(error);
         }
+      } else {
+        notify({ message: error.response.data.message, type: "error" });
+        return Promise.reject(error);
       }
-      throw new Error(error);
     }
   );
 };

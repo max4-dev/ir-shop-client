@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Button, Input } from "@/components/shared/ui";
 import { useActions } from "@/hooks/useActions";
 import { phoneRegExp } from "@/helpers/const/phoneRegExp";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import { ILogin, PhoneStart } from "./LoginForm.props";
 import styles from "./LoginForm.module.scss";
@@ -20,7 +21,7 @@ const formSchema = yup.object({
     .string()
     .matches(phoneRegExp, "Некорректный телефон")
     .required("Телефон - обязательное поле"),
-  password: yup.string().min(6, "Минимум 6 символа").required("Пароль - обязательное поле"),
+  password: yup.string().min(6, "Минимум 6 символов").required("Пароль - обязательное поле"),
 });
 
 const defaultValues = {
@@ -30,6 +31,7 @@ const defaultValues = {
 
 export const LoginForm = () => {
   const { login } = useActions();
+  const { isLoading } = useTypedSelector((state) => state.user);
   const [phone, setPhone] = useState<string>(PhoneStart.RU);
   const {
     register,
@@ -77,7 +79,7 @@ export const LoginForm = () => {
           errorMessage={errors.password?.message}
           isPassword
         />
-        <Button className={styles.button} size="big" type="submit">
+        <Button className={styles.button} size="big" type="submit" isLoading={isLoading}>
           Вход
         </Button>
       </form>

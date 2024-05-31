@@ -8,10 +8,6 @@ module.exports = {
     return config;
   },
   reactStrictMode: true,
-  webp: {
-    preset: "default",
-    quality: 100,
-  },
   images: {
     remotePatterns: [
       {

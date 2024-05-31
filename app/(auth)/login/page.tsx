@@ -1,3 +1,5 @@
+"use client";
+
 import { LoginForm } from "@/components/features/auth";
 import { UserTypes, useAuthRedirect } from "@/hooks/useAuthRedirect";
 

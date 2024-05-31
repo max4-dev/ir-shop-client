@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getNewTokens, sign } from "@/components/shared/handler";
 import { removeTokenStorage } from "@/components/shared/api/lib/interceptor/AuthHelper";
-import { ILogin } from "@/app/(auth)/login/Login.interface";
-import { ISignup } from "@/app/(auth)/signup/Signup.interface";
+import { ISignup } from "@/components/features/auth/SignupForm/SignupForm.props";
+import { ILogin } from "@/components/features/auth/LoginForm/LoginForm.props";
 
 import { AuthType, IAuthResponse } from "./types";
 

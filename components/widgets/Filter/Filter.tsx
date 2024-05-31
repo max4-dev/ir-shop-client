@@ -34,7 +34,6 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
 
   const variants = {
     visible: {
-      display: "block",
       transition: shouldReduceMotion
         ? {}
         : {
@@ -42,9 +41,7 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
             staggerChildren: 0.1,
           },
     },
-    hidden: {
-      display: "block",
-    },
+    hidden: {},
   };
 
   const variantsChildren = {

@@ -1,0 +1,24 @@
+.profile {
+  &FormBox {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  &InputBox + .profileInputBox {
+    margin-top: 20px;
+  }
+
+  &Form + .profileForm {
+    margin-top: 30px;
+  }
+
+  &InputText {
+    margin-bottom: 23px;
+    font-size: 16px;
+  }
+}
+
+.button {
+  margin-top: 20px;
+  margin-left: auto;
+}
