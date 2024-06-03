@@ -8,7 +8,7 @@ import { addProduct, removeProduct } from "@/redux/favorites/slice";
 import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { addCartProduct } from "@/redux/cart/slice";
 
-import { IProduct, ProductProps } from "./Product.props";
+import { ProductProps } from "./Product.props";
 import styles from "./Product.module.scss";
 
 export const Product = ({
@@ -20,37 +20,22 @@ export const Product = ({
   images,
   inStock,
   priceWithSale,
-  slug,
-  rating,
   className,
   ...props
 }: ProductProps) => {
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.favorites);
+  const { favoriteProducts } = useAppSelector((state) => state.favorites);
   const cart = useAppSelector((state) => state.cart);
   const cartItem = cart.products.find((product: { id: string }) => product.id === id);
   const addedCount = cartItem ? cartItem.count : 0;
 
-  const product: IProduct = {
-    salePercent,
-    price,
-    categories,
-    title,
-    id,
-    images,
-    inStock,
-    priceWithSale,
-    slug,
-    rating,
-  };
-
   const isFavorit = useMemo(() => {
-    return Boolean(products.find((product) => product.id === id));
-  }, [products, id]);
+    return Boolean(favoriteProducts.find((product) => product.id === id));
+  }, [favoriteProducts, id]);
 
   const toggleFavorite = () => {
     if (!isFavorit) {
-      return dispatch(addProduct(product));
+      return dispatch(addProduct({ id }));
     }
 
     return dispatch(removeProduct({ id }));
@@ -99,7 +84,7 @@ export const Product = ({
         </div>
         {inStock && (
           <button
-            onClick={() => dispatch(addCartProduct(product))}
+            onClick={() => dispatch(addCartProduct({ id, count: addedCount }))}
             className={styles.productCartButton}
           >
             {addedCount > 0 && <span className={styles.productCartCount}>{addedCount}</span>}

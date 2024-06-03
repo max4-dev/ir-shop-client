@@ -1,10 +1,10 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
+type Enumerate<N extends number, Acc extends number[] = []> = Acc["length"] extends N
   ? Acc[number]
-  : Enumerate<N, [...Acc, Acc['length']]>
+  : Enumerate<N, [...Acc, Acc["length"]]>;
 
-type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
+type Range<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>;
 
 export interface IProduct {
   id: string;
@@ -21,9 +21,10 @@ export interface IProduct {
 }
 
 export interface ILimitProductsResponse {
-  products: IProduct[],
-  page: number,
-  pages: number,
+  products: IProduct[];
+  page: number;
+  pages: number;
 }
 
-export type ProductProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & IProduct
+export type ProductProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> &
+  IProduct;

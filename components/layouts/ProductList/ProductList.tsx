@@ -36,6 +36,7 @@ export const ProductList = ({ className, ...props }: ProductListProps) => {
     sort: sort.type,
     products: filteredProducts,
   });
+
   const { paginateProducts, pageCount } = useProductsPaginate({
     limit,
     activePage,

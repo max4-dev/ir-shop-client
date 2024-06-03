@@ -129,6 +129,11 @@
   }
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 400px) {
   .cart {
     box-shadow: none;

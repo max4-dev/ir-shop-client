@@ -1,22 +1,22 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
-
 import { IFavoritesInitialState } from "./types";
 
 const initialState: IFavoritesInitialState = {
-  products: [],
+  favoriteProducts: [],
 };
 
 export const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
-    addProduct(state, action: PayloadAction<IProduct>) {
-      state.products = [...state.products, action.payload];
+    addProduct(state, action: PayloadAction<{ id: string }>) {
+      state.favoriteProducts = [...state.favoriteProducts, action.payload];
     },
     removeProduct(state, action: PayloadAction<{ id: string }>) {
-      state.products = state.products.filter((product) => product.id !== action.payload.id);
+      state.favoriteProducts = state.favoriteProducts.filter(
+        (product) => product.id !== action.payload.id
+      );
     },
   },
 });

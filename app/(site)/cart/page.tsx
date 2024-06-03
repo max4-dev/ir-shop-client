@@ -6,8 +6,9 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
 import { CartProduct } from "@/components/entities/product/ui";
-import { Button, Checkbox, Popup } from "@/components/shared/ui";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { Button, Checkbox, Loader, Popup } from "@/components/shared/ui";
+import { useAppDispatch } from "@/redux/store";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { clearProducts } from "@/redux/cart/slice";
 
 import styles from "./Cart.module.scss";
@@ -15,9 +16,15 @@ import styles from "./Cart.module.scss";
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { products, totalCount, totalPrice } = useAppSelector((state) => state.cart);
+  const { cartProducts, isLoading, totalCount, totalPrice } = useTypedSelector(
+    (state) => state.cart
+  );
 
-  if (products.length === 0) {
+  if (isLoading) {
+    return <Loader className={styles.loader} />;
+  }
+
+  if (cartProducts.length === 0) {
     return (
       <div className="container">
         <h3 className={cn("title-b", styles.cartNotFoundTitle)}>Корзина пуста</h3>
@@ -39,7 +46,7 @@ const Cart = () => {
               Товаров в корзине: <span>{totalCount}</span>
             </p>
             <div className={styles.cartItems}>
-              {products.map((product) => (
+              {cartProducts.map((product) => (
                 <CartProduct key={product.id} className={styles.cartItem} {...product} />
               ))}
             </div>

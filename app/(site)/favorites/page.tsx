@@ -2,17 +2,47 @@
 
 import cn from "classnames";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useEffect, useState } from "react";
 
 import { useAppSelector } from "@/redux/store";
 import { Product } from "@/components/entities/product/ui";
+import { useProducts } from "@/hooks/useProducts";
+import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
+import { Loader } from "@/components/shared/ui";
 
 import styles from "./FavoritesPage.module.scss";
 
 const FavoritesPage = () => {
-  const { products } = useAppSelector((state) => state.favorites);
+  const { favoriteProducts } = useAppSelector((state) => state.favorites);
+  const { data, isLoading } = useProducts();
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [parent] = useAutoAnimate();
 
-  if (!products || products.length === 0) {
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    const products = favoriteProducts
+      .map((product) => {
+        const foundedProduct = data.find((fovoriteProduct) => fovoriteProduct.id === product.id);
+
+        if (!foundedProduct) {
+          return null;
+        }
+
+        return foundedProduct;
+      })
+      .filter((product): product is IProduct => product !== null);
+
+    setProducts(products);
+  }, [data, favoriteProducts]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (!favoriteProducts || favoriteProducts.length === 0) {
     return <h3 className={cn("title-b", styles.favoritesNotFoundTitle)}>Товары не найдены</h3>;
   }
 
