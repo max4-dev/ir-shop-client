@@ -29,7 +29,7 @@ enum StockStatus {
 
 const ProductPage = ({ params }: ProductPageProps) => {
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.favorites);
+  const { favoriteProducts } = useAppSelector((state) => state.favorites);
   const [thumbsSwiper, setThumbsSwiper] = useState<Swiper | null>(null);
   const { productId } = params;
   const cart = useAppSelector((state) => state.cart);
@@ -47,8 +47,8 @@ const ProductPage = ({ params }: ProductPageProps) => {
   const addedCount = cartItem ? cartItem.count : 0;
 
   const isFavorit = useMemo(() => {
-    return Boolean(products.find((product) => product.id === data?.id));
-  }, [products, data?.id]);
+    return Boolean(favoriteProducts.find((product) => product.id === data?.id));
+  }, [favoriteProducts, data?.id]);
 
   const toggleFavorite = () => {
     if (!data) {
@@ -99,7 +99,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
                 <div className={styles.productPageButtons}>
                   {data.inStock && (
                     <Button
-                      onClick={() => dispatch(addCartProduct(data))}
+                      onClick={() => dispatch(addCartProduct({ id: data.id, count: addedCount }))}
                       className={styles.productPageCartButton}
                       size="big"
                     >
