@@ -7,8 +7,7 @@ import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "framer-motion";
 
-import ArrowIcon from "@/public/images/icons/arrow.svg";
-import { Checkbox, Button } from "@/components/shared/ui";
+import { Checkbox, Button, Icon } from "@/components/shared/ui";
 import { getCategories } from "@/components/entities/category/handler";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setFilter } from "@/redux/filter/slice";
@@ -163,9 +162,9 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
                 onClick={() => openSecondLevel(parentCategory.name)}
               >
                 <h5 className={cn(styles.filterBlockTitle, "title-s")}>{parentCategory.name}</h5>
-                <ArrowIcon
+                <Icon.ArrowIcon
                   className={cn(styles.arrow, {
-                    [styles.reverced]: parentCategory.isOpened,
+                    [styles.reverced]: !openedCategories[parentCategory.name],
                   })}
                 />
               </div>
@@ -202,7 +201,7 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
         >
           <div className={styles.filterBlockTop} onClick={() => handleChangeOpen("price")}>
             <h5 className={cn(styles.filterBlockTitle, "title-s")}>Цена</h5>
-            <ArrowIcon className={cn(styles.arrow, { [styles.reverced]: isOpened.price })} />
+            <Icon.ArrowIcon className={cn(styles.arrow, { [styles.reverced]: !isOpened.price })} />
           </div>
           <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
             <div className={styles.filterBlockInputs}>

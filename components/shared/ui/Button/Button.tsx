@@ -4,6 +4,7 @@ import cn from "classnames";
 import Link from "next/link";
 
 import { Loader } from "../Loader/Loader";
+import { Icon } from "../Icon/Icon";
 
 import { ButtonProps } from "./Button.props";
 import styles from "./Button.module.scss";
@@ -11,7 +12,7 @@ import styles from "./Button.module.scss";
 export const Button = ({
   size = "medium",
   appearance = "primary",
-  icon = "none",
+  icon,
   typeOf = "button",
   href = "",
   disabled = false,
@@ -20,6 +21,8 @@ export const Button = ({
   className,
   ...props
 }: ButtonProps) => {
+  const IconComponent = icon ? Icon[icon] : null;
+
   if (typeOf === "button") {
     return (
       <button
@@ -38,7 +41,14 @@ export const Button = ({
         disabled={disabled || isLoading}
         {...props}
       >
-        {isLoading ? <Loader loaderClassName={styles.loader} /> : children}
+        {isLoading ? (
+          <Loader loaderClassName={styles.loader} />
+        ) : (
+          <>
+            {children}
+            {IconComponent && <IconComponent className={styles.icon} />}
+          </>
+        )}
       </button>
     );
   }
@@ -58,7 +68,14 @@ export const Button = ({
       )}
       href={href}
     >
-      {isLoading ? <Loader loaderClassName={styles.loader} /> : children}
+      {isLoading ? (
+        <Loader loaderClassName={styles.loader} />
+      ) : (
+        <>
+          {children}
+          {IconComponent && <IconComponent className={styles.icon} />}
+        </>
+      )}
     </Link>
   );
 };

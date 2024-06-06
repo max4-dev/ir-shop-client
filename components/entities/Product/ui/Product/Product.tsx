@@ -5,8 +5,8 @@ import { useMemo } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { addProduct, removeProduct } from "@/redux/favorites/slice";
-import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { addCartProduct } from "@/redux/cart/slice";
+import { Icon } from "@/components/shared/ui";
 
 import { ProductProps } from "./Product.props";
 import styles from "./Product.module.scss";
@@ -45,7 +45,7 @@ export const Product = ({
     <div className={cn(styles.product, className)} {...props}>
       {salePercent > 0 && <div className={styles.productSale}>-{salePercent}%</div>}
       <button onClick={toggleFavorite} className={styles.productFavorite}>
-        <FavoriteIcon
+        <Icon.FavoriteIcon
           className={cn(styles.productFavoriteIcon, {
             [styles.productFavoriteIconActive]: isFavorit,
           })}
@@ -88,7 +88,7 @@ export const Product = ({
             className={styles.productCartButton}
           >
             {addedCount > 0 && <span className={styles.productCartCount}>{addedCount}</span>}
-            <Image src="/images/icons/cart.svg" alt="Корзина" width={23} height={23} />
+            <Icon.CartIcon />
           </button>
         )}
       </div>

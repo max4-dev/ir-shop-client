@@ -63,19 +63,18 @@
 
   &CartCount {
     position: absolute;
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--black);
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     font-weight: 500;
     font-size: 18px;
-    width: 35px;
-    height: 35px;
-    right: -6px;
-    top: -6px;
-    border: 2px solid var(--black);
+    width: 25px;
+    height: 25px;
+    right: 19px;
+    top: 3px;
   }
 
   &Favorite {

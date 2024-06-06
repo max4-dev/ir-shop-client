@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 
+import { IconType } from "../Icon/Icon";
+
 export interface ButtonProps
   extends Omit<
     DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
@@ -8,7 +10,7 @@ export interface ButtonProps
   children: ReactNode;
   size?: "fullWidth" | "small" | "medium" | "big";
   appearance?: "primary" | "ghost" | "disabled";
-  icon?: any | "none";
+  icon?: IconType;
   typeOf?: "link" | "button";
   href?: string;
   disabled?: boolean;

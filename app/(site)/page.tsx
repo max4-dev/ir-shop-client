@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 
 import { Filter, Sort } from "@/components/widgets";
 import { ProductList } from "@/components/layouts";
-import { Popup } from "@/components/shared/ui";
+import { Icon, Popup } from "@/components/shared/ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 import styles from "./Home.module.scss";
@@ -24,12 +23,7 @@ export default function Home() {
               className={styles.filterButton}
               onClick={() => setFilterOpen((prevState) => !prevState)}
             >
-              <Image
-                src="/images/icons/filter.svg"
-                width={30}
-                height={30}
-                alt="Иконка фильтрации"
-              />
+              <Icon.FilterIcon />
             </button>
           )}
           <Sort />

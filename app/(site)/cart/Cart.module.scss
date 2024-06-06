@@ -89,46 +89,6 @@
   }
 }
 
-.popup {
-  &Title {
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--gray);
-  }
-
-  &List {
-    margin-top: 24px;
-  }
-
-  &Item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &Item + &Item {
-    margin-top: 24px;
-  }
-
-  &Name,
-  &Value {
-    color: var(--disabled);
-  }
-
-  &Button {
-    margin-top: 36px;
-  }
-
-  &Checkbox {
-    margin-top: 36px;
-  }
-
-  &Checkbox p {
-    font-size: 14px;
-    display: block;
-    max-width: 354px;
-  }
-}
-
 .loader {
   display: flex;
   justify-content: center;
