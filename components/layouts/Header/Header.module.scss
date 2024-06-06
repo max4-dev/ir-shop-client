@@ -162,6 +162,15 @@
   z-index: 1000;
 }
 
+.logo {
+  max-width: 350px;
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 961px) {
   .userNav {
     justify-content: center;
@@ -209,12 +218,7 @@
   }
 
   .logo {
-    max-width: 135px;
-    width: 100%;
-
-    img {
-      width: 100%;
-    }
+    max-width: 250px;
   }
 }
 

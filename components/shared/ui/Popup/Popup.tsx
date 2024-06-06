@@ -3,10 +3,11 @@
 import cn from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import Image from "next/image";
+
+import { Icon } from "../Icon/Icon";
 
 import { PopupProps } from "./Popup.props";
-import styles from "./Popup.module.scss"
+import styles from "./Popup.module.scss";
 
 export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
   return (
@@ -37,7 +38,7 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
             >
               <Dialog.Panel className={styles.popupPanel}>
                 <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
-                  <Image src="/images/icons/close.svg" width={20} height={20} alt="Картинка закрыть" />
+                  <Icon.CloseIcon />
                 </button>
                 {children}
               </Dialog.Panel>
@@ -47,4 +48,4 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
       </Transition>
     </div>
   );
-}
+};

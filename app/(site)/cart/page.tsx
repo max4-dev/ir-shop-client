@@ -1,15 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import cn from "classnames";
 import { useState } from "react";
-import { Dialog } from "@headlessui/react";
 
 import { CartProduct } from "@/components/entities/product/ui";
-import { Button, Checkbox, Loader, Popup } from "@/components/shared/ui";
+import { Button, Icon, Loader } from "@/components/shared/ui";
 import { useAppDispatch } from "@/redux/store";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { clearProducts } from "@/redux/cart/slice";
+import { CartPopup } from "@/components/features/order";
 
 import styles from "./Cart.module.scss";
 
@@ -37,7 +36,7 @@ const Cart = () => {
       <h2 className={cn(styles.cartTitle, "title-b")}>Оформление заказа</h2>
       <div className={styles.cart}>
         <div className={styles.cartTop}>
-          <Image src="/images/icons/cart-white.svg" width={48} height={48} alt="Корзина" />
+          <Icon.CartWhiteIcon />
           <h5 className={cn(styles.cartTopTitle, "title-m")}>Корзина</h5>
         </div>
         <div className={styles.cartContent}>
@@ -67,29 +66,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Popup className={styles.popup} isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Dialog.Title className={cn(styles.popupTitle, "title-m")} as="h3">
-          Итого
-        </Dialog.Title>
-        <ul className={styles.popupList}>
-          <li className={styles.popupItem}>
-            <p className={styles.popupName}>
-              Товары <span>({totalCount})</span>
-            </p>
-            <p className={styles.popupValue}>{totalPrice} ₽</p>
-          </li>
-          <li className={styles.popupItem}>
-            <p className={styles.popupName}>Итого</p>
-            <p className="title-m">{totalPrice} ₽</p>
-          </li>
-        </ul>
-        <Button className={styles.popupButton} size="fullWidth" appearance="disabled">
-          Оформить заказ
-        </Button>
-        <Checkbox className={styles.popupCheckbox}>
-          Согласен с условиями Правил пользования торговой площадкой и правилами возврата
-        </Checkbox>
-      </Popup>
+      <CartPopup isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

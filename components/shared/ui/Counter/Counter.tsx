@@ -3,9 +3,10 @@
 /* eslint-disable no-plusplus */
 
 import cn from "classnames";
-import Image from "next/image";
 
 import { checkRange } from "@/helpers/checkRange";
+
+import { Icon } from "../Icon/Icon";
 
 import { CounterProps } from "./Counter.props";
 import styles from "./Counter.module.scss";
@@ -47,14 +48,14 @@ export const Counter = ({
         className={cn(styles.counterButton, styles.counterMinus)}
         onClick={() => decrement(value)}
       >
-        <Image src="/images/icons/minus.svg" width={20} height={20} alt="Минус" />
+        <Icon.MinusIcon />
       </button>
       <span className={styles.counterItem}>{value}</span>
       <button
         className={cn(styles.counterButton, styles.counterPlus)}
         onClick={() => increment(value)}
       >
-        <Image src="/images/icons/plus.svg" width={20} height={20} alt="Плюс" />
+        <Icon.PlusIcon />
       </button>
     </div>
   );

@@ -8,10 +8,9 @@ import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { Swiper } from "swiper/types";
 
-import { Button } from "@/components/shared/ui";
+import { Button, Icon, Loader } from "@/components/shared/ui";
 import { ProductSlider } from "@/components/widgets";
 import { getProducts } from "@/components/entities/product/handler";
-import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { addProduct, removeProduct } from "@/redux/favorites/slice";
 import { addCartProduct } from "@/redux/cart/slice";
@@ -38,7 +37,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
     notFound();
   }
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [`product-${productId}`],
     queryFn: () => getProducts.getById(productId),
   });
@@ -61,6 +60,10 @@ const ProductPage = ({ params }: ProductPageProps) => {
 
     return dispatch(removeProduct({ id: data.id }));
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -102,6 +105,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
                       onClick={() => dispatch(addCartProduct({ id: data.id, count: addedCount }))}
                       className={styles.productPageCartButton}
                       size="big"
+                      icon={"CartIcon"}
                     >
                       {addedCount > 0 && (
                         <span className={styles.productPageCartCount}>{addedCount}</span>
@@ -110,7 +114,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
                     </Button>
                   )}
                   <button onClick={toggleFavorite} className={styles.productPageFavorite}>
-                    <FavoriteIcon
+                    <Icon.FavoriteIcon
                       className={cn(styles.favoriteIcon, {
                         [styles.favoriteIconActive]: isFavorit,
                       })}

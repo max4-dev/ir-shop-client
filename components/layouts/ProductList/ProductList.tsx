@@ -1,3 +1,5 @@
+"use client";
+
 import cn from "classnames";
 import { useEffect, useReducer, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";

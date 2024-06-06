@@ -12,12 +12,12 @@ import {
   ProfileMenu,
   Popup,
   CityMenu,
+  Icon,
 } from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
-import FavoriteIcon from "@/assets/icons/favorite.svg";
 import { useAppSelector } from "@/redux/store";
 
 import { HeaderProps } from "./Header.props";
@@ -86,11 +86,11 @@ export const Header = ({ className, ...props }: HeaderProps) => {
           </Dropdown>
         </div>
         <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={"/favorites"}>
-          <FavoriteIcon className={styles.favoriteIcon} />
+          <Icon.FavoriteIcon className={styles.favoriteIcon} />
         </Link>
         <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
           {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}
-          <Image src={"/images/icons/cart.svg"} alt="Корзина" width={28} height={28} />
+          <Icon.CartIcon />
         </Link>
       </div>
     );
@@ -121,12 +121,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               panelClassName={styles.cityMenu}
               buttonChildren={
                 <div className={styles.city}>
-                  <Image
-                    src="/images/icons/location.svg"
-                    width={12}
-                    height={12}
-                    alt="Иконка маркера"
-                  />
+                  <Icon.LocationIcon />
                   <span>{address}</span>
                 </div>
               }
@@ -135,7 +130,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
             </Dropdown>
             <nav>{!isMobile && renderMenuItems()}</nav>
             <div className={styles.phone}>
-              <Image src="/images/icons/phone.svg" alt="" width={16} height={16} />
+              <Icon.PhoneIcon />
               <a href="tel:+79998549080">+7 (999) 854-90-80</a>
             </div>
           </div>
@@ -148,7 +143,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               <Image
                 className={styles.logo}
                 priority={true}
-                src="/images/logo.svg"
+                src={`/images/logo${isMobile ? "-mobile" : ""}.svg`}
                 width={181}
                 height={48}
                 alt="Логотип"

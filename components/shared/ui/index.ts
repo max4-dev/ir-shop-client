@@ -13,3 +13,4 @@ export * from "./ProfileMenu/ProfileMenu";
 export * from "./Dropdown/Dropdown";
 export * from "./UserAside/UserAside";
 export * from "./Loader/Loader";
+export * from "./Icon/Icon";

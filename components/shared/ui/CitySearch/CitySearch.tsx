@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import Image from "next/image";
+
+import { Icon } from "../Icon/Icon";
 
 import { CitySearchProps } from "./CitySearch.props";
 import styles from "./CitySearch.module.scss";
@@ -18,13 +19,7 @@ export const CitySearch = forwardRef<HTMLInputElement, CitySearchProps>(
           {...props}
           onBlur={undefined}
         />
-        <Image
-          className={styles.searchIcon}
-          src="/images/icons/search.svg"
-          alt="Поиск"
-          width={14}
-          height={14}
-        />
+        <Icon.SearchIcon className={styles.searchIcon} />
       </div>
     );
   }
