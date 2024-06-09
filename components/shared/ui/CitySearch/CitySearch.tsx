@@ -15,7 +15,7 @@ export const CitySearch = forwardRef<HTMLInputElement, CitySearchProps>(
           ref={ref}
           type="text"
           className={props.className}
-          placeholder="Ваш город..."
+          placeholder="Адрес почты..."
           {...props}
           onBlur={undefined}
         />

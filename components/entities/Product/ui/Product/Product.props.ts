@@ -15,7 +15,7 @@ export interface IProduct {
   images: string[];
   categories?: string[];
   price: number;
-  inStock: boolean;
+  inStock?: boolean;
   rating: number;
   priceWithSale: number;
 }

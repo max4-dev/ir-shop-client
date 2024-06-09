@@ -13,7 +13,7 @@ export const UserAside = ({ profile, className, ...props }: UserAsideProps) => {
             <p className={styles.ordersAsideText}>{profile.name}</p>
             <p className={styles.ordersAsideText}>{profile.phone}</p>
           </div>
-          <div className={styles.ordersAsideItem}>
+          {/* <div className={styles.ordersAsideItem}>
             <h5 className={cn(styles.ordersAsideTitle, "title-l")}>Статистика</h5>
             <div className={cn(styles.ordersAsideText, styles.ordersAsideStatistic)}>
               <p>Товаров куплено:</p>
@@ -23,7 +23,7 @@ export const UserAside = ({ profile, className, ...props }: UserAsideProps) => {
               <p>Сейчас в доставке:</p>
               <p>4</p>
             </div>
-          </div>
+          </div> */}
         </aside>
       )}
     </>

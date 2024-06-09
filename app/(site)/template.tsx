@@ -7,11 +7,23 @@ import { setCartProducts, setTotal } from "@/redux/cart/slice";
 import { useProducts } from "@/hooks/useProducts";
 import { IProductForCart } from "@/redux/cart/types";
 import { useAppDispatch } from "@/redux/store";
+import useRetryRequest from "@/hooks/useRetryRequest";
+import { useActions } from "@/hooks/useActions";
+import { useAuth } from "@/hooks/useAuth";
 
 function SiteTemplate({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const { products } = useTypedSelector((state) => state.cart);
   const { data: productsData } = useProducts();
+
+  const { getProfile } = useActions();
+  const { user } = useAuth();
+
+  const { setRetry } = useRetryRequest({ requestFn: getProfile, user });
+
+  useEffect(() => {
+    setRetry(false);
+  }, []);
 
   useEffect(() => {
     if (!productsData) {

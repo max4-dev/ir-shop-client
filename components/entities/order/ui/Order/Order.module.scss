@@ -24,6 +24,31 @@
     margin-top: 24px;
   }
 
+  &StatisticBox {
+    margin-bottom: 30px;
+  }
+
+  &Statistic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &Statistic + &Statistic {
+    margin-top: 15px;
+  }
+
+  &StatisticText {
+    color: var(--dark-gray);
+  }
+
+  &StatisticCount {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
   &Buttons {
     display: flex;
     align-items: center;
@@ -42,6 +67,19 @@
         max-width: 267px;
         width: 100%;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .order {
+    &Statistic {
+      display: block;
+    }
+
+    &StatisticCount {
+      font-size: 20px;
+      margin-top: 5px;
     }
   }
 }

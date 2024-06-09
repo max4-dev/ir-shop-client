@@ -12,7 +12,6 @@ export type IUser = {
   id: string;
   name: string;
   phone: string;
-  password: string;
 } | null;
 
 export interface IAuthResponse extends ITokens {

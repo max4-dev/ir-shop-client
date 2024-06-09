@@ -9,11 +9,13 @@ import { useAppDispatch } from "@/redux/store";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { clearProducts } from "@/redux/cart/slice";
 import { CartPopup } from "@/components/features/order";
+import { useAuth } from "@/hooks/useAuth";
 
 import styles from "./Cart.module.scss";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { cartProducts, isLoading, totalCount, totalPrice } = useTypedSelector(
     (state) => state.cart
@@ -59,9 +61,15 @@ const Cart = () => {
               <Button onClick={() => dispatch(clearProducts())} size="small" appearance="ghost">
                 Очистить корзину
               </Button>
-              <Button className={styles.cartButton} onClick={() => setIsOpen(true)} size="small">
-                Продолжить
-              </Button>
+              {user ? (
+                <Button className={styles.cartButton} onClick={() => setIsOpen(true)} size="small">
+                  Продолжить
+                </Button>
+              ) : (
+                <Button className={styles.cartButton} href="/signup" typeOf="link" size="small">
+                  Продолжить
+                </Button>
+              )}
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { DaDataAddress, DaDataSuggestion } from "react-dadata";
+
 export interface ICityInitialState {
-  address: string;
+  address: DaDataSuggestion<DaDataAddress>;
 }
