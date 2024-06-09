@@ -62,6 +62,9 @@ export const axiosInterceptor = (props: AxiosInterceptorProps) => {
           removeTokenStorage();
           return Promise.reject(error);
         }
+      } else if (error.response && error.response.status === HttpCodes.UserNotFound) {
+        removeTokenStorage();
+        return Promise.reject(error);
       } else {
         notify({ message: error.response.data.message, type: "error" });
         return Promise.reject(error);

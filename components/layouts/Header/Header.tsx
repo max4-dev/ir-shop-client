@@ -3,7 +3,8 @@
 import cn from "classnames";
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import {
   Search,
@@ -13,12 +14,13 @@ import {
   Popup,
   CityMenu,
   Icon,
+  CitySearch,
 } from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
-import { useAppSelector } from "@/redux/store";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import { HeaderProps } from "./Header.props";
 import styles from "./Header.module.scss";
@@ -29,8 +31,9 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   const { width } = useWindowSize();
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const isMobile = Boolean(width && width < 961);
-  const { totalCount } = useAppSelector((state) => state.cart);
-  const { address } = useAppSelector((state) => state.address);
+  const { totalCount } = useTypedSelector((state) => state.cart);
+  const { address } = useTypedSelector((state) => state.address);
+  const pathname = usePathname();
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
@@ -77,6 +80,12 @@ export const Header = ({ className, ...props }: HeaderProps) => {
         ];
   }, [user]);
 
+  useEffect(() => {
+    if (isMobile) {
+      setMenuOpen(false);
+    }
+  }, [pathname]);
+
   const renderUserNav = () => {
     return (
       <div className={styles.userNav}>
@@ -122,11 +131,11 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               buttonChildren={
                 <div className={styles.city}>
                   <Icon.LocationIcon />
-                  <span>{address}</span>
+                  <span>{address.value}</span>
                 </div>
               }
             >
-              <CityMenu />
+              <CityMenu customInput={CitySearch} />
             </Dropdown>
             <nav>{!isMobile && renderMenuItems()}</nav>
             <div className={styles.phone}>

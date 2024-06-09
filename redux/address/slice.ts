@@ -1,19 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { DaDataAddress, DaDataSuggestion } from "react-dadata";
 
-import { getStoreLocalString } from "@/helpers/getStoreLocal";
+import { getStoreLocal } from "@/helpers/getStoreLocal";
 
 import { ICityInitialState } from "./types";
 
 const initialState: ICityInitialState = {
-  address: getStoreLocalString("address") || "Москва",
+  address: getStoreLocal("address") || { value: "Москва" },
 };
 
 export const addressSlice = createSlice({
   name: "address",
   initialState,
   reducers: {
-    setAddress(state, action: PayloadAction<string>) {
-      localStorage.setItem("address", action.payload);
+    setAddress(state, action: PayloadAction<DaDataSuggestion<DaDataAddress>>) {
+      localStorage.setItem("address", JSON.stringify(action.payload));
       state.address = action.payload;
     },
   },

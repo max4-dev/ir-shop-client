@@ -1,7 +1,7 @@
 "use client";
 
 import cn from "classnames";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
 import React, { Fragment } from "react";
 
 import { Icon } from "../Icon/Icon";
@@ -9,12 +9,19 @@ import { Icon } from "../Icon/Icon";
 import { PopupProps } from "./Popup.props";
 import styles from "./Popup.module.scss";
 
-export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: PopupProps) => {
+export const Popup = ({
+  isOpen,
+  setIsOpen,
+  children,
+  panelClassName,
+  className,
+  ...props
+}: PopupProps) => {
   return (
     <div className={cn(styles.popup, className)} {...props}>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className={styles.popupDialog} onClose={() => setIsOpen(false)}>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter={styles.enter}
             enterFrom={styles.enterFrom}
@@ -24,10 +31,10 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
             leaveTo={styles.leaveTo}
           >
             <div className={styles.popupBackground} />
-          </Transition.Child>
+          </TransitionChild>
 
           <div className={styles.popupBox}>
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter={styles.enter}
               enterFrom={styles.enterFrom}
@@ -36,13 +43,13 @@ export const Popup = ({ isOpen, setIsOpen, children, className, ...props }: Popu
               leaveFrom={styles.leaveFrom}
               leaveTo={styles.leaveTo}
             >
-              <Dialog.Panel className={styles.popupPanel}>
+              <DialogPanel className={cn(panelClassName, styles.popupPanel)}>
                 <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
                   <Icon.CloseIcon />
                 </button>
                 {children}
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </Dialog>
       </Transition>

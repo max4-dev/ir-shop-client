@@ -12,6 +12,8 @@
 
   &Button {
     position: absolute;
+    display: flex;
+    align-items: center;
     left: 4px;
     top: 50%;
     transform: translateY(-50%);

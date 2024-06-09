@@ -9,51 +9,35 @@ import { Counter } from "@/components/shared/ui";
 import { useAppDispatch } from "@/redux/store";
 import { addCartProduct, minusProduct, removeProduct } from "@/redux/cart/slice";
 
-import { IProduct } from "../Product/Product.props";
-
 import { CartProductProps } from "./CartProduct.props";
 import styles from "./CartProduct.module.scss";
 
 export const CartProduct = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  inStock,
   count,
   salePercent = 0,
   price,
-  categories = [],
   title,
   id,
   images,
-  inStock,
   priceWithSale,
-  slug,
-  rating,
   className,
   ...props
 }: CartProductProps) => {
   const dispatch = useAppDispatch();
   const [counterValue, setCounterValue] = useState(count);
-  const product: IProduct = {
-    salePercent,
-    price,
-    categories,
-    title,
-    id,
-    images,
-    inStock,
-    priceWithSale,
-    slug,
-    rating,
-  };
 
   const addToCart = () => {
-    dispatch(addCartProduct(product));
+    dispatch(addCartProduct({ id, count: counterValue }));
   };
 
   const removeFromCart = () => {
-    dispatch(minusProduct({ id: product.id }));
+    dispatch(minusProduct({ id, count: counterValue }));
   };
 
   const deleteFromCart = () => {
-    dispatch(removeProduct({ id: product.id }));
+    dispatch(removeProduct({ id }));
   };
 
   return (

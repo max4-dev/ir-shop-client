@@ -6,17 +6,15 @@ import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from "react-dadat
 import { useAppDispatch } from "@/redux/store";
 import { setAddress } from "@/redux/address/slice";
 
-import { CitySearch } from "../CitySearch/CitySearch";
-
 import { CityMenuProps } from "./CityMenu.props";
 import styles from "./CityMenu.module.scss";
 
-export function CityMenu({ className, ...props }: CityMenuProps) {
+export function CityMenu({ className, customInput, ...props }: CityMenuProps) {
   const dispatch = useAppDispatch();
 
   const saveAddress = (city: DaDataSuggestion<DaDataAddress> | undefined) => {
-    if (city?.value) {
-      dispatch(setAddress(city.value));
+    if (city) {
+      dispatch(setAddress(city));
     }
   };
 
@@ -24,7 +22,7 @@ export function CityMenu({ className, ...props }: CityMenuProps) {
     <div className={cn(className, styles.menu)} {...props}>
       <div className={styles.menuSearch}>
         <AddressSuggestions
-          customInput={CitySearch}
+          customInput={customInput}
           renderOption={(suggestion) => {
             return <div>{suggestion.value}</div>;
           }}

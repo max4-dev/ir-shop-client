@@ -2,12 +2,13 @@
 
 import { useEffect } from "react";
 
-import { Order } from "@/components/widgets";
 import { UserTypes, useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
 import { useAppSelector } from "@/redux/store";
 import { Loader, UserAside } from "@/components/shared/ui";
+import { Order } from "@/components/entities/order/ui";
+import { useOrders } from "@/hooks/useOrders";
 
 import styles from "./Orders.module.scss";
 
@@ -15,9 +16,10 @@ const Orders = () => {
   useAuthRedirect(UserTypes.IsOnlyUser);
 
   const { user } = useAuth();
-  const { profile, isLoading } = useAppSelector((state) => state.profile);
+  const { profile, isLoading: profileIsLoading } = useAppSelector((state) => state.profile);
 
   const { getProfile } = useActions();
+  const { data, isLoading } = useOrders();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -31,7 +33,7 @@ const Orders = () => {
     fetchProfile();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || profileIsLoading) {
     return <Loader className={styles.loader} />;
   }
 
@@ -43,10 +45,13 @@ const Orders = () => {
             <div className={styles.ordersInner}>
               <UserAside profile={profile} />
               <div className={styles.ordersItems}>
-                <div className={styles.ordersItem}>
-                  <Order className={styles.order} />
-                  <Order className={styles.order} />
-                </div>
+                {data && (
+                  <div className={styles.ordersItem}>
+                    {data.map((order) => (
+                      <Order className={styles.order} key={order.id} {...order} />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
