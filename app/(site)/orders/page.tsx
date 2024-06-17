@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import cn from "classnames";
 
 import { UserTypes, useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useAuth } from "@/hooks/useAuth";
 import { useActions } from "@/hooks/useActions";
-import { useAppSelector } from "@/redux/store";
 import { Loader, UserAside } from "@/components/shared/ui";
 import { Order } from "@/components/entities/order/ui";
 import { useOrders } from "@/hooks/useOrders";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import styles from "./Orders.module.scss";
 
@@ -16,7 +17,7 @@ const Orders = () => {
   useAuthRedirect(UserTypes.IsOnlyUser);
 
   const { user } = useAuth();
-  const { profile, isLoading: profileIsLoading } = useAppSelector((state) => state.profile);
+  const { profile, isLoading: profileIsLoading } = useTypedSelector((state) => state.profile);
 
   const { getProfile } = useActions();
   const { data, isLoading } = useOrders();
@@ -35,6 +36,14 @@ const Orders = () => {
 
   if (isLoading || profileIsLoading) {
     return <Loader className={styles.loader} />;
+  }
+
+  if (data?.length === 0) {
+    return (
+      <div className="container">
+        <h3 className={cn("title-b", styles.ordersNotFoundTitle)}>Пока нет заказов</h3>
+      </div>
+    );
   }
 
   return (

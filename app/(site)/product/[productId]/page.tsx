@@ -1,19 +1,15 @@
 "use client";
 
-/* eslint-disable consistent-return */
-
 import cn from "classnames";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { Swiper } from "swiper/types";
 
-import { Button, Icon, Loader } from "@/components/shared/ui";
+import { Loader } from "@/components/shared/ui";
 import { ProductSlider } from "@/components/widgets";
 import { getProducts } from "@/components/entities/product/handler";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { addProduct, removeProduct } from "@/redux/favorites/slice";
-import { addCartProduct } from "@/redux/cart/slice";
+import { ProductPageContent } from "@/components/widgets/ProductPageContent/ProductPageContent";
 
 import styles from "./ProductPage.module.scss";
 
@@ -21,17 +17,9 @@ interface ProductPageProps {
   params: { productId: string };
 }
 
-enum StockStatus {
-  IN_STOCK = "В наличии",
-  OUT_STOCK = "Нет в наличии",
-}
-
 const ProductPage = ({ params }: ProductPageProps) => {
-  const dispatch = useAppDispatch();
-  const { favoriteProducts } = useAppSelector((state) => state.favorites);
   const [thumbsSwiper, setThumbsSwiper] = useState<Swiper | null>(null);
   const { productId } = params;
-  const cart = useAppSelector((state) => state.cart);
 
   if (!productId) {
     notFound();
@@ -41,25 +29,6 @@ const ProductPage = ({ params }: ProductPageProps) => {
     queryKey: [`product-${productId}`],
     queryFn: () => getProducts.getById(productId),
   });
-
-  const cartItem = cart.products.find((product: { id: string }) => product.id === data?.id);
-  const addedCount = cartItem ? cartItem.count : 0;
-
-  const isFavorit = useMemo(() => {
-    return Boolean(favoriteProducts.find((product) => product.id === data?.id));
-  }, [favoriteProducts, data?.id]);
-
-  const toggleFavorite = () => {
-    if (!data) {
-      return;
-    }
-
-    if (!isFavorit) {
-      return dispatch(addProduct(data));
-    }
-
-    return dispatch(removeProduct({ id: data.id }));
-  };
 
   if (isLoading) {
     return <Loader />;
@@ -79,53 +48,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
                   setThumbsSwiper={setThumbsSwiper}
                 />
               </div>
-              <div className={styles.productPageContent}>
-                <p className={styles.productPagePrice}>{data.priceWithSale} ₽</p>
-                {data.inStock ? (
-                  <p className={cn(styles.productPageStatus, styles.statusStock)}>
-                    {StockStatus.IN_STOCK}
-                  </p>
-                ) : (
-                  <p className={cn(styles.productPageStatus, styles.statusOutStock)}>
-                    {StockStatus.OUT_STOCK}
-                  </p>
-                )}
-                <p className={styles.productPageVendor}>Артикул: {data.id}</p>
-                {data.categories &&
-                  data.categories.map((category) => (
-                    <div className={styles.productPageTypeBadges} key={category}>
-                      <div className={styles.productTypeBadges}>
-                        <span className={styles.productPageTypeBadge}>{category}</span>
-                      </div>
-                    </div>
-                  ))}
-                <div className={styles.productPageButtons}>
-                  {data.inStock && (
-                    <Button
-                      onClick={() => dispatch(addCartProduct({ id: data.id, count: addedCount }))}
-                      className={styles.productPageCartButton}
-                      size="big"
-                      icon={"CartIcon"}
-                    >
-                      {addedCount > 0 && (
-                        <span className={styles.productPageCartCount}>{addedCount}</span>
-                      )}
-                      Положить в корзину
-                    </Button>
-                  )}
-                  <button onClick={toggleFavorite} className={styles.productPageFavorite}>
-                    <Icon.FavoriteIcon
-                      className={cn(styles.favoriteIcon, {
-                        [styles.favoriteIconActive]: isFavorit,
-                      })}
-                    />
-                  </button>
-                </div>
-                <div className={styles.productPageDescription}>
-                  <h5>Описание</h5>
-                  <p>{data.description}</p>
-                </div>
-              </div>
+              <ProductPageContent {...data} />
             </div>
           </div>
         </div>

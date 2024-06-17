@@ -22,6 +22,10 @@ export const CartProduct = ({
   id,
   images,
   priceWithSale,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  createdAt,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  updatedAt,
   className,
   ...props
 }: CartProductProps) => {

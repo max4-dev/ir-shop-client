@@ -51,7 +51,7 @@ export const PasswordForm = ({ className, ...props }: PasswordFormProps) => {
     if (response?.status) {
       updateUser({
         phone: profile.phone,
-        password: newPassword || profile.password,
+        password: newPassword,
       });
     }
   };

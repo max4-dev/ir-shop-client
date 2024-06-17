@@ -2,22 +2,23 @@
 
 import cn from "classnames";
 import ReactSlider from "react-slider";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { Checkbox, Button, Icon } from "@/components/shared/ui";
 import { getCategories } from "@/components/entities/category/handler";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { setFilter } from "@/redux/filter/slice";
 import { defaultPrice, price } from "@/helpers/const/defaultPrice";
 import { ICategory } from "@/components/entities/category/types";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import { FilterProps, IIsOpened, SliderStateWithValue } from "./Filter.props";
 import styles from "./Filter.module.scss";
 
-export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
+export const Filter = memo(({ setFilterOpen, className, ...props }: FilterProps) => {
   const dispatch = useAppDispatch();
   const [thumbValue, setThumbValue] = useState<number[]>(defaultPrice);
   const [isOpened, setOpened] = useState<IIsOpened>({ price: true });
@@ -25,7 +26,7 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
   const categories = useQuery({ queryKey: ["categories"], queryFn: getCategories.getAll });
 
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
-  const { filter } = useAppSelector((state) => state.filter);
+  const { filter } = useTypedSelector((state) => state.filter);
   const pathname = usePathname();
   const rangeSliderRef = useRef<SliderStateWithValue>(null);
 
@@ -246,4 +247,6 @@ export const Filter = ({ setFilterOpen, className, ...props }: FilterProps) => {
       </div>
     </aside>
   );
-};
+});
+
+Filter.displayName = "Filter";

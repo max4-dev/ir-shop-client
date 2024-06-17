@@ -4,7 +4,7 @@ import cn from "classnames";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useEffect, useState } from "react";
 
-import { useAppSelector } from "@/redux/store";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { Product } from "@/components/entities/product/ui";
 import { useProducts } from "@/hooks/useProducts";
 import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
@@ -13,7 +13,7 @@ import { Loader } from "@/components/shared/ui";
 import styles from "./FavoritesPage.module.scss";
 
 const FavoritesPage = () => {
-  const { favoriteProducts } = useAppSelector((state) => state.favorites);
+  const { favoriteProducts } = useTypedSelector((state) => state.favorites);
   const { data, isLoading } = useProducts();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [parent] = useAutoAnimate();
@@ -43,7 +43,7 @@ const FavoritesPage = () => {
   }
 
   if (!favoriteProducts || favoriteProducts.length === 0) {
-    return <h3 className={cn("title-b", styles.favoritesNotFoundTitle)}>Товары не найдены</h3>;
+    return <h3 className={cn("title-b", styles.favoritesNotFoundTitle)}>Список избранного пуст</h3>;
   }
 
   return (

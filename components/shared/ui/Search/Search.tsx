@@ -5,8 +5,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { setSearch } from "@/redux/filter/slice";
+import { useAppDispatch } from "@/redux/store";
+import { setSearch } from "@/redux/search/slice";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import { Icon } from "../Icon/Icon";
 
@@ -15,7 +16,7 @@ import styles from "./Search.module.scss";
 
 export const Search = ({ className, ...props }: SearchProps) => {
   const dispatch = useAppDispatch();
-  const { search } = useAppSelector((state) => state.filter);
+  const { search } = useTypedSelector((state) => state.search);
   const router = useRouter();
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement>(null);

@@ -15,6 +15,8 @@ import storage from "redux-persist/lib/storage";
 import auth from "./auth/slice";
 import profile from "./profile/slice";
 import filter from "./filter/slice";
+import sort from "./sort/slice";
+import search from "./search/slice";
 import favorites from "./favorites/slice";
 import cart from "./cart/slice";
 import address from "./address/slice";
@@ -31,6 +33,8 @@ const rootReducer = combineReducers({
   user: auth,
   profile,
   filter,
+  sort,
+  search,
   favorites,
   cart,
   address,

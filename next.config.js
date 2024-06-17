@@ -7,6 +7,19 @@ module.exports = {
 
     return config;
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*{/}?",
+        headers: [
+          {
+            key: "X-Accel-Buffering",
+            value: "no",
+          },
+        ],
+      },
+    ];
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
