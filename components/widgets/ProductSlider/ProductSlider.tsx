@@ -1,20 +1,39 @@
 "use client";
 
-import cn from 'classnames';
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Navigation, Thumbs, Scrollbar } from 'swiper/modules';
+import cn from "classnames";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs, Scrollbar } from "swiper/modules";
 
 import { ProductSliderProps } from "./ProductSlider.props";
-import styles from './ProductSlider.module.scss';
+import styles from "./ProductSlider.module.scss";
 
-import 'swiper/css';
-import '@/scss/slider/slider.scss';
+import "swiper/css";
+import "@/scss/slider/slider.scss";
 
-export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className, ...props }: ProductSliderProps) => {
-  
+const breakpoints = {
+  0: {
+    slidesPerView: 1.5,
+  },
+  320: {
+    slidesPerView: 2,
+  },
+  400: {
+    slidesPerView: 3,
+  },
+  768: {
+    slidesPerView: 4,
+  },
+};
 
-  return ( 
+export const ProductSlider = ({
+  images,
+  thumbsSwiper,
+  setThumbsSwiper,
+  className,
+  ...props
+}: ProductSliderProps) => {
+  return (
     <div className={cn(styles.slider, className)} {...props}>
       <Swiper
         spaceBetween={10}
@@ -22,7 +41,6 @@ export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className
         allowTouchMove={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-
         className={styles.sliderBig}
       >
         {images.map((image, index) => (
@@ -41,21 +59,7 @@ export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className
         }}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs, Scrollbar]}
-        breakpoints={{
-          0: {
-            slidesPerView: 1.5,
-          },
-          320: {
-            slidesPerView: 2,
-          },
-          400: {
-            slidesPerView: 3,
-          },
-          768: {
-            slidesPerView: 4,
-          },
-        }}
-
+        breakpoints={breakpoints}
         className={styles.sliderThumbs}
       >
         {images.map((image, index) => (
@@ -65,5 +69,5 @@ export const ProductSlider = ({ images, thumbsSwiper, setThumbsSwiper, className
         ))}
       </Swiper>
     </div>
-   );
-}
+  );
+};

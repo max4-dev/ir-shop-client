@@ -10,6 +10,14 @@
     width: 100%;
     margin-left: 95px;
   }
+
+  &NotFoundTitle {
+    text-align: center;
+
+    &::after {
+      display: none;
+    }
+  }
 }
 
 .order + .order {

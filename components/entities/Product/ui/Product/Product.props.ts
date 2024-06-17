@@ -18,6 +18,8 @@ export interface IProduct {
   inStock?: boolean;
   rating: number;
   priceWithSale: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ILimitProductsResponse {

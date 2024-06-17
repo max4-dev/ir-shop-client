@@ -116,12 +116,6 @@
   }
 }
 
-.panel {
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
-  top: 53px;
-  left: -57px;
-}
-
 .burger {
   width: 50px;
   height: 50px;
@@ -138,10 +132,6 @@
     height: 3px;
     background-color: var(--white);
   }
-}
-
-.favoriteIcon {
-  color: var(--white);
 }
 
 .cityMenu {
@@ -172,11 +162,6 @@
 }
 
 @media screen and (max-width: 961px) {
-  .userNav {
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
   .list {
     display: block;
     text-align: center;

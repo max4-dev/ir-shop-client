@@ -9,21 +9,22 @@ import { Button, Loader, Pagination } from "@/components/shared/ui";
 import { sortReducer } from "@/components/widgets/Sort/sortReducer";
 import { useProducts } from "@/hooks/useProducts";
 import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { setActivePage, setCatalogCountPages } from "@/redux/filter/slice";
 import { useProductsSearch } from "@/hooks/useProductsSearch";
 import { useProductsFilter } from "@/hooks/useProductsFilter";
 import { defaultLimit } from "@/helpers/const/defaultLimit";
 import { useProductsPaginate } from "@/hooks/useProductsPaginate";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 import { ProductListProps } from "./ProductList.props";
 import styles from "./ProductList.module.scss";
 
 export const ProductList = ({ className, ...props }: ProductListProps) => {
   const dispatch = useAppDispatch();
-  const { sort, filter, search, activePage, catalogCountPages } = useAppSelector(
-    (state) => state.filter
-  );
+  const { filter, activePage, catalogCountPages } = useTypedSelector((state) => state.filter);
+  const { sort } = useTypedSelector((state) => state.sort);
+  const { search } = useTypedSelector((state) => state.search);
 
   const [isLoading, setLoading] = useState(true);
   const [limit, setLimit] = useState(defaultLimit);

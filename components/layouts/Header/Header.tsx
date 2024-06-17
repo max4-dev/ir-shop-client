@@ -6,32 +6,19 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 
-import {
-  Search,
-  Dropdown,
-  ProfileButton,
-  ProfileMenu,
-  Popup,
-  CityMenu,
-  Icon,
-  CitySearch,
-} from "@/components/shared/ui";
+import { Search, Dropdown, Popup, CityMenu, Icon, CitySearch } from "@/components/shared/ui";
 import { ProfileMenuItem } from "@/components/shared/ui/ProfileMenu/ProfileMenu.props";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import { useAuth } from "@/hooks/useAuth";
-import { useActions } from "@/hooks/useActions";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { UserNav } from "@/components/widgets/UserNav/UserNav";
 
 import { HeaderProps } from "./Header.props";
 import styles from "./Header.module.scss";
 
 export const Header = ({ className, ...props }: HeaderProps) => {
-  const { user } = useAuth();
-  const { logout } = useActions();
   const { width } = useWindowSize();
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const isMobile = Boolean(width && width < 961);
-  const { totalCount } = useTypedSelector((state) => state.cart);
   const { address } = useTypedSelector((state) => state.address);
   const pathname = usePathname();
 
@@ -52,58 +39,11 @@ export const Header = ({ className, ...props }: HeaderProps) => {
     ];
   }, []);
 
-  const profileItems = useMemo((): ProfileMenuItem[] => {
-    return user
-      ? [
-          {
-            title: "Профиль",
-            href: `/profile`,
-          },
-          {
-            title: "Мои заказы",
-            href: `/orders`,
-          },
-          {
-            title: "Выйти",
-            onClick: logout,
-          },
-        ]
-      : [
-          {
-            title: "Войти",
-            href: `/login`,
-          },
-          {
-            title: "Регистрация",
-            href: `/signup`,
-          },
-        ];
-  }, [user]);
-
   useEffect(() => {
     if (isMobile) {
       setMenuOpen(false);
     }
   }, [pathname]);
-
-  const renderUserNav = () => {
-    return (
-      <div className={styles.userNav}>
-        <div className={cn(styles.userNavLink, styles.profile)}>
-          <Dropdown buttonChildren={() => <ProfileButton />} panelClassName={styles.panel}>
-            <ProfileMenu items={profileItems} />
-          </Dropdown>
-        </div>
-        <Link className={cn(styles.userNavLink, styles.userNavFavorite)} href={"/favorites"}>
-          <Icon.FavoriteIcon className={styles.favoriteIcon} />
-        </Link>
-        <Link className={cn(styles.userNavLink, styles.userNavCart)} href={"/cart"}>
-          {totalCount > 0 && <span className={styles.userNavCartCount}>{totalCount}</span>}
-          <Icon.CartIcon />
-        </Link>
-      </div>
-    );
-  };
 
   const renderMenuItems = () => {
     return (
@@ -159,7 +99,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
               />
             </Link>
             <Search className={styles.search} />
-            {!isMobile && renderUserNav()}
+            {!isMobile && <UserNav />}
             {isMobile && (
               <button
                 className={styles.burger}
@@ -176,7 +116,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
 
       {isMobile && (
         <Popup isOpen={isMenuOpen} setIsOpen={setMenuOpen}>
-          {renderUserNav()}
+          <UserNav />
           {renderMenuItems()}
         </Popup>
       )}

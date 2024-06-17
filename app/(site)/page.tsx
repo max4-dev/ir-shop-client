@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 import { Filter, Sort } from "@/components/widgets";
-import { ProductList } from "@/components/layouts";
 import { Icon, Popup } from "@/components/shared/ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { ProductList } from "@/components/layouts";
 
 import styles from "./Home.module.scss";
 

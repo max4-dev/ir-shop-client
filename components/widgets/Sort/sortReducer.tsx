@@ -1,10 +1,11 @@
 import { IProduct } from "@/components/entities/product/ui/Product/Product.props";
-import { SortEnum } from "@/redux/filter/types";
+import { SortEnum } from "@/redux/sort/types";
 
 export type SortActions =
-  | { type: SortEnum.Price; products: IProduct[] | undefined }
+  | { type: SortEnum.MaxPrice; products: IProduct[] | undefined }
+  | { type: SortEnum.MinPrice; products: IProduct[] | undefined }
+  | { type: SortEnum.New; products: IProduct[] | undefined }
   | { type: SortEnum.Default; products: IProduct[] | undefined }
-  | { type: SortEnum.Rating; products: IProduct[] | undefined }
   | { type: "reset"; initialState: IProduct[] | undefined };
 
 export interface SortReducerState {
@@ -14,26 +15,36 @@ export interface SortReducerState {
 
 export const sortReducer = (state: SortReducerState, action: SortActions) => {
   switch (action.type) {
-    case SortEnum.Rating:
+    case SortEnum.MaxPrice:
       return {
-        sort: SortEnum.Rating,
+        sort: SortEnum.MaxPrice,
         products: action.products && [
-          ...action.products.sort((a, b) => (a.rating > b.rating ? -1 : 1)),
+          ...action.products.sort((a, b) => (a.priceWithSale < b.priceWithSale ? 1 : -1)),
         ],
       };
 
-    case SortEnum.Price:
+    case SortEnum.MinPrice:
       return {
-        sort: SortEnum.Price,
+        sort: SortEnum.MaxPrice,
         products: action.products && [
-          ...action.products.sort((a, b) => (a.priceWithSale < b.priceWithSale ? 1 : -1)),
+          ...action.products.sort((a, b) => (a.priceWithSale > b.priceWithSale ? 1 : -1)),
+        ],
+      };
+
+    case SortEnum.New:
+      return {
+        sort: SortEnum.Default,
+        products: action.products && [
+          ...action.products.sort((a, b) => {
+            return Date.parse(a.updatedAt) < Date.parse(b.updatedAt) ? 1 : -1;
+          }),
         ],
       };
 
     case SortEnum.Default:
       return {
         sort: SortEnum.Default,
-        products: action.products && action.products.toReversed(),
+        products: action.products,
       };
 
     case "reset":
