@@ -1,3 +1,4 @@
+import ArrowNextIcon from "@/assets/icons/arrow-next.svg";
 import ArrowIcon from "@/assets/icons/arrow.svg";
 import CartWhiteIcon from "@/assets/icons/cart-white.svg";
 import CartIcon from "@/assets/icons/cart.svg";
@@ -18,6 +19,7 @@ import UserIcon from "@/assets/icons/user.svg";
 export const Icon = {
   FavoriteIcon,
   ArrowIcon,
+  ArrowNextIcon,
   CartWhiteIcon,
   CartIcon,
   CloseIcon,

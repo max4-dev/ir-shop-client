@@ -2,7 +2,7 @@ import { API_URL } from "@/components/shared/api/const/ApiUrl";
 
 import { ILimitQuery } from "../types";
 
-export const s3Url = process.env.NEXT_PUBLIC_S3_URL
+export const s3Url = process.env.NEXT_PUBLIC_S3_URL;
 
 export const productsApi = {
   getAll: `${API_URL}/products`,

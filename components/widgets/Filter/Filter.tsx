@@ -129,20 +129,18 @@ export const Filter = memo(({ setFilterOpen, className, ...props }: FilterProps)
     }));
   };
 
-  const buildSecondLevel = (category: ICategory) => {
-    return (
-      <li className={styles.selectItem} key={category.id}>
-        <Checkbox
-          checked={Boolean(
-            activeCategories.find((activeCategory) => category.name === activeCategory)
-          )}
-          onChange={() => handleCategoryToggle(category.name)}
-        >
-          {category.name}
-        </Checkbox>
-      </li>
-    );
-  };
+  const buildSecondLevel = (category: ICategory) => (
+    <li className={styles.selectItem} key={category.id}>
+      <Checkbox
+        checked={Boolean(
+          activeCategories.find((activeCategory) => category.name === activeCategory)
+        )}
+        onChange={() => handleCategoryToggle(category.name)}
+      >
+        {category.name}
+      </Checkbox>
+    </li>
+  );
 
   const buildFirstLevel = () => {
     return (
@@ -171,7 +169,7 @@ export const Filter = memo(({ setFilterOpen, className, ...props }: FilterProps)
               </div>
               <motion.div className={styles.filterBlockContent} variants={variantsChildren}>
                 <button
-                  onClick={() => checkAllCategories(parentCategory.slug)}
+                  onClick={() => checkAllCategories(parentCategory.id)}
                   className={styles.selectButton}
                 >
                   Выбрать все
@@ -179,7 +177,7 @@ export const Filter = memo(({ setFilterOpen, className, ...props }: FilterProps)
                 <ul className={styles.select}>
                   {categories.data.map(
                     (category) =>
-                      category.parent === parentCategory.slug && buildSecondLevel(category)
+                      category.parent === parentCategory.id && buildSecondLevel(category)
                   )}
                 </ul>
               </motion.div>

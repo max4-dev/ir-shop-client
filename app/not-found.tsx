@@ -1,11 +1,14 @@
-import Link from 'next/link'
- 
+import { Button } from "@/components/shared/ui";
+
 export default function NotFound() {
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-      <Link href="/">Return Home</Link>
+    <div className="container">
+      <div className="notFound">
+        <h2 className="title-b">Страница не найдена</h2>
+        <Button className="notFoundButton" href="/" typeOf="link" icon="ArrowNextIcon">
+          Вернуться на главную
+        </Button>
+      </div>
     </div>
-  )
+  );
 }
