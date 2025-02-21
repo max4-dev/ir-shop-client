@@ -1,0 +1,29 @@
+.radio {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radioIcon span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.radioIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--black);
+  border-radius: 50%;
+}
+
+.radio[data-checked] .radioIcon span {
+  border: 2px solid var(--white);
+  background-color: var(--black);
+}
+

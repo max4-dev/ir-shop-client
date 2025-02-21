@@ -1,0 +1,40 @@
+.PlacingAnOrderForm {
+  &InputBox + &InputBox {
+    margin-top: 25px;
+  }
+
+  &Text {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  &Button {
+    margin-top: 36px;
+  }
+
+  &Checkbox {
+    margin-top: 36px;
+  }
+
+  &Checkbox p {
+    font-size: 14px;
+    display: block;
+    max-width: 354px;
+  }
+}
+
+.city {
+  text-align: left;
+  padding: 0 2px 5px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--black);
+
+  &Menu {
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.button {
+  margin-top: 20px;
+  margin-left: auto;
+}
