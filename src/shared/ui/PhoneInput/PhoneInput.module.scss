@@ -1,0 +1,58 @@
+.inputBox {
+  position: relative;
+  margin-top: 12px;
+}
+
+.input {
+  max-width: 530px;
+  width: 100%;
+  padding: 12px 50px 12px 18px;
+  border: 1px solid var(--black);
+
+  &Button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &Error {
+    border-color: var(--red);
+  }
+}
+
+.label {
+  position: absolute;
+  background-color: var(--white);
+  padding: 0 5px;
+  top: -11px;
+  left: 30px;
+}
+
+.errorMessage {
+  position: absolute;
+  right: 0;
+  top: -22px;
+  font-size: 16px;
+  color: var(--red);
+}
+
+.prefixBox {
+  display: flex;
+  align-items: center;
+}
+
+.prefix {
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--black);
+  border-right: none;
+}
