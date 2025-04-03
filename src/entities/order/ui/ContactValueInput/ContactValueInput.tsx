@@ -1,10 +1,8 @@
-// import cn from 'classnames';
 import { ContactType } from "@/src/shared/types";
 import { Input, PhoneInput } from "@/src/shared/ui";
 import { contact } from "@/src/shared/const/contact";
 
 import { ContactValueInputProps } from "./ContactValueInput.props";
-// import styles from './ContactValueInput.module.scss';
 
 export const ContactValueInput = ({
   className,

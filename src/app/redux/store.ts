@@ -12,17 +12,18 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { auth, profile } from "@/src/entities/user/model";
 import { cart } from "@/src/entities/cart/model";
+import { guestUser } from "@/src/entities/guest-user/model";
 import { favorites } from "@/src/entities/favorites/model";
-import { filter, sort, search } from "@/src/features/products-actions/model";
+import { auth, profile } from "@/src/entities/user/model";
+import { filter, search, sort } from "@/src/features/products-actions/model";
 
 import type { TypedUseSelectorHook } from "react-redux";
 
 const persistConfig = {
   key: "ir-shop",
   storage,
-  whitelist: ["favorites", "cart"],
+  whitelist: ["favorites", "cart", "guestUser"],
 };
 
 const rootReducer = combineReducers({
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   search,
   favorites,
   cart,
+  guestUser,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -52,6 +54,5 @@ export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
-
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

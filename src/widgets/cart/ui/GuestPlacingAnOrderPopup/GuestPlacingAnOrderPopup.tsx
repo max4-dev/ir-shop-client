@@ -27,9 +27,6 @@ export const GuestPlacingAnOrderPopup = ({
         <DialogTitle className={cn(styles.popupTitle, "title-m")} as="h3">
           Итого
         </DialogTitle>
-        <div className={styles.popupContent}>
-          <GuestPlacingAnOrderForm />
-        </div>
         <ul className={styles.popupList}>
           <li className={styles.popupItem}>
             <p className={styles.popupName}>
@@ -38,6 +35,9 @@ export const GuestPlacingAnOrderPopup = ({
             <p className="title-m">{totalPrice} ₽</p>
           </li>
         </ul>
+        <div className={styles.popupContent}>
+          <GuestPlacingAnOrderForm />
+        </div>
       </Popup>
     </div>
   );

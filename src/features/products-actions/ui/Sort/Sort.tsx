@@ -1,15 +1,15 @@
+import { Transition } from "@headlessui/react";
 import cn from "classnames";
 import { Fragment, memo } from "react";
-import { Transition } from "@headlessui/react";
 
-import { Dropdown, Icon } from "@/src/shared/ui";
 import { useAppDispatch, useTypedSelector } from "@/src/shared/hooks";
+import { Dropdown, Icon } from "@/src/shared/ui";
 
-import { SortEnum } from "../../model/sort/types";
 import { setSort } from "../../model";
+import { SortEnum } from "../../model/sort/types";
 
-import { SortProps } from "./Sort.props";
 import styles from "./Sort.module.scss";
+import { SortProps } from "./Sort.props";
 
 const sortTypes = [
   { name: "Новизне", type: SortEnum.New },
@@ -38,6 +38,7 @@ export const Sort = memo(({ className, ...props }: SortProps) => {
         panelClassName={styles.panel}
       >
         <Transition
+          show={true}
           as={Fragment}
           enter={styles.enter}
           enterFrom={styles.enterFrom}

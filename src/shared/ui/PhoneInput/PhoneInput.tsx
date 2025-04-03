@@ -1,13 +1,13 @@
 "use client";
 
-import { forwardRef } from "react";
 import cn from "classnames";
+import { forwardRef } from "react";
 import PhoneNumberInput, { Value } from "react-phone-number-input/input";
 
 import { irShopBrand } from "../../const";
 
-import { PhoneInputProps } from "./PhoneInput.props";
 import styles from "./PhoneInput.module.scss";
+import { PhoneInputProps } from "./PhoneInput.props";
 
 export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   (
@@ -23,7 +23,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   ) => {
     const handleChange = (value: Value) => {
       if (onChange) {
-        onChange({ target: value, name: "phone" } as unknown as Value);
+        onChange(value as string);
       }
     };
 

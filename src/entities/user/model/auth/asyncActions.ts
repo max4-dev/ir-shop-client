@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 
 import { AuthType, IAuthResponse, ISignup } from "@/src/shared/api/user";
 import { removeTokenStorage } from "@/src/shared/lib";
 
 import { getNewTokens, sign } from "../../handler";
 import { ILogin } from "../../types";
-
 
 export const signup = createAsyncThunk<IAuthResponse, ISignup>(
   "auth/register",
@@ -14,7 +14,11 @@ export const signup = createAsyncThunk<IAuthResponse, ISignup>(
       const response = await sign(AuthType.REGISTER, data);
       return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error);
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data);
+      }
+
+      throw error;
     }
   }
 );
@@ -27,7 +31,11 @@ export const login = createAsyncThunk<IAuthResponse, ILogin>(
 
       return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error);
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data);
+      }
+
+      throw error;
     }
   }
 );

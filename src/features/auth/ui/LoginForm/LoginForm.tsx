@@ -1,16 +1,15 @@
 "use client";
 
-import cn from "classnames";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import cn from "classnames";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 
-import { Button, Input, PhoneInput } from "@/src/shared/ui";
 import { ILogin } from "@/src/entities/user/types";
-import { useActions, useTypedSelector } from "@/src/shared/hooks";
 import { phoneRegExp } from "@/src/shared/const";
+import { useActions, useTypedSelector } from "@/src/shared/hooks";
+import { Button, Input, PhoneInput } from "@/src/shared/ui";
 
 import styles from "./LoginForm.module.scss";
 import { ILoginFormProps } from "./LoginForm.props";
@@ -31,11 +30,11 @@ const defaultValues = {
 export const LoginForm = ({ className, ...props }: ILoginFormProps) => {
   const { login } = useActions();
   const { isLoading } = useTypedSelector((state) => state.user);
-  const [parsedPhone, setParsedPhone] = useState<string>("");
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<ILogin>({
     defaultValues,
@@ -43,19 +42,25 @@ export const LoginForm = ({ className, ...props }: ILoginFormProps) => {
     mode: "onChange",
   });
 
-  const onSubmit = ({ password }: ILogin) => {
-    login({ phone: parsedPhone, password });
+  const onSubmit = (data: ILogin) => {
+    login(data);
   };
 
   return (
     <div className={cn(className, styles.login)}>
       <h2 className={cn(styles.loginTitle, "title-b")}>Вход</h2>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)} {...props}>
-        <PhoneInput
-          {...register("phone")}
-          onChange={(phone) => setParsedPhone(phone as string)}
-          className={styles.input}
-          errorMessage={errors.phone?.message}
+        <Controller
+          name="phone"
+          control={control}
+          render={({ field }) => (
+            <PhoneInput
+              value={field.value}
+              onChange={(value) => field.onChange(value)}
+              className={styles.input}
+              errorMessage={errors.phone?.message}
+            />
+          )}
         />
         <Input
           {...register("password", { required: true })}

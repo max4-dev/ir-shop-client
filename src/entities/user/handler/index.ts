@@ -10,7 +10,7 @@ export const getNewTokens = async () => {
   const refreshToken = Cookies.get(Tokens.REFRESH);
 
   const response = await axiosInstance.post<string, { data: IAuthResponse }>(
-    "/auth/login/access-token",
+    "/token/",
     {
       refreshToken,
     }

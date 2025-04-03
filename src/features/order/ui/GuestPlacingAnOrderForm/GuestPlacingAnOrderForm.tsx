@@ -1,63 +1,25 @@
 "use client";
 
-import cn from "classnames";
-import { RadioGroup } from "@headlessui/react";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import cn from "classnames";
 import { Controller, Resolver, useForm } from "react-hook-form";
 
-import { RadioItem } from "@/src/shared/ui";
-import { phoneRegExp } from "@/src/shared/const";
+import { orderRequest } from "@/src/entities/order/handler";
+import { ContactsRadioGroup, ContactValueInput } from "@/src/entities/order/ui";
+import { useActions, useTypedSelector } from "@/src/shared/hooks";
+import { formatPhoneNumber } from "@/src/shared/lib";
 import { ContactType } from "@/src/shared/types";
-import { ContactValueInput } from "@/src/entities/order/ui";
+import { Button, Input } from "@/src/shared/ui";
 
-import { ContactFormData, GuestPlacingAnOrderFormProps } from "./GuestPlacingAnOrderForm.props";
+import { defaultValues, formSchema } from "../../const";
+import { ContactFormData } from "../../types/contacts";
+
 import styles from "./GuestPlacingAnOrderForm.module.scss";
-
-const getPhoneScheme = () =>
-  yup.object().shape({
-    type: yup.string(),
-    value: yup
-      .string()
-      .matches(phoneRegExp, "Некорректный телефон")
-      .required("Телефон - обязательное поле"),
-  });
-
-const getNameScheme = () => (
-  yup.object().shape({
-    type: yup.string(),
-    value: yup.string().required("Обязательное поле"),
-  })
-)
-
-const getContactScheme = () =>
-  yup.lazy((value) => {
-    if (value === undefined) {
-      return yup.mixed().notRequired();
-    }
-    return value.type === "telegram" ? getNameScheme() : getPhoneScheme();
-  });
-
-const defaultValues: ContactFormData = {
-  name: "",
-  postIndex: "",
-  city: "",
-  address: "",
-  contact: {
-    value: "",
-    type: ContactType.Telegram,
-  },
-};
+import { GuestPlacingAnOrderFormProps } from "./GuestPlacingAnOrderForm.props";
 
 export const GuestPlacingAnOrderForm = ({ className, ...props }: GuestPlacingAnOrderFormProps) => {
-  const formSchema = yup.object().shape({
-    // name: yup.string().required("ФИО - обязательное поле"),
-    // postIndex: yup.string().required("Почтовый индекс - обязательное поле"),
-    // city: yup.string().required("Город - обязательное поле"),
-    // address: yup.string().required("Адрес - обязательное поле"),
-    contact: getContactScheme(),
-  });
-  
+  const { register: registerGuestUser } = useActions();
+
   const {
     register,
     handleSubmit,
@@ -70,9 +32,10 @@ export const GuestPlacingAnOrderForm = ({ className, ...props }: GuestPlacingAnO
     resolver: yupResolver(formSchema) as Resolver<ContactFormData>,
     mode: "onChange",
   });
+  const { cartProducts, totalCount, totalPrice } = useTypedSelector((state) => state.cart);
 
   const { contact } = watch();
-  console.log(contact.type);
+  console.log(contact);
   
 
   const handleChangeContactType = (e: string, onChange: (...event: unknown[]) => void) => {
@@ -80,44 +43,64 @@ export const GuestPlacingAnOrderForm = ({ className, ...props }: GuestPlacingAnO
     resetField("contact.value", { defaultValue: "" });
   };
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log(data);
+  const onSubmit = async (data: ContactFormData) => {
+    const formattedData = { ...data };
+
+    if (contact.type !== ContactType.Telegram) {
+      formattedData.contact = {
+        ...formattedData.contact,
+        value: formatPhoneNumber(formattedData.contact.value),
+      };
+    }
+
+    const token = await registerGuestUser(formattedData);
+    console.log(token);
+    
+
+    if (!token) return;
+
+    await orderRequest.createGuestOrder({
+      ...formattedData,
+      token,
+      price: totalPrice,
+      count: totalCount,
+      products: cartProducts,
+    });
   };
 
   return (
     <form className={cn(className, styles.form)} onSubmit={handleSubmit(onSubmit)} {...props}>
-      <Controller
-        name="contact.type"
-        control={control}
-        render={({ field }) => (
-          <RadioGroup
-            {...field}
-            onChange={(e) => handleChangeContactType(e, field.onChange)}
-            aria-label="Выберите способ связи"
-          >
-            <RadioItem
-              value={ContactType.Telegram}
-              label="Telegram"
-            />
-            <RadioItem
-              value={ContactType.Whatsapp}
-              label="Whatsapp"
-            />
-            <RadioItem
-              value={ContactType.Phone}
-              label="По телефону"
-            />
-          </RadioGroup>
-        )}
+      <Input {...register("name")} placeholder="ФИО" errorMessage={errors?.name?.message} />
+      <Input
+        {...register("postIndex")}
+        placeholder="Почтовый индекс"
+        errorMessage={errors?.postIndex?.message}
       />
-      <ContactValueInput
-        {...register("contact.value")}
-        key={contact.type}
-        contactType={contact.type as ContactType}
-        errorMessage={errors?.contact?.value?.message}
-        className={styles.input}
-      />
-      <button type="submit">Сделать заказ</button>
+      <Input {...register("city")} placeholder="Город" errorMessage={errors?.city?.message} />
+      <Input {...register("address")} placeholder="Адрес" errorMessage={errors?.address?.message} />
+      <div>
+        <Controller
+          name="contact.type"
+          control={control}
+          render={({ field }) => (
+            <ContactsRadioGroup
+              className={styles.radioGroup}
+              field={field}
+              handleChangeContactType={handleChangeContactType}
+            />
+          )}
+        />
+        <ContactValueInput
+          {...register("contact.value")}
+          key={contact.type}
+          contactType={contact.type as ContactType}
+          errorMessage={errors?.contact?.value?.message}
+          className={styles.input}
+        />
+      </div>
+      <Button className={styles.submitButton} type="submit">
+        Сделать заказ
+      </Button>
     </form>
   );
 };
