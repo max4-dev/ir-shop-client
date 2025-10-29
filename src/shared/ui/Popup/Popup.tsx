@@ -1,13 +1,11 @@
-"use client";
-
-import cn from "classnames";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
-import React, { Fragment } from "react";
+import cn from "classnames";
+import { Fragment } from "react";
 
-import { Icon } from "../Icon/Icon";
+import { Icon } from "../../assets";
 
-import { PopupProps } from "./Popup.props";
 import styles from "./Popup.module.scss";
+import { PopupProps } from "./Popup.props";
 
 export const Popup = ({
   isOpen,

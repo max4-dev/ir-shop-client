@@ -1,18 +1,13 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-import { IconType } from "../Icon/Icon";
+import { IconType } from "../../assets";
 
 export interface ButtonProps
   extends Omit<
     DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
-    "onAnimationStart" | "onDraagStart" | "onDragEnd" | "onDrag" | "ref"
+    "onAnimationStart" | "onDragStart" | "onDragEnd" | "onDrag" | "ref"
   > {
-  children: ReactNode;
-  size?: "fullWidth" | "small" | "medium" | "big";
+  size?: "small" | "medium" | "big" | "icon";
   appearance?: "primary" | "ghost" | "disabled";
   icon?: IconType;
-  typeOf?: "link" | "button";
-  href?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
 }

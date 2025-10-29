@@ -3,4 +3,5 @@ import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 export interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   errorMessage?: string;
   isPassword?: boolean;
+  label?: string;
 }

@@ -1,7 +1,7 @@
 .popup {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   &Dialog {
     position: relative;
@@ -11,17 +11,17 @@
   &Background {
     position: fixed;
     inset: 0;
-    background-color: rgba(#000000, .25);
+    background-color: rgba(#000, .25);
   }
 
   &Box {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 40px 0;
     inset: 0;
     overflow-y: auto;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    padding: 40px 0;
   }
 
   &Panel {

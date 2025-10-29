@@ -1,72 +1,55 @@
 "use client";
 
-import { ChangeEvent, MouseEvent, forwardRef, useEffect, useState } from "react";
 import cn from "classnames";
+import { MouseEvent, useState } from "react";
 
-import { Icon } from "../Icon/Icon";
+import { Icon } from "../../assets";
 
-import { InputProps } from "./Input.props";
 import styles from "./Input.module.scss";
+import { InputProps } from "./Input.props";
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      errorMessage,
-      value,
-      placeholder,
-      type,
-      onChange,
-      isPassword = false,
-      className,
-      ...props
-    }: InputProps,
-    ref
-  ) => {
-    const [inputType, setInputType] = useState(type);
-    const [customValue, setValue] = useState<string | number | readonly string[] | undefined>();
+export const Input = ({
+  errorMessage,
+  placeholder,
+  type,
+  label,
+  isPassword = false,
+  className,
+  ref,
+  ...props
+}: InputProps) => {
+  const [inputType, setInputType] = useState(type);
 
-    useEffect(() => {
-      setValue(value);
-    }, [value]);
+  const toggleVisible = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
 
-    const change = (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
-      if (onChange) {
-        onChange(e);
-      }
-    };
+    if (inputType === "password") {
+      setInputType("text");
+    } else {
+      setInputType("password");
+    }
+  };
 
-    const toggleVisible = (e: MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-
-      if (inputType === "password") {
-        setInputType("text");
-      } else {
-        setInputType("password");
-      }
-    };
-
-    return (
-      <div className={cn(styles.inputBox, className)}>
-        {placeholder && <span className={styles.placeholder}>{placeholder}</span>}
-        {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
-        <input
-          className={cn(styles.input, { [styles.inputError]: errorMessage })}
-          value={customValue ?? ""}
-          ref={ref}
-          placeholder={placeholder}
-          type={inputType}
-          onChange={(e) => change(e)}
-          {...props}
-        />
-        {isPassword && (
-          <button onClick={toggleVisible} className={styles.inputButton}>
-            {inputType === "password" ? <Icon.EyeIcon /> : <Icon.EyeSlashIcon />}
-          </button>
-        )}
-      </div>
-    );
-  }
-);
-
-Input.displayName = "Input";
+  return (
+    <div className={cn(styles.inputBox, className)}>
+      {label && (
+        <label htmlFor={props.id} className={styles.label}>
+          {label}
+        </label>
+      )}
+      {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
+      <input
+        className={cn(styles.input, { [styles.inputError]: errorMessage })}
+        ref={ref}
+        placeholder={placeholder}
+        type={inputType}
+        {...props}
+      />
+      {isPassword && (
+        <button onClick={toggleVisible} className={styles.inputButton}>
+          {inputType === "password" ? <Icon.EyeIcon /> : <Icon.EyeSlashIcon />}
+        </button>
+      )}
+    </div>
+  );
+};

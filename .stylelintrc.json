@@ -1,17 +1,32 @@
 {
-	"rules": {
-		"indentation": [
-			"tab"
-		],
-		"color-hex-case": "upper",
-		"selector-class-pattern": "^.*$",
-		"declaration-block-no-redundant-longhand-properties": [
-			true,
-			{
-				"ignoreShorthands": [
-					"/grid/"
-				]
-			}
-		]
-	}
+  "extends": "stylelint-config-standard-scss",
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "order/properties-order": [
+      "position",
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "display",
+      "flex-direction",
+      "justify-content",
+      "align-items",
+      "width",
+      "height",
+      "margin",
+      "padding",
+      "color",
+      "background",
+      "font-size",
+      "font-family"
+    ],
+    "selector-class-pattern": "^.*$",
+    "declaration-block-no-redundant-longhand-properties": [
+      true,
+      {
+        "ignoreShorthands": ["/grid/"]
+      }
+    ]
+  }
 }

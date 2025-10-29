@@ -1,0 +1,51 @@
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 32px;
+  font-size: 18px;
+  gap: 10px;
+  border: 1px solid var(--black);
+}
+
+.primary {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.ghost {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.disabled {
+  color: var(--disabled);
+  background-color: var(--light-gray);
+  border-color: var(--light-gray);
+  cursor: default;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+.medium {
+  padding: 10px 32px;
+  font-size: 20px;
+}
+
+.big {
+  height: 56px;
+  padding: 15px 34px;
+  font-size: 20px;
+  min-width: 280px;
+}
+
+@media screen and (width <= 400px) {
+  .big {
+    padding: 12px 28px;
+    font-size: 19px;
+    min-width: 100%;
+  }
+}

@@ -1,11 +1,9 @@
-"use client";
-
+import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from "@headlessui/react";
 import cn from "classnames";
 import { Fragment } from "react";
-import { Popover, PopoverButton, PopoverOverlay, PopoverPanel } from "@headlessui/react";
 
-import { DropdownProps } from "./Dropdown.props";
 import styles from "./Dropdown.module.scss";
+import { DropdownProps } from "./Dropdown.props";
 
 export function Dropdown({
   children,
@@ -25,7 +23,7 @@ export function Dropdown({
           </Fragment>
         )}
       </PopoverButton>
-      {overlay && <PopoverOverlay className={styles.overlay} />}
+      {overlay && <PopoverBackdrop className={styles.overlay} />}
       <PopoverPanel className={cn(styles.panel, panelClassName, { [styles.float]: float })}>
         {children}
       </PopoverPanel>

@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 import { FlatCompat } from "@eslint/eslintrc";
 import typescriptEs from "@typescript-eslint/parser";
+import importEs from "eslint-plugin-import";
 import reactRefresh from "eslint-plugin-react-refresh";
-import importEs from "eslint-plugin-import"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -49,6 +49,7 @@ const eslintConfig = [
       "import/no-unresolved": "error",
       "import/prefer-default-export": "off",
       "no-param-reassign": "warn",
+      "no-console": "warn",
       "prefer-promise-reject-errors": "warn",
       "import/extensions": "off",
       "import/order": [

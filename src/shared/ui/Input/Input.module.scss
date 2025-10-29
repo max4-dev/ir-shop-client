@@ -1,6 +1,6 @@
 .inputBox {
   position: relative;
-  margin-top: 12px;
+  padding-top: 30px;
 }
 
 .input {
@@ -15,14 +15,13 @@
 
   &Button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     right: 15px;
-    width: 35px;
-    height: 35px;
+    bottom: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 48px;
   }
 
   &Error {
@@ -32,16 +31,16 @@
 
 .placeholder {
   position: absolute;
-  background-color: var(--white);
-  padding: 0 5px;
-  top: -11px;
+  top: 18px;
   left: 30px;
+  padding: 0 5px;
+  background-color: var(--white);
 }
 
 .errorMessage {
   position: absolute;
+  top: 0;
   right: 0;
-  top: -22px;
-  font-size: 16px;
   color: var(--red);
+  font-size: 16px;
 }

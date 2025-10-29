@@ -9,30 +9,30 @@
     height: 0;
     opacity: 0;
   }
-  
-  &Input:checked+.selectCheckbox {
-    background-color: var(--black);
-    border-color: var(--black);
-    background-image: url('/images/icons/check.svg');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-  }
-  
-  &Input:checked+.selectCheckbox+.selectText {
-    color: var(--black);
-  }
-  
+
   &Checkbox {
     width: 18px;
     height: 18px;
     border: 2px solid var(--dark-gray);
   }
-  
+
+  &Input:checked + .selectCheckbox {
+    background-color: var(--black);
+    border-color: var(--black);
+    background-image: url("/images/icons/check.svg");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+  }
+
   &Text {
     color: var(--dark-gray);
     font-size: 16px;
     margin-left: 10px;
     max-width: 284px;
+  }
+
+  &Input:checked + .selectCheckbox + .selectText {
+    color: var(--black);
   }
 
   a {

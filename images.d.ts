@@ -1,52 +1,59 @@
 declare module "*.svg" {
-	const content: React.FunctionComponent<React.SVGAttributes<SVGAElement>>;
-	export default content;
+  import { FC, SVGProps } from "react";
+  
+  const content: FC<SVGProps<SVGElement>>;
+  export default content;
 }
 
-declare module '*.png' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
-
-  export default content
+declare module "*.svg?url" {
+  const content: unknown;
+  export default content;
 }
 
-declare module '*.jpg' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.png" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.jpeg' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.jpg" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.gif' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.jpeg" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.webp' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.gif" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.avif' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.webp" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.ico' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.avif" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
 }
 
-declare module '*.bmp' {
-  const content: import('../dist/shared/lib/image-external').StaticImageData
+declare module "*.ico" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
 
-  export default content
+  export default content;
+}
+
+declare module "*.bmp" {
+  const content: import("../dist/shared/lib/image-external").StaticImageData;
+
+  export default content;
 }

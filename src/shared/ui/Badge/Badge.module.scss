@@ -1,0 +1,20 @@
+.badge {
+  display: inline-block;
+  padding: 5px 20px;
+  font-size: 16px;
+}
+
+.ghost {
+  color: var(--disabled);
+  background-color: var(--light-gray);
+}
+
+.success {
+  color: var(--dark-green);
+  background-color: var(--green);
+}
+
+.danger {
+  color: var(--white);
+  background-color: var(--red);
+}

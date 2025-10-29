@@ -1,0 +1,43 @@
+.title {
+  font-weight: 500;
+}
+
+.h1 {
+  font-size: 48px;
+}
+
+.h2 {
+  font-size: 38px;
+}
+
+.h3 {
+  font-size: 30px;
+}
+
+.h4 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.h5 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.h6 {
+  font-size: 18px;
+}
+
+.decorated {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 4px;
+    content: "";
+    background-color: #000;
+  }
+}

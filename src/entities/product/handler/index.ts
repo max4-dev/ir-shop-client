@@ -1,33 +1,31 @@
-import { cache } from "react";
-
-import { axiosInstance } from "@/src/shared/lib";
+import { client } from "@/src/shared/api";
 
 import { productsApi } from "../api";
-import { ILimitProductsResponse, ILimitQuery, IProduct } from "../types";
+import { ILimitProductsResponse, ILimitQuery, IProduct } from "../model/types";
 
-const getAll = cache(async () => {
-  const res = await axiosInstance.get<IProduct[]>(productsApi.getAll);
+const getAll = async () => {
+  const res = await client.get<IProduct[]>(productsApi.getAll);
 
-  return res.data;
-});
+  return res.json();
+};
 
-const getByLimited = cache(async (query: ILimitQuery) => {
-  const res = await axiosInstance.get<ILimitProductsResponse>(productsApi.byLimited(query));
+const getByLimited = async (query: ILimitQuery) => {
+  const res = await client.get<ILimitProductsResponse>(productsApi.byLimited(query)).json();
 
-  return res.data;
-});
+  return res;
+};
 
-const getBySlug = cache(async (slug: string) => {
-  const res = await axiosInstance.get<IProduct[]>(productsApi.bySlug(slug));
+const getBySlug = async (slug: string) => {
+  const res = await client.get<IProduct[]>(productsApi.bySlug(slug)).json();
 
-  return res.data;
-});
+  return res;
+};
 
-const getById = cache(async (id: string) => {
-  const res = await axiosInstance.get<IProduct>(productsApi.byId(id));
+const getById = async (id: string) => {
+  const res = await client.get<IProduct>(productsApi.byId(id)).json();
 
-  return res.data;
-});
+  return res;
+};
 
 export const getProducts = {
   getAll,
