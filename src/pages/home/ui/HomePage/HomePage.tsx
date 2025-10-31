@@ -1,32 +1,26 @@
 "use client";
 
 import { useProducts } from "@/src/entities/product/model";
+import { Product } from "@/src/entities/product/ui";
+import { AddToCartButton } from "@/src/features/cart/ui";
+import { FavoriteButton } from "@/src/features/favorite/ui";
 
 export const HomePage = () => {
   const { data: products } = useProducts();
-  console.log(products);
 
+  if (!products) {
+    return null;
+  }
   return (
-    <div>
-      {products &&
-        products.map((product) => (
-          <div key={product.id}>
-            <div>{product.title}</div>
-            <div>{product.price}</div>
-          </div>
-        ))}
-      {/* <LoginForm /> */}
-      {/* <Swiper slidesPerView={1}>
-        <SwiperSlide>
-          <div className={styles.block}>1</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.block}>2</div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.block}>34</div>
-        </SwiperSlide>
-      </Swiper> */}
-    </div>
+    <>
+      {products.map((product) => (
+        <Product
+          key={product.id}
+          product={product}
+          favoriteButtonSlot={<FavoriteButton itemId={product.id} />}
+          cartButtonSlot={<AddToCartButton itemId={product.id} />}
+        />
+      ))}
+    </>
   );
 };

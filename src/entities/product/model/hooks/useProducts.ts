@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getProducts } from "../../handler";
+import { productsQuery } from "../../api";
 
 export const useProducts = () =>
   useQuery({
     queryKey: ["products"],
-    queryFn: getProducts.getAll,
+    queryFn: productsQuery.getAll,
   });

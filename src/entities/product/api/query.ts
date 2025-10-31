@@ -1,12 +1,13 @@
 import { client } from "@/src/shared/api";
 
-import { productsApi } from "../api";
-import { ILimitProductsResponse, ILimitQuery, IProduct } from "../model/types";
+import { ILimitProductsResponse, ILimitQuery, IProduct } from "../model/types/product.interface";
+
+import { productsApi } from "./api";
 
 const getAll = async () => {
-  const res = await client.get<IProduct[]>(productsApi.getAll);
+  const res = await client.get<IProduct[]>(productsApi.all).json();
 
-  return res.json();
+  return res;
 };
 
 const getByLimited = async (query: ILimitQuery) => {
@@ -27,7 +28,7 @@ const getById = async (id: string) => {
   return res;
 };
 
-export const getProducts = {
+export const productsQuery = {
   getAll,
   getByLimited,
   getBySlug,

@@ -1,0 +1,25 @@
+.cart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 43px;
+  height: 43px;
+  background-color: var(--black);
+
+  &Count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    color: var(--white);
+    font-size: 14px;
+    background-color: var(--black);
+    border-radius: 50%;
+    font-weight: 500;
+  }
+}

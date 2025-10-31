@@ -1,13 +1,2 @@
-import { CONFIG } from "@/src/shared/config";
-
-import { ILimitQuery } from "../model/types";
-
-export const s3Url = process.env.NEXT_PUBLIC_S3_URL;
-
-export const productsApi = {
-  getAll: `${CONFIG.API_URL}/products`,
-  byLimited: ({ limit, page }: ILimitQuery) =>
-    `${CONFIG.API_URL}/products?limit=${limit}&page=${page}`,
-  byId: (id: string) => `${CONFIG.API_URL}/products/${id}`,
-  bySlug: (slug: string) => `${CONFIG.API_URL}/products/by-slug/${slug}`,
-};
+export { productsApi } from "./api";
+export { productsQuery } from "./query";

@@ -1,7 +1,5 @@
 import ky from "ky";
 
-import { HttpCodes } from "../const";
-
 import {
   getAccessToken,
   getIsRefreshSent,
@@ -10,6 +8,7 @@ import {
   removeTokenStorage,
   saveTokenStorage,
 } from "./authHelper";
+import { HttpCodes } from "./const/httpCodes";
 
 export const client = ky.create({
   headers: {

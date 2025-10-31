@@ -5,4 +5,4 @@ export {
   type ILimitQuery,
   type IMinProduct,
   type IProduct,
-} from "./types";
+} from "./types/product.interface";
